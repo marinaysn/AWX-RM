@@ -1,22 +1,69 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person'
 
+class App extends Component {
 
-function App() {
-  return (
-    <div className="App">
-      <h1>Testing the App</h1>
-      <p>working...</p>
+  state = {
+    persons:
+      [
+        {name: 'Marina', age: 43},
+        {name: 'Pavel', age: 43},
+        {name: 'Alexey', age: 15},
+        {name: 'Anna', age: 13}
+      ],
+    otherState: 'test'
+  }
 
-      <button>Switch Name</button>
-      <Person name="Marina" age= "43" />
-      <Person name="Pavel" age= "43" />
-      <Person name="Alexey" age= "15">My hobby: Racing</Person>
-      <Person name="Anna" age= "13"/>
-    </div>
-  );
+  switchNameHandler = (newName) => {
+    this.setState({
+      persons: [
+        {name: 'Marina', age: 45},
+        {name: 'Pavel', age: 43},
+        {name: newName, age: 15},
+        {name: 'Anna', age: 13}
+      ]
+    })
+    console.log(this.state.otherState)
+  }
 
+  nameChangeHandler =(event) => {
+    this.setState({
+      persons: [
+        {name: 'Marka', age: 45},
+        {name: 'Pavel', age: 43},
+        {name: event.target.value, age: 15},
+        {name: 'Anna', age: 13}
+      ]
+    })
+
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <h1>Testing the App</h1>
+        <p>working...</p>
+
+        <button onClick={() =>this.switchNameHandler('Alex') }>Switch Name</button>
+
+        <Person 
+          name={this.state.persons[0].name} 
+          age={this.state.persons[0].age} />
+        <Person 
+          name={this.state.persons[1].name} 
+          age={this.state.persons[1].age} />
+        <Person 
+          name={this.state.persons[2].name} 
+          age={this.state.persons[2].age}
+          click={this.switchNameHandler.bind(this, "Aleshka")}
+          changed={this.nameChangeHandler}>My hobby: Video Games</Person>
+        <Person 
+          name={this.state.persons[3].name} 
+          age={this.state.persons[3].age} />
+      </div>
+    );
+  }
 }
 
 export default App;
