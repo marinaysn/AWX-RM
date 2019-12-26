@@ -1,12 +1,29 @@
-import React from 'react';
-import './App.css';
+import React, { Component } from 'react'
+import  './App.css';
+import Input from './Input/Input'
+import Output from './Output/Output'
 
-function App() {
-  return (
-    <div className="App">
- 
+export default class App extends Component {
+
+  state = {
+    name: 'Marina'
+  }
+
+  NameDisplayhandler =(event) =>{
+    this.setState({
+      name : event.target.value
+    })
+  }
+
+  render() {
+    return (
+      <div className="App">
+      <Input changed={this.NameDisplayhandler} /> 
+      <Output name={this.state.name} />
+
+      <Output name={this.state.name} />
     </div>
-  );
+    )
+  }
 }
 
-export default App;
