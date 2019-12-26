@@ -18,8 +18,8 @@ export default class App extends Component {
   render() {
     return (
       <div className="App">
-      <Input changed={this.NameDisplayhandler} /> 
-      <Output name={this.state.name} />
+      <Input changed={this.NameDisplayhandler} originalName={this.state.name}/> 
+      <Output name='Anna' />
 
       <Output name={this.state.name} />
     </div>

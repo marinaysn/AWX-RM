@@ -5,7 +5,7 @@ const input = (props) => {
         <div>
 
             <p>Please enter you name:</p>
-            <input type="text" onChange={props.changed} value={props.name} />
+            <input type="text" onChange={props.changed} value={props.originalName} />
 
         </div>
     )
