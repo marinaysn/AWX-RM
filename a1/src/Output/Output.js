@@ -5,7 +5,7 @@ import './Output.css'
 const output = (props) => {
     return (
         <div className='outputdiv'>
-            <p>Hello dear friend!!! Welcome!</p>
+            <p>Hello friends!!! Welcome!</p>
             <p>My name is {props.name}</p> 
             <hr />           
         </div>
