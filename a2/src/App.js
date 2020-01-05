@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ValidationComponent from  './ValidiationComponent/ValidiationComponent'
+import ValidationComponent from './ValidiationComponent/ValidiationComponent'
 import CharComponent from './CharComponent/CharComponent'
 
 import './App.css';
@@ -12,61 +12,53 @@ class App extends Component {
 
   textChangeHandler = (event) => {
 
-    if (event.target.value.length > 0){
+    if (event.target.value.length > 0) {
       this.setState({
         messageText: event.target.value
       })
     }
-    else{
+    else {
       this.setState({
         messageText: ''
       })
     }
+  }
 
-    }
-
-    deleteCharHandler = (index) =>{
-      console.log('a=============')
-      console.log(index)
-    }
-  
-
+  deleteCharHandler = (tempArr, index) => {
+    tempArr.splice(index, 1)
+    this.setState({
+      messageText: tempArr.join('')
+    })
+  }
 
   render() {
-    //console.log(this.state.messageText.length)
+
     let charsDisplay = null;
 
     if (this.state.messageText.length > 4) {
-
-    const tempArr = (this.state.messageText).split('')
-  //  console.log(tempArr);
-   
+      const tempArr = (this.state.messageText).split('')
       charsDisplay = (
         <div>
-          {tempArr.map( (p, index) =>{
-            console.log(index)
-            console.log(p)
-
-            return <CharComponent 
-            onClick={() => {this.deleteCharHandler(index)} }
-            change={p}
-            
-            /> 
+          {tempArr.map((p, index) => {
+            return <CharComponent
+              clicked={() => { this.deleteCharHandler(tempArr, index) }}
+              change={p}
+            />
           })}
-          
         </div>
-        
-
-      ) 
+      )
     }
 
     return (
       <div className="App">
         <h3>Enter any text</h3>
-        <input type="text" onChange={(event) => this.textChangeHandler(event)} />
+        <input
+          type="text"
+          onChange={(event) => this.textChangeHandler(event)}
+          value={this.state.messageText} />
         <ValidationComponent msg={this.state.messageText} />
-       {charsDisplay}
-    <p> {this.state.messageText}</p>
+        {charsDisplay}
+        <p> {this.state.messageText}</p>
       </div>
     );
   }
