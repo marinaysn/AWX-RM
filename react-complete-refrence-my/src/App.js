@@ -34,7 +34,7 @@ class App extends Component {
       return p.id === id
     })
 
-    const person = { ... this.state.persons[index] }
+    const person = {...this.state.persons[index]}
     person.name = event.target.value
 
     const tempPersons = [...this.state.persons]
@@ -56,7 +56,8 @@ class App extends Component {
   render() {
 
     const style = {
-      backgroundColor: 'white',
+      backgroundColor: 'green',
+      color: 'white',
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
@@ -78,14 +79,26 @@ class App extends Component {
             />
           })}
 
-        </div>)
+        </div>);
+        //change style with js once we show person array
+        style.backgroundColor = 'red';
+        style.color = 'pink';
+    }
+
+    let classes = [];
+
+    if(this.state.persons.length <= 2){
+      classes.push('red')
+    }
+    if(this.state.persons.length <= 1){
+      classes.push('bold')
     }
 
 
     return (
       <div className="App">
         <h1>Testing the App</h1>
-        <p>working...</p>
+        <p className={classes.join(' ')}>working...</p>
 
         <button
           style={style}
