@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
-import Radium from 'radium';
+import Radium, { StyleRoot } from 'radium';
 
 class App extends Component {
 
@@ -35,7 +35,7 @@ class App extends Component {
       return p.id === id
     })
 
-    const person = {...this.state.persons[index]}
+    const person = { ...this.state.persons[index] }
     person.name = event.target.value
 
     const tempPersons = [...this.state.persons]
@@ -85,36 +85,38 @@ class App extends Component {
           })}
 
         </div>);
-        //change style with js once we show person array
-        style.backgroundColor = 'red';
-        style.color = 'pink';
-        style[':hover'] = {
-          backgroundColor: 'lightred',
-          color: 'brown'
-        }
+      //change style with js once we show person array
+      style.backgroundColor = 'red';
+      style.color = 'pink';
+      style[':hover'] = {
+        backgroundColor: 'salmon',
+        color: 'brown'
+      }
     }
 
     let classes = [];
 
-    if(this.state.persons.length <= 2){
+    if (this.state.persons.length <= 2) {
       classes.push('red')
     }
-    if(this.state.persons.length <= 1){
+    if (this.state.persons.length <= 1) {
       classes.push('bold')
     }
 
 
     return (
-      <div className="App">
-        <h1>Testing the App</h1>
-        <p className={classes.join(' ')}>working...</p>
+      <StyleRoot>
+        <div className="App">
+          <h1>Testing the App</h1>
+          <p className={classes.join(' ')}>working...</p>
 
-        <button
-          style={style}
-          onClick={this.togglePersonHandler}>Show the Persons List</button>
-        {persons}
+          <button
+            style={style}
+            onClick={this.togglePersonHandler}>Show the Persons List</button>
+          {persons}
 
-      </div>
+        </div>
+      </StyleRoot>
     );
   }
 }
