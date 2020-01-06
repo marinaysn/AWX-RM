@@ -8,3 +8,10 @@
     background-color: blanchedalmond;
     border-radius: 3%;
 }
+
+/* @media(min-width:900px){
+    .Person {
+       width: 450px; 
+       background-color: rgb(232, 214, 248);
+    }
+} */
