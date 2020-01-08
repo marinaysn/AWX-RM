@@ -1,7 +1,21 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
+import styled from 'styled-components';
 
+const StyledButton = styled.button`
+  background-color: green;
+  color: white;
+  font: inherit;
+  border: 1px solid blue;
+  padding: 8px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: pink;
+    color: darkgreen;
+}
+`;
 
 class App extends Component {
 
@@ -56,18 +70,6 @@ class App extends Component {
 
   render() {
 
-    const style = {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer',
-      ':hover': {
-        backgroundColor: 'lightgreen',
-        color: 'darkgreen'
-      }
-    }
 
     let persons = null;
 
@@ -85,13 +87,7 @@ class App extends Component {
           })}
 
         </div>);
-      //change style with js once we show person array
-      style.backgroundColor = 'red';
-      style.color = 'pink';
-      style[':hover'] = {
-        backgroundColor: 'salmon',
-        color: 'brown'
-      }
+
     }
 
     let classes = [];
@@ -110,9 +106,9 @@ class App extends Component {
           <h1>Testing the App</h1>
           <p className={classes.join(' ')}>working...</p>
 
-          <button
-            style={style}
-            onClick={this.togglePersonHandler}>Show the Persons List</button>
+          <StyledButton
+            onClick={this.togglePersonHandler}>Show the Persons List
+          </StyledButton>
           {persons}
 
         </div>

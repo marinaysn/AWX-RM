@@ -21,16 +21,6 @@ border-radius: 3%;
 `
 
 const person = (props) => {
-
-    const style = {
-        '@media (min-width: 900px)': {
-            'width': '450px',
-            'backgroundColor': 'rgb(232, 214, 248)'
-        }
-
-
-    };
-
     return (
         //<div className='Person' style={style}>
         <StyledDiv>
