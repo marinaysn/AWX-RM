@@ -3,19 +3,7 @@ import './App.css';
 import Person from './Person/Person';
 import styled from 'styled-components';
 
-const StyledButton = styled.button`
-  background-color: ${props => props.alt ? 'red' : 'green'};
-  color: white;
-  font: inherit;
-  border: 1px solid blue;
-  padding: 8px;
-  cursor: pointer;
 
-  &:hover {
-    background-color: ${props => props.alt ? 'salmon' : 'lightgreen'};
-    color: ${props => props.alt ? 'blue' : 'darkgreen'} ;
-}
-`;
 
 class App extends Component {
 
@@ -108,10 +96,11 @@ class App extends Component {
           <h1>Testing the App</h1>
           <p className={classes.join(' ')}>working...</p>
 
-          <StyledButton
+          <button
+          className={this.state.showPerson? "buttonRed" : "buttonApp"}
           alt={this.state.showPerson}
             onClick={this.togglePersonHandler}>Show the Persons List
-          </StyledButton>
+          </button>
           {persons}
 
         </div>
