@@ -4,7 +4,7 @@ import Person from './Person/Person';
 import styled from 'styled-components';
 
 const StyledButton = styled.button`
-  background-color: green;
+  background-color: ${props => props.alt ? 'red' : 'green'};
   color: white;
   font: inherit;
   border: 1px solid blue;
@@ -12,8 +12,8 @@ const StyledButton = styled.button`
   cursor: pointer;
 
   &:hover {
-    background-color: pink;
-    color: darkgreen;
+    background-color: ${props => props.alt ? 'salmon' : 'lightgreen'};
+    color: ${props => props.alt ? 'blue' : 'darkgreen'} ;
 }
 `;
 
@@ -88,6 +88,8 @@ class App extends Component {
 
         </div>);
 
+
+
     }
 
     let classes = [];
@@ -107,6 +109,7 @@ class App extends Component {
           <p className={classes.join(' ')}>working...</p>
 
           <StyledButton
+          alt={this.state.showPerson}
             onClick={this.togglePersonHandler}>Show the Persons List
           </StyledButton>
           {persons}
