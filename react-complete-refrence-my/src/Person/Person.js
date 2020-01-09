@@ -2,6 +2,7 @@ import React from 'react';
 //import './Person.css'
 import styled from 'styled-components'
 
+
 const StyledDiv = styled.div`
 width: 50%;
 margin: 7px auto;
@@ -21,7 +22,17 @@ border-radius: 3%;
 `
 
 const person = (props) => {
+
+    const rnd = Math.random();
+    console.log('===============')
+            console.log(rnd)
+        if(rnd > 0.7) {          
+                throw new Error('This is wrong!!!')
+        }
+
     return (
+
+        
         //<div className='Person' style={style}>
         <StyledDiv>
             < p onClick={props.click} > I am {props.name} and I am {props.age} years old</p >
@@ -29,6 +40,7 @@ const person = (props) => {
 
             <input type="text" onChange={props.changed} value={props.name} />
         </StyledDiv>
+        // </div>
     );
 }
 
