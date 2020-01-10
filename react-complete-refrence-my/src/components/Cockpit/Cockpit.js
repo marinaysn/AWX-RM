@@ -11,9 +11,11 @@ const Cockpit = (props) => {
         classes.push('bold')
     }
 
+    console.log('6666 - Cockpit.js - nice and slow...');
+
     return (
         <div>
-            <h1>Testing the App</h1>
+            <h1>{props.title}</h1>
             <p className={classes.join(' ')}>working...</p>
 
             <button

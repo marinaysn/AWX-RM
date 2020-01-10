@@ -23,6 +23,8 @@ border-radius: 3%;
 
 const person = (props) => {
 
+    console.log('4444 - Person.js - main method...');
+
     return (
 
         
