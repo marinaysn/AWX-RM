@@ -23,12 +23,7 @@ border-radius: 3%;
 
 const person = (props) => {
 
-    const rnd = Math.random();
-    console.log('===============')
-            console.log(rnd)
-        if(rnd > 0.7) {          
-                throw new Error('This is wrong!!!')
-        }
+    console.log('4444 - Person.js - main method...');
 
     return (
 
