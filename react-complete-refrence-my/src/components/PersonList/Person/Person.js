@@ -1,42 +1,51 @@
-import React from 'react';
-//import './Person.css'
-import styled from 'styled-components'
+import React, { Component } from 'react';
+import './Person.css'
 
+class Person extends Component {
+    
+    // static getDerivedStateFromProps(props, state) {
 
-const StyledDiv = styled.div`
-width: 50%;
-margin: 7px auto;
-border: 1px solid #eee;
-box-shadow:  0 2px 3px #ccc;
-padding: 16px;
-text-align: center;
-background-color: blanchedalmond;
-border-radius: 3%;
+    //     console.log('4444 - Person.js - (1) getDerivedStateFromProps');
+    //     return state
+    // }
 
+    // shouldComponentUpdate(nextProps, nextState){
+    //     console.log('5555 - Person.js - (2) shouldComponentUpdate');
+    //     return true
+    // }
 
-@media(min-width:900px){
+    // getSnapshotBeforeUpdate(prevProps, prevState){
+    //     console.log('6666 - Person.js - (3) shouldComponentUpdate');
+    // }
 
-    width: 450px; 
-    background-color: rgb(232, 214, 248);
-}
-`
+    render() {
+        console.log('7777 - Person.js - (4) render method...');
 
-const person = (props) => {
-
-    console.log('4444 - Person.js - main method...');
-
-    return (
-
-        
-        //<div className='Person' style={style}>
-        <StyledDiv>
-            < p onClick={props.click} > I am {props.name} and I am {props.age} years old</p >
-            <p>{props.children}</p>
-
-            <input type="text" onChange={props.changed} value={props.name} />
-        </StyledDiv>
-        // </div>
-    );
+        return (
+            <div className='Person' >
+                < p onClick={this.props.click} > I am {this.props.name} and I am {this.props.age} years old</p >
+                <p>{this.props.children}</p>
+                <input type="text" onChange={this.props.changed} value={this.props.name} />
+            </div>
+        );
+    }
 }
 
-export default person;
+export default Person;
+
+// const person = (props) => {
+
+//     console.log('4444 - Person.js - main method...');
+
+//     return (
+
+
+//         <div className='Person' >
+//             < p onClick={props.click} > I am {props.name} and I am {props.age} years old</p >
+//             <p>{props.children}</p>
+//             <input type="text" onChange={props.changed} value={props.name} />
+//         </div>
+//     );
+// }
+
+// export default person;
