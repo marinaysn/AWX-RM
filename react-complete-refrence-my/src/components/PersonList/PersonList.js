@@ -1,21 +1,61 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Person from './Person/Person';
 import ErrorBoundary from '../../ErrorBoundary/ErrorBoundary'
 
-const PersonList = (props) =>{
+class PersonList extends Component {
+    state = {}
 
-   // console.log('5555 - PersonsList.js - List rendering...');
+    static getDerivedStateFromProps(props, state) {
 
-    return props.persons.map((p, index) => {
-        return <ErrorBoundary key={p.id}><Person
-            click={() => props.clicked(index)}
-            changed={(event) => props.changed(event, p.id)}
-            name={p.name}
-            age={p.age}
+        console.log('4444 - PersonList.js - (1) getDerivedStateFromProps');
+        return state
+    }
 
-        />
-        </ErrorBoundary>
-    })
+    shouldComponentUpdate(nextProps, nextState) {
+        console.log('5555 - PersonList.js - (2) shouldComponentUpdate');
+        return true
+    }
+
+    getSnapshotBeforeUpdate(prevProps, prevState) {
+        console.log('6666 - PersonList.js - (3) shouldComponentUpdate');
+    }
+
+    componentDidUpdate() {
+        console.log('7777 - PersonList.js - (3) componentDidUpdate');
+    }
+    render() {
+
+        console.log('8888 - PersonList.js - (4) render');
+
+        return this.props.persons.map((p, index) => {
+            return <ErrorBoundary key={p.id}><Person
+                click={() => this.props.clicked(index)}
+                changed={(event) => this.props.changed(event, p.id)}
+                name={p.name}
+                age={p.age}
+
+            />
+            </ErrorBoundary>
+        })
+    }
 }
 
 export default PersonList;
+
+// const PersonList = (props) =>{
+
+//    // console.log('5555 - PersonsList.js - List rendering...');
+
+//     return props.persons.map((p, index) => {
+//         return <ErrorBoundary key={p.id}><Person
+//             click={() => props.clicked(index)}
+//             changed={(event) => props.changed(event, p.id)}
+//             name={p.name}
+//             age={p.age}
+
+//         />
+//         </ErrorBoundary>
+//     })
+// }
+
+// export default PersonList;
