@@ -1,22 +1,26 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import './Cockpit.css'
 
 const Cockpit = (props) => {
 
+    const btnRef = useRef(null);
+
+
     useEffect(() => {
         console.log('1111 - COCKPIT - useEffect')
         //HTTP request
-        setTimeout(()=>{
-           // alert('Saved data to cloud')
-        }, 1000);
-        return ()=>{
+        setTimeout(() => {
+            btnRef.current.click();
+        }, 3000);
+        return () => {
             console.log('111 - Cockpit.js - useEffect - will unmount')
         }
-    },[])
+    }, [])
 
-    useEffect(() =>{
+    useEffect(() => {
         console.log('222- - Cockpit.js - 2nd useEffect()')
-        return ()=>{
+
+        return () => {
             console.log('Cleanup work in second useeffect')
         }
     })
@@ -38,10 +42,12 @@ const Cockpit = (props) => {
             <p className={classes.join(' ')}>working...</p>
 
             <button
+                ref={btnRef}
                 className={props.showPerson ? "buttonRed" : "buttonApp"}
                 alt={props.showPerson}
                 onClick={props.clicked}>Show the Persons List
           </button>
+            <button onClick={props.login}>Log in</button>
         </div>
     )
 }

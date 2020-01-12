@@ -7,9 +7,16 @@ import PropTypes from 'prop-types';
 
 class Person extends Component {
 
+    constructor(props) {
+        super(props);
+        this.inputElementRef = React.createRef();
+    }
+
     componentDidMount() {
-       // document.querySelector('input').focus();
-       this.inputElement.focus();
+        // document.querySelector('input').focus();
+        // this.inputElement.focus();
+
+        this.inputElementRef.current.focus();
     }
 
     render() {
@@ -17,17 +24,18 @@ class Person extends Component {
 
         return (
             <Auxiliary>
-                
-            < p onClick={this.props.click} > 
-                I am {this.props.name} and I am {this.props.age} years old
+                {this.props.isAuth ? <p>Authenticated</p> : <p>Please Log In</p>}
+                < p onClick={this.props.click} >
+                    I am {this.props.name} and I am {this.props.age} years old
             </p >
-            <p>{this.props.children}</p>
-            <input type="text" 
-            ref={(inputEl) => {this.inputElement = inputEl}}
-            onChange={this.props.changed} 
-            value={this.props.name} />
+                <p>{this.props.children}</p>
+                <input type="text"
+                    //ref={(inputEl) => {this.inputElement = inputEl}}
+                    ref={this.inputElementRef}
+                    onChange={this.props.changed}
+                    value={this.props.name} />
 
-               
+
             </Auxiliary>
         );
     }
