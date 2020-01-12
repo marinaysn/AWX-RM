@@ -7,20 +7,10 @@ import PropTypes from 'prop-types';
 
 class Person extends Component {
 
-    // static getDerivedStateFromProps(props, state) {
-
-    //     console.log('4444 - Person.js - (1) getDerivedStateFromProps');
-    //     return state
-    // }
-
-    // shouldComponentUpdate(nextProps, nextState){
-    //     console.log('5555 - Person.js - (2) shouldComponentUpdate');
-    //     return true
-    // }
-
-    // getSnapshotBeforeUpdate(prevProps, prevState){
-    //     console.log('6666 - Person.js - (3) shouldComponentUpdate');
-    // }
+    componentDidMount() {
+       // document.querySelector('input').focus();
+       this.inputElement.focus();
+    }
 
     render() {
         console.log('Person.js - (4) render method...');
@@ -32,7 +22,10 @@ class Person extends Component {
                 I am {this.props.name} and I am {this.props.age} years old
             </p >
             <p>{this.props.children}</p>
-            <input type="text" onChange={this.props.changed} value={this.props.name} />
+            <input type="text" 
+            ref={(inputEl) => {this.inputElement = inputEl}}
+            onChange={this.props.changed} 
+            value={this.props.name} />
 
                
             </Auxiliary>
