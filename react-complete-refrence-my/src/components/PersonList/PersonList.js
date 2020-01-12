@@ -13,24 +13,29 @@ class PersonList extends Component {
 
     shouldComponentUpdate(nextProps, nextState) {
         console.log('PersonList.js - (2) shouldComponentUpdate');
-        
-        if (nextProps.persons !== this.props.persons){
+
+        if (nextProps.persons !== this.props.persons ||
+            this.props.changed !== nextProps.changed ||
+            this.props.clicked !== nextProps.clicked
+        ) {
             return true
         }
-        else return false
+        else {
+            return false
+        }
 
     }
 
     getSnapshotBeforeUpdate(prevProps, prevState) {
         console.log('PersonList.js - (3) shouldComponentUpdate');
-   return true;
+        return true;
     }
 
     componentDidUpdate() {
         console.log('PersonList.js - (3) componentDidUpdate');
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         console.log('444 - PersonList.js - (4) componentWillUnmount');
     }
 
