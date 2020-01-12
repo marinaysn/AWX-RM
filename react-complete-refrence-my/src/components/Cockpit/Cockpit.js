@@ -1,6 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const Cockpit = (props) => {
+
+    useEffect(() => {
+        console.log('1111 - COCKPIT - useEffect')
+        //HTTP request
+        setTimeout(()=>{
+            alert('Saved data to cloud')
+        }, 1000);
+    },[])
 
     let classes = [];
 

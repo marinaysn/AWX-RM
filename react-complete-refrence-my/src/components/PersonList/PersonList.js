@@ -7,21 +7,21 @@ class PersonList extends Component {
 
     static getDerivedStateFromProps(props, state) {
 
-        console.log('4444 - PersonList.js - (1) getDerivedStateFromProps');
+        console.log('PersonList.js - (1) getDerivedStateFromProps');
         return state
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        console.log('5555 - PersonList.js - (2) shouldComponentUpdate');
+        console.log('PersonList.js - (2) shouldComponentUpdate');
         return true
     }
 
     getSnapshotBeforeUpdate(prevProps, prevState) {
-        console.log('6666 - PersonList.js - (3) shouldComponentUpdate');
+        console.log('PersonList.js - (3) shouldComponentUpdate');
     }
 
     componentDidUpdate() {
-        console.log('7777 - PersonList.js - (3) componentDidUpdate');
+        console.log('PersonList.js - (3) componentDidUpdate');
     }
     render() {
 

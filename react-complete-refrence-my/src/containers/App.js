@@ -31,6 +31,16 @@ class App extends Component {
     console.log('7777 - App.js - componentDidMount');
   }
 
+  componentDidUpdate(){
+    console.log('8888 - App.js - componentDidUpdate');
+  }
+
+  shouldComponentUpdate(nextProps, nextState){
+    console.log('9999 - App.js - shouldComponentUpdate');
+    return true;
+  }
+
+
   deletePersonHandler = (index) => {
     const temp = [...this.state.persons]
     temp.splice(index, 1)
@@ -83,6 +93,7 @@ class App extends Component {
 
       <div className="App">
         <Cockpit
+          persons={this.state.persons}
           clicked={this.togglePersonHandler}
           showPerson={this.state.showPerson}
           personArrLength={this.state.persons.length}
