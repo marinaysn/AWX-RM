@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Person.css'
+import classes from './Person.css'
 import Auxiliary from '../../../hoc/Auxiliary'
 import withClassName from '../../../hoc/withClassName'
 class Person extends Component {

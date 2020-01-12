@@ -4,10 +4,9 @@ const withClassName = (WrappedContent, className) => {
 
     return props => (
         <div className={className}>
-            <WrappedContent />
+            <WrappedContent {...props} />
         </div>
     );
-
 };
 
 export default withClassName;
