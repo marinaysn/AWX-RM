@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import classes from './Person.css'
+import './Person.css'
 import Auxiliary from '../../../hoc/Auxiliary'
-import withClassName from '../../../hoc/withClassName'
+import withClassName from '../../../hoc/withClassName';
+import PropTypes from 'prop-types';
+
+
 class Person extends Component {
 
     // static getDerivedStateFromProps(props, state) {
@@ -25,15 +28,24 @@ class Person extends Component {
         return (
             <Auxiliary>
                 
-                    < p onClick={this.props.click} > I am {this.props.name} and I am {this.props.age} years old</p >
-                    <p>{this.props.children}</p>
-                    <input type="text" onChange={this.props.changed} value={this.props.name} />
+            < p onClick={this.props.click} > 
+                I am {this.props.name} and I am {this.props.age} years old
+            </p >
+            <p>{this.props.children}</p>
+            <input type="text" onChange={this.props.changed} value={this.props.name} />
 
                
             </Auxiliary>
         );
     }
 }
+
+Person.propTypes = {
+    click: PropTypes.func,
+    name: PropTypes.string,
+    age: PropTypes.number,
+    channged: PropTypes.func
+};
 
 export default withClassName(Person, 'Person');
 

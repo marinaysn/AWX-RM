@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import './Cockpit.css'
 
 const Cockpit = (props) => {
 
