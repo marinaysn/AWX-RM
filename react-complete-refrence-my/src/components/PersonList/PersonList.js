@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import Person from './Person/Person';
 import ErrorBoundary from '../../ErrorBoundary/ErrorBoundary'
 
-class PersonList extends Component {
+class PersonList extends PureComponent {
     state = {}
 
     static getDerivedStateFromProps(props, state) {
@@ -11,20 +11,20 @@ class PersonList extends Component {
         return state
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        console.log('PersonList.js - (2) shouldComponentUpdate');
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     console.log('PersonList.js - (2) shouldComponentUpdate');
 
-        if (nextProps.persons !== this.props.persons ||
-            this.props.changed !== nextProps.changed ||
-            this.props.clicked !== nextProps.clicked
-        ) {
-            return true
-        }
-        else {
-            return false
-        }
+    //     if (nextProps.persons !== this.props.persons ||
+    //         this.props.changed !== nextProps.changed ||
+    //         this.props.clicked !== nextProps.clicked
+    //     ) {
+    //         return true
+    //     }
+    //     else {
+    //         return false
+    //     }
 
-    }
+    // }
 
     getSnapshotBeforeUpdate(prevProps, prevState) {
         console.log('PersonList.js - (3) shouldComponentUpdate');
