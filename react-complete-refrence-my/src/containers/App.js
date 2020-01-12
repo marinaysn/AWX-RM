@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import './App.css';
 import PersonList from '../components/PersonList/PersonList'
 import Cockpit from '../components/Cockpit/Cockpit'
+import WithClass from '../hoc/WithClass'
 
 class App extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
     console.log("App.js Constructor")
   }
@@ -20,7 +21,7 @@ class App extends Component {
       ],
     otherState: 'test',
     showPerson: false,
-    showCockpit : true
+    showCockpit: true
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -32,11 +33,11 @@ class App extends Component {
     console.log('App.js - componentDidMount');
   }
 
-  componentDidUpdate(){
+  componentDidUpdate() {
     console.log('App.js - componentDidUpdate');
   }
 
-  shouldComponentUpdate(nextProps, nextState){
+  shouldComponentUpdate(nextProps, nextState) {
     console.log(' App.js - shouldComponentUpdate');
     return true;
   }
@@ -92,27 +93,27 @@ class App extends Component {
 
     return (
 
-      <div className="App">
 
+      <WithClass classes='App'>
         <button
-          onClick={()=>{
-            this.setState({showCockpit : !this.state.showCockpit})
+          onClick={() => {
+            this.setState({ showCockpit: !this.state.showCockpit })
           }}> Remove Cockpit!!!
         </button>
-        {this.state.showCockpit? (
+        {this.state.showCockpit ? (
           <Cockpit
-          persons={this.state.persons}
-          clicked={this.togglePersonHandler}
-          showPerson={this.state.showPerson}
-          personArrLength={this.state.persons.length}
-          title={this.props.appTitle }
-        />
-        ): null }
-        
+            persons={this.state.persons}
+            clicked={this.togglePersonHandler}
+            showPerson={this.state.showPerson}
+            personArrLength={this.state.persons.length}
+            title={this.props.appTitle}
+          />
+        ) : null}
+
 
         {persons}
 
-      </div>
+      </WithClass>
 
     );
   }
