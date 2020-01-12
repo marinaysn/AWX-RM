@@ -1,6 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const Cockpit = (props) => {
+
+    useEffect(() => {
+        console.log('1111 - COCKPIT - useEffect')
+        //HTTP request
+        setTimeout(()=>{
+           // alert('Saved data to cloud')
+        }, 1000);
+        return ()=>{
+            console.log('111 - Cockpit.js - useEffect - will unmount')
+        }
+    },[])
+
+    useEffect(() =>{
+        console.log('222- - Cockpit.js - 2nd useEffect()')
+        return ()=>{
+            console.log('Cleanup work in second useeffect')
+        }
+    })
 
     let classes = [];
 
@@ -27,4 +45,4 @@ const Cockpit = (props) => {
     )
 }
 
-export default Cockpit
+export default React.memo(Cockpit);

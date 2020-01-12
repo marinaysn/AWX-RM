@@ -19,7 +19,7 @@ class Person extends Component {
     // }
 
     render() {
-        console.log('7777 - Person.js - (4) render method...');
+        console.log('Person.js - (4) render method...');
 
         return (
             <div className='Person' >
