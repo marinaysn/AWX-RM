@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import './App.css';
-import PersonList from '../components/PersonList/PersonList'
-import Cockpit from '../components/Cockpit/Cockpit'
-import WithClass from '../hoc/WithClass'
+import PersonList from '../components/PersonList/PersonList';
+import Cockpit from '../components/Cockpit/Cockpit';
+import WithClass from '../hoc/WithClass';
+import AuthContext from '../context/auth-context';
+
+
 
 class App extends Component {
 
   constructor(props) {
     super(props);
-    console.log("App.js Constructor")
+   // console.log("App.js Constructor")
   }
 
   state = {
@@ -22,24 +25,25 @@ class App extends Component {
     otherState: 'test',
     showPerson: false,
     showCockpit: true,
-    changeCounter: 0
+    changeCounter: 0,
+    auth: false
   }
 
   static getDerivedStateFromProps(props, state) {
-    console.log('App.js - getDerivedStateFromProps', props)
+   // console.log('App.js - getDerivedStateFromProps', props)
     return state;
   }
 
   componentDidMount() {
-    console.log('App.js - componentDidMount');
+   // console.log('App.js - componentDidMount');
   }
 
   componentDidUpdate() {
-    console.log('App.js - componentDidUpdate');
+   // console.log('App.js - componentDidUpdate');
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    console.log(' App.js - shouldComponentUpdate');
+  //  console.log(' App.js - shouldComponentUpdate');
     return true;
   }
 
@@ -66,9 +70,10 @@ class App extends Component {
 
     this.setState((prevState, props) => {
       return {
-      persons: tempPersons,
-      changeCounter: prevState.changeCounter + 1
-    }})
+        persons: tempPersons,
+        changeCounter: prevState.changeCounter + 1
+      }
+    })
 
   }
 
@@ -79,9 +84,15 @@ class App extends Component {
     })
   }
 
+  loginHandler = () => {
+    this.setState({
+      auth: true
+    })
+  }
+
   render() {
 
-    console.log(' App.js - render method');
+   // console.log(' App.js - render method');
     let persons = null;
 
     if (this.state.showPerson) {
@@ -90,7 +101,8 @@ class App extends Component {
           <PersonList
             persons={this.state.persons}
             clicked={this.deletePersonHandler}
-            changed={this.nameChangeHandler} />
+            changed={this.nameChangeHandler}
+            isAuthenticated={this.state.auth} />
         </div>);
     }
 
@@ -103,19 +115,25 @@ class App extends Component {
             this.setState({ showCockpit: !this.state.showCockpit })
           }}> Remove Cockpit!!!
         </button>
-        {this.state.showCockpit ? (
-          <Cockpit
-            persons={this.state.persons}
-            clicked={this.togglePersonHandler}
-            showPerson={this.state.showPerson}
-            personArrLength={this.state.persons.length}
-            title={this.props.appTitle}
-          />
-        ) : null}
 
+        <AuthContext.Provider value={{
+          authenticated: this.state.auth,
+          login: this.loginHandler
+        }}>
 
-        {persons}
+          {this.state.showCockpit ? (
+            <Cockpit
+              persons={this.state.persons}
+              clicked={this.togglePersonHandler}
+              showPerson={this.state.showPerson}
+              personArrLength={this.state.persons.length}
+              title={this.props.appTitle}
+            />
+          ) : null}
 
+          {persons}
+
+        </AuthContext.Provider>
       </WithClass>
 
     );

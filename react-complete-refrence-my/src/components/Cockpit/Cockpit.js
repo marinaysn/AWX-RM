@@ -1,22 +1,28 @@
-import React, { useEffect } from 'react';
-
+import React, { useEffect, useRef , useContext} from 'react';
+import './Cockpit.css'
+import AuthContext from "../../context/auth-context"
 const Cockpit = (props) => {
 
-    useEffect(() => {
-        console.log('1111 - COCKPIT - useEffect')
-        //HTTP request
-        setTimeout(()=>{
-           // alert('Saved data to cloud')
-        }, 1000);
-        return ()=>{
-            console.log('111 - Cockpit.js - useEffect - will unmount')
-        }
-    },[])
+    const btnRef = useRef(null);
 
-    useEffect(() =>{
-        console.log('222- - Cockpit.js - 2nd useEffect()')
-        return ()=>{
-            console.log('Cleanup work in second useeffect')
+    const authContext = useContext(AuthContext);
+
+    useEffect(() => {
+      //  console.log('1111 - COCKPIT - useEffect')
+        //HTTP request
+        setTimeout(() => {
+            btnRef.current.click();
+        }, 3000);
+        return () => {
+          //  console.log('111 - Cockpit.js - useEffect - will unmount')
+        }
+    }, [])
+
+    useEffect(() => {
+       // console.log('222- - Cockpit.js - 2nd useEffect()')
+
+        return () => {
+           // console.log('Cleanup work in second useeffect')
         }
     })
 
@@ -29,7 +35,7 @@ const Cockpit = (props) => {
         classes.push('bold')
     }
 
-    console.log('6666 - Cockpit.js - nice and slow...');
+  //  console.log('6666 - Cockpit.js - nice and slow...');
 
     return (
         <div>
@@ -37,10 +43,15 @@ const Cockpit = (props) => {
             <p className={classes.join(' ')}>working...</p>
 
             <button
+                ref={btnRef}
                 className={props.showPerson ? "buttonRed" : "buttonApp"}
                 alt={props.showPerson}
                 onClick={props.clicked}>Show the Persons List
           </button>
+            
+            <button onClick={authContext.login}>Log in</button>
+                
+
         </div>
     )
 }

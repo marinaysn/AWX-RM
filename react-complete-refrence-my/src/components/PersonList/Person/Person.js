@@ -1,39 +1,59 @@
 import React, { Component } from 'react';
-import classes from './Person.css'
+import './Person.css'
 import Auxiliary from '../../../hoc/Auxiliary'
-import withClassName from '../../../hoc/withClassName'
+import withClassName from '../../../hoc/withClassName';
+import PropTypes from 'prop-types';
+import AuthContext from '../../../context/auth-context'
+
 class Person extends Component {
 
-    // static getDerivedStateFromProps(props, state) {
+    constructor(props) {
+        super(props);
+        this.inputElementRef = React.createRef();
+    }
 
-    //     console.log('4444 - Person.js - (1) getDerivedStateFromProps');
-    //     return state
-    // }
+    static contextType = AuthContext;
 
-    // shouldComponentUpdate(nextProps, nextState){
-    //     console.log('5555 - Person.js - (2) shouldComponentUpdate');
-    //     return true
-    // }
+    componentDidMount() {
+        // document.querySelector('input').focus();
+        // this.inputElement.focus();
 
-    // getSnapshotBeforeUpdate(prevProps, prevState){
-    //     console.log('6666 - Person.js - (3) shouldComponentUpdate');
-    // }
+        this.inputElementRef.current.focus();
+        console.log('========================')
+        console.log(this.context.login)
+        console.log(this.context.authenticated)
+    }
 
     render() {
-        console.log('Person.js - (4) render method...');
+        //console.log('Person.js - (4) render method...');
 
         return (
             <Auxiliary>
                 
-                    < p onClick={this.props.click} > I am {this.props.name} and I am {this.props.age} years old</p >
-                    <p>{this.props.children}</p>
-                    <input type="text" onChange={this.props.changed} value={this.props.name} />
+            {this.context.authenticated ? <p>Authenticated</p> : <p>Please Log In</p>
+             }      
 
-               
+                < p onClick={this.props.click} >
+                    I am {this.props.name} and I am {this.props.age} years old
+                    </p >
+                <p>{this.props.children}</p>
+                <input type="text"
+                    //ref={(inputEl) => {this.inputElement = inputEl}}
+                    ref={this.inputElementRef}
+                    onChange={this.props.changed}
+                    value={this.props.name} />
+
             </Auxiliary>
         );
     }
 }
+
+Person.propTypes = {
+    click: PropTypes.func,
+    name: PropTypes.string,
+    age: PropTypes.number,
+    channged: PropTypes.func
+};
 
 export default withClassName(Person, 'Person');
 
