@@ -11,7 +11,7 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    console.log("App.js Constructor")
+   // console.log("App.js Constructor")
   }
 
   state = {
@@ -30,20 +30,20 @@ class App extends Component {
   }
 
   static getDerivedStateFromProps(props, state) {
-    console.log('App.js - getDerivedStateFromProps', props)
+   // console.log('App.js - getDerivedStateFromProps', props)
     return state;
   }
 
   componentDidMount() {
-    console.log('App.js - componentDidMount');
+   // console.log('App.js - componentDidMount');
   }
 
   componentDidUpdate() {
-    console.log('App.js - componentDidUpdate');
+   // console.log('App.js - componentDidUpdate');
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    console.log(' App.js - shouldComponentUpdate');
+  //  console.log(' App.js - shouldComponentUpdate');
     return true;
   }
 
@@ -92,7 +92,7 @@ class App extends Component {
 
   render() {
 
-    console.log(' App.js - render method');
+   // console.log(' App.js - render method');
     let persons = null;
 
     if (this.state.showPerson) {

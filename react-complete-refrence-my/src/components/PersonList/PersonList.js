@@ -7,26 +7,26 @@ class PersonList extends PureComponent {
 
     static getDerivedStateFromProps(props, state) {
 
-        console.log('PersonList.js - (1) getDerivedStateFromProps');
+        //console.log('PersonList.js - (1) getDerivedStateFromProps');
         return state
     }
 
     getSnapshotBeforeUpdate(prevProps, prevState) {
-        console.log('PersonList.js - (3) shouldComponentUpdate');
+        //console.log('PersonList.js - (3) shouldComponentUpdate');
         return true;
     }
 
     componentDidUpdate() {
-        console.log('PersonList.js - (3) componentDidUpdate');
+       // console.log('PersonList.js - (3) componentDidUpdate');
     }
 
     componentWillUnmount() {
-        console.log('444 - PersonList.js - (4) componentWillUnmount');
+       // console.log('444 - PersonList.js - (4) componentWillUnmount');
     }
 
     render() {
 
-        console.log('8888 - PersonList.js - (4) render');
+       // console.log('8888 - PersonList.js - (4) render');
 
         return (this.props.persons.map((p, index) => {
             return <ErrorBoundary key={p.id}>

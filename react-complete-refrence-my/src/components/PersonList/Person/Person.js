@@ -12,23 +12,26 @@ class Person extends Component {
         this.inputElementRef = React.createRef();
     }
 
+    static contextType = AuthContext;
+
     componentDidMount() {
         // document.querySelector('input').focus();
         // this.inputElement.focus();
 
         this.inputElementRef.current.focus();
+        console.log('========================')
+        console.log(this.context.login)
+        console.log(this.context.authenticated)
     }
 
     render() {
-        console.log('Person.js - (4) render method...');
+        //console.log('Person.js - (4) render method...');
 
         return (
             <Auxiliary>
-                <AuthContext.Consumer>
-                    {(context) =>
-                        context.authenticated ? <p>Authenticated</p> : <p>Please Log In</p>
-                    }
-                </AuthContext.Consumer>
+                
+            {this.context.authenticated ? <p>Authenticated</p> : <p>Please Log In</p>
+             }      
 
                 < p onClick={this.props.click} >
                     I am {this.props.name} and I am {this.props.age} years old
