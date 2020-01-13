@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
-import PersonList from '../components/PersonList/PersonList'
-import Cockpit from '../components/Cockpit/Cockpit'
-import WithClass from '../hoc/WithClass'
+import PersonList from '../components/PersonList/PersonList';
+import Cockpit from '../components/Cockpit/Cockpit';
+import WithClass from '../hoc/WithClass';
+import AuthContext from '../context/auth-context';
+
+
 
 class App extends Component {
 
@@ -67,9 +70,10 @@ class App extends Component {
 
     this.setState((prevState, props) => {
       return {
-      persons: tempPersons,
-      changeCounter: prevState.changeCounter + 1
-    }})
+        persons: tempPersons,
+        changeCounter: prevState.changeCounter + 1
+      }
+    })
 
   }
 
@@ -80,9 +84,9 @@ class App extends Component {
     })
   }
 
-  loginHandler = () =>{
+  loginHandler = () => {
     this.setState({
-      auth : true 
+      auth: true
     })
   }
 
@@ -111,20 +115,25 @@ class App extends Component {
             this.setState({ showCockpit: !this.state.showCockpit })
           }}> Remove Cockpit!!!
         </button>
-        {this.state.showCockpit ? (
-          <Cockpit
-            persons={this.state.persons}
-            clicked={this.togglePersonHandler}
-            showPerson={this.state.showPerson}
-            personArrLength={this.state.persons.length}
-            title={this.props.appTitle}
-            login={this.loginHandler}
-          />
-        ) : null}
 
+        <AuthContext.Provider value={{
+          authenticated: this.state.auth,
+          login: this.loginHandler
+        }}>
 
-        {persons}
+          {this.state.showCockpit ? (
+            <Cockpit
+              persons={this.state.persons}
+              clicked={this.togglePersonHandler}
+              showPerson={this.state.showPerson}
+              personArrLength={this.state.persons.length}
+              title={this.props.appTitle}
+            />
+          ) : null}
 
+          {persons}
+
+        </AuthContext.Provider>
       </WithClass>
 
     );

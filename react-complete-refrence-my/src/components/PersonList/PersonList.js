@@ -28,7 +28,7 @@ class PersonList extends PureComponent {
 
         console.log('8888 - PersonList.js - (4) render');
 
-        return this.props.persons.map((p, index) => {
+        return (this.props.persons.map((p, index) => {
             return <ErrorBoundary key={p.id}>
                 <Person
                     click={() => this.props.clicked(index)}
@@ -39,6 +39,7 @@ class PersonList extends PureComponent {
                 />
             </ErrorBoundary>
         })
+        );
     }
 }
 
