@@ -1,7 +1,9 @@
 import React from 'react';
 import Auxiliary from '../../hoc/Auxiliary';
 //import classes from '../Layout/Layout.css'
+import Burger from '../Burger/Burger'
 import './Layout.css';
+
 const Layout = (props) => {
     return (
         <Auxiliary>
