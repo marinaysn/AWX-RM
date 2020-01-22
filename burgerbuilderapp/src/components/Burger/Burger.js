@@ -17,11 +17,18 @@ const Burger = (props) => {
     const ingredientsObj = props.ingBurger;
     let ingredientsArray = [];
     Object.keys(ingredientsObj).forEach(ingKey => {
-        for (let i = 0; i < ingredientsObj[ingKey]; i++)
+        // console.log(ingKey)
+        for (let i = 0; i < ingredientsObj[ingKey]; i++) {
+            // console.log(ingredientsObj[ingKey])
+            // console.log(ingKey)
+            // console.log(ingKey + 1)
             ingredientsArray.push(<BurgerIngredient key={ingKey + i} type={ingKey} />)
+        }
     });
 
-
+    if (ingredientsArray.length === 0) {
+        ingredientsArray = <p>Please add your ingredients</p>
+    }
     // //
     // //method3
     // const ingredientArr1 = Object.keys(props.ingBurger);
@@ -33,13 +40,13 @@ const Burger = (props) => {
     // })
     // //call {realIngredientsFinalized}
     // const realIngredientsFinalized = realIngredients.map((ingr,i)=> <BurgerIngredient type={ingr} key={i} /> )
-            
+
 
     return (
         <div className="Burger">
             <BurgerIngredient type="bread-top" />
 
-            { ingredientsArray }
+            {ingredientsArray}
 
             <BurgerIngredient type="bread-bottom" />
 
