@@ -21,6 +21,8 @@ const Burger = (props) => {
 
     return (
         <div className="Burger">
+
+            <h1>${props.price.toFixed(2)}</h1>
             <BurgerIngredient type="bread-top" />
 
             {ingredientsArray}

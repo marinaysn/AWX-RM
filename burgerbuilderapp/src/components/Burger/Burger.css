@@ -2,8 +2,9 @@
     width: 100%;
     margin: auto;
     padding-top: 10px;
-    height: 250px;
-    /* overflow: scroll; */
+    position: relative;
+    height: 350px;  
+    overflow: scroll;
     text-align: center;
     font-weight: bold;
     font-size: 1.2rem;
