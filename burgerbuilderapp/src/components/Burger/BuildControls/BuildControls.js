@@ -14,7 +14,12 @@ const BuildControls =(props) =>{
         <div className="BuildControls">
             {
                 controls.map ( i =>(
-                    <BuildControl key={i.label} label={i.label} />
+                    <BuildControl 
+                    key={i.label} 
+                    label={i.label}
+                    added={() => props.addItem(i.type)}
+                    removed={() => props.removeItem(i.type) }
+                    disabled={props.disabled[i.type]} />
                 ))
             }
         </div>
