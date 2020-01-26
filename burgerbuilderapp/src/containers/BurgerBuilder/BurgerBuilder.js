@@ -40,13 +40,11 @@ export class BurgerBuilder extends Component {
             totalPrice: updatedPrice,
             ingredients: updatedIngredients
         })
+        this.updateTotalItemsState(updatedIngredients);
     }
 
-    updateTotalItemsState (){
-        const tempIngArr = {
-            ...this.state.ingredients
-        }
-
+    updateTotalItemsState (tempIngArr){
+       
         const sum = Object.keys(tempIngArr).map(i =>
           {  return tempIngArr[i]})
           .reduce((sum, el)=>{
@@ -78,6 +76,8 @@ export class BurgerBuilder extends Component {
                 totalPrice: updatedPrice,
                 ingredients: updatedIngredients,
             })
+
+            this.updateTotalItemsState(updatedIngredients);
         }
 
     }
