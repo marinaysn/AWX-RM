@@ -46,17 +46,16 @@ export class BurgerBuilder extends Component {
         this.updateTotalItemsState(updatedIngredients);
     }
 
-    updateTotalItemsState (tempIngArr){
-       
-        const sum = Object.keys(tempIngArr).map(i =>
-          {  return tempIngArr[i]})
-          .reduce((sum, el)=>{
-              return sum + el
-          }, 0)
+    updateTotalItemsState(tempIngArr) {
 
-          this.setState({
+        const sum = Object.keys(tempIngArr).map(i => { return tempIngArr[i] })
+            .reduce((sum, el) => {
+                return sum + el
+            }, 0)
+
+        this.setState({
             isAnyitemsSelected: sum > 0
-          })
+        })
     }
 
     removeIngredientHandler = (type) => {
@@ -85,31 +84,39 @@ export class BurgerBuilder extends Component {
 
     }
 
-    orderButtonClickedHandler = () =>{
-        this.setState({
-            orderIsClicked : true
-        })
+    orderButtonClickedHandler = () => {
 
+        this.setState({
+            orderIsClicked: true
+        })
+    }
+
+    orderCancelledHandler = () => {
+        this.setState({
+            orderIsClicked: false
+        })
     }
 
     render() {
         let disabledOrderBtn = true
-        const disabledInfo ={
+        const disabledInfo = {
             ...this.state.ingredients
         };
-        for (let key in disabledInfo){
+        for (let key in disabledInfo) {
             disabledInfo[key] = disabledInfo[key] <= 0
         }
-       
+
         console.log("====================")
         console.log(this.state.isAnyitemsSelected)
-        
+
 
         return (
-            <Auxiliary>  
-                 { this.state.isAnyitemsSelected ? <Modal>
-                    <OrderSummary ingredients={this.state.ingredients} />
-                    </Modal>  : null }    
+            <Auxiliary>
+                <Modal show={this.state.orderIsClicked}>
+                    <OrderSummary
+                        ingredients={this.state.ingredients} />
+                </Modal>
+
                 <Burger
                     ingBurger={this.state.ingredients}
                     price={this.state.totalPrice} />
@@ -117,7 +124,8 @@ export class BurgerBuilder extends Component {
                     addItem={this.addIngredientHandler}
                     removeItem={this.removeIngredientHandler}
                     disabled={disabledInfo}
-                    disabledOrderBtn={this.state.isAnyitemsSelected} />
+                    disabledOrderBtn={this.state.isAnyitemsSelected}
+                    orderBtnClicked={this.orderButtonClickedHandler} />
             </Auxiliary>
 
         )
