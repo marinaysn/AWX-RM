@@ -92,13 +92,17 @@ export class BurgerBuilder extends Component {
     }
 
     orderCancelledHandler = () => {
+
+        console.log('^^^^^^^^^^^^')
+        console.log(this.state.orderIsClicked)
+
         this.setState({
             orderIsClicked: false
         })
     }
 
     render() {
-        let disabledOrderBtn = true
+
         const disabledInfo = {
             ...this.state.ingredients
         };
@@ -106,15 +110,17 @@ export class BurgerBuilder extends Component {
             disabledInfo[key] = disabledInfo[key] <= 0
         }
 
-        console.log("====================")
-        console.log(this.state.isAnyitemsSelected)
+        // console.log("====================")
+        // console.log(this.state.isAnyitemsSelected)
 
 
         return (
             <Auxiliary>
-                <Modal show={this.state.orderIsClicked}>
+                <Modal show={this.state.orderIsClicked}
+                    modalClosed={this.orderCancelledHandler} >
                     <OrderSummary
-                        ingredients={this.state.ingredients} />
+                        ingredients={this.state.ingredients}
+                        modalClosed={this.orderCancelledHandler} />
                 </Modal>
 
                 <Burger
