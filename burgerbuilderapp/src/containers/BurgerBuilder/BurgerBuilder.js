@@ -20,7 +20,8 @@ export class BurgerBuilder extends Component {
             cheese: 0,
             meat: 0
         },
-        totalPrice: 4.00
+        totalPrice: 4.00,
+        totalItems: false
     }
 
     addIngredientHandler = (type) => {
@@ -34,10 +35,27 @@ export class BurgerBuilder extends Component {
         const originalPrice = this.state.totalPrice;
         const updatedPrice = originalPrice + INGREDIENTPRICES[type]
 
+        const items = this.state.totalItems + 1
         this.setState({
             totalPrice: updatedPrice,
             ingredients: updatedIngredients
         })
+    }
+
+    updateTotalItemsState (){
+        const tempIngArr = {
+            ...this.state.ingredients
+        }
+
+        const sum = Object.keys(tempIngArr).map(i =>
+          {  return tempIngArr[i]})
+          .reduce((sum, el)=>{
+              return sum + el
+          }, 0)
+
+          this.setState({
+              totalItems: sum > 0
+          })
     }
 
     removeIngredientHandler = (type) => {
@@ -56,36 +74,39 @@ export class BurgerBuilder extends Component {
             const originalPrice = this.state.totalPrice;
             updatedPrice = originalPrice - INGREDIENTPRICES[type]
 
-
-
             this.setState({
                 totalPrice: updatedPrice,
-                ingredients: updatedIngredients
+                ingredients: updatedIngredients,
             })
         }
 
     }
 
     render() {
-
+        let disabledOrderBtn = true
         const disabledInfo ={
             ...this.state.ingredients
         };
         for (let key in disabledInfo){
             disabledInfo[key] = disabledInfo[key] <= 0
         }
+       
+        console.log("====================")
+        console.log(this.state.totalItems)
+        
 
         return (
             <Auxiliary>
                 
-                <BuildControls
-                    addItem={this.addIngredientHandler}
-                    removeItem={this.removeIngredientHandler}
-                    disabled={disabledInfo} />
+                
                 <Burger
                     ingBurger={this.state.ingredients}
                     price={this.state.totalPrice} />
-                
+                <BuildControls
+                    addItem={this.addIngredientHandler}
+                    removeItem={this.removeIngredientHandler}
+                    disabled={disabledInfo}
+                    disabledOrderBtn={this.state.totalItems} />
             </Auxiliary>
 
         )
