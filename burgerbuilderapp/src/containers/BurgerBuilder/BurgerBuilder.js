@@ -93,8 +93,14 @@ export class BurgerBuilder extends Component {
 
     orderCancelledHandler = () => {
 
-        console.log('^^^^^^^^^^^^')
-        console.log(this.state.orderIsClicked)
+        this.setState({
+            orderIsClicked: false
+        })
+    }
+
+    orderContinuedHandler = () => {
+
+        alert('you clicked Continue')
 
         this.setState({
             orderIsClicked: false
@@ -120,7 +126,9 @@ export class BurgerBuilder extends Component {
                     modalClosed={this.orderCancelledHandler} >
                     <OrderSummary
                         ingredients={this.state.ingredients}
-                        modalClosed={this.orderCancelledHandler} />
+                        modalClosed={this.orderCancelledHandler}
+                        modalContinue={this.orderContinuedHandler}
+                        price={this.state.totalPrice} />
                 </Modal>
 
                 <Burger
