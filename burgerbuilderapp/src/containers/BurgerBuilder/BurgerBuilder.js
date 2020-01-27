@@ -1,7 +1,9 @@
-import React, { Component } from 'react'
-import Auxiliary from '../../hoc/Auxiliary'
-import Burger from '../../components/Burger/Burger'
-import BuildControls from '../../components/Burger/BuildControls/BuildControls'
+import React, { Component } from 'react';
+import Auxiliary from '../../hoc/Auxiliary';
+import Burger from '../../components/Burger/Burger';
+import BuildControls from '../../components/Burger/BuildControls/BuildControls';
+import Modal from '../../components/UI/Modal/Modal';
+import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 
 const INGREDIENTPRICES = {
     salad: 0.5,
@@ -21,7 +23,8 @@ export class BurgerBuilder extends Component {
             meat: 0
         },
         totalPrice: 4.00,
-        totalItems: false
+        isAnyitemsSelected: false,
+        orderIsClicked: false
     }
 
     addIngredientHandler = (type) => {
@@ -35,7 +38,7 @@ export class BurgerBuilder extends Component {
         const originalPrice = this.state.totalPrice;
         const updatedPrice = originalPrice + INGREDIENTPRICES[type]
 
-        const items = this.state.totalItems + 1
+        const items = this.state.isAnyitemsSelected + 1
         this.setState({
             totalPrice: updatedPrice,
             ingredients: updatedIngredients
@@ -43,17 +46,16 @@ export class BurgerBuilder extends Component {
         this.updateTotalItemsState(updatedIngredients);
     }
 
-    updateTotalItemsState (tempIngArr){
-       
-        const sum = Object.keys(tempIngArr).map(i =>
-          {  return tempIngArr[i]})
-          .reduce((sum, el)=>{
-              return sum + el
-          }, 0)
+    updateTotalItemsState(tempIngArr) {
 
-          this.setState({
-              totalItems: sum > 0
-          })
+        const sum = Object.keys(tempIngArr).map(i => { return tempIngArr[i] })
+            .reduce((sum, el) => {
+                return sum + el
+            }, 0)
+
+        this.setState({
+            isAnyitemsSelected: sum > 0
+        })
     }
 
     removeIngredientHandler = (type) => {
@@ -82,23 +84,45 @@ export class BurgerBuilder extends Component {
 
     }
 
+    orderButtonClickedHandler = () => {
+
+        this.setState({
+            orderIsClicked: true
+        })
+    }
+
+    orderCancelledHandler = () => {
+
+        console.log('^^^^^^^^^^^^')
+        console.log(this.state.orderIsClicked)
+
+        this.setState({
+            orderIsClicked: false
+        })
+    }
+
     render() {
-        let disabledOrderBtn = true
-        const disabledInfo ={
+
+        const disabledInfo = {
             ...this.state.ingredients
         };
-        for (let key in disabledInfo){
+        for (let key in disabledInfo) {
             disabledInfo[key] = disabledInfo[key] <= 0
         }
-       
-        console.log("====================")
-        console.log(this.state.totalItems)
-        
+
+        // console.log("====================")
+        // console.log(this.state.isAnyitemsSelected)
+
 
         return (
             <Auxiliary>
-                
-                
+                <Modal show={this.state.orderIsClicked}
+                    modalClosed={this.orderCancelledHandler} >
+                    <OrderSummary
+                        ingredients={this.state.ingredients}
+                        modalClosed={this.orderCancelledHandler} />
+                </Modal>
+
                 <Burger
                     ingBurger={this.state.ingredients}
                     price={this.state.totalPrice} />
@@ -106,7 +130,8 @@ export class BurgerBuilder extends Component {
                     addItem={this.addIngredientHandler}
                     removeItem={this.removeIngredientHandler}
                     disabled={disabledInfo}
-                    disabledOrderBtn={this.state.totalItems} />
+                    disabledOrderBtn={this.state.isAnyitemsSelected}
+                    orderBtnClicked={this.orderButtonClickedHandler} />
             </Auxiliary>
 
         )
