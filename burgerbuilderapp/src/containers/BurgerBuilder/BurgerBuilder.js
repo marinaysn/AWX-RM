@@ -38,7 +38,6 @@ export class BurgerBuilder extends Component {
         const originalPrice = this.state.totalPrice;
         const updatedPrice = originalPrice + INGREDIENTPRICES[type]
 
-        const items = this.state.isAnyitemsSelected + 1
         this.setState({
             totalPrice: updatedPrice,
             ingredients: updatedIngredients
