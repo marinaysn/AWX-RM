@@ -16,6 +16,9 @@
         display: none;
     }
 }
+.Logo { 
+    height: 48px;
+}
 
 .Open {
     transform: translateX(0);
