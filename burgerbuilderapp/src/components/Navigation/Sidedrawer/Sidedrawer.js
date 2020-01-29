@@ -7,9 +7,9 @@ const Sidedrawer = (props) => {
 
     return (
         <div className="Sidedrawer">
-            <div className="Logo">
-                <Logo height="48px" />
-            </div>
+            {/* <div className="Logo">
+                <Logo height="48px" marginBottom="32px" />
+            </div> */}
             <nav>
                 <Navigation />
             </nav>
