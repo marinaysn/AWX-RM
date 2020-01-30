@@ -5,8 +5,15 @@ import './Logo.css'
 const Logo =(props) => {
     console.log('=================');
     console.log(props.height)
+
+    let styleClasses = {
+        'height': props.height,
+        'marginBottom': props.marginBottom
+      };
+
+
     return (
-        <div className="Logo" style={{ height: props.height}} >
+        <div className="Logo" style={styleClasses} >
             <img src={imgLogo} alt="burger Logo" />
         </div>
     )
