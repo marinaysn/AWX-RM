@@ -1,15 +1,16 @@
+
 import React from 'react';
 import Logo from '../../Logo/Logo';
 import Navigation from '../NavigationItems/NavigationItems';
-import './Sidedrawer';
+import './Sidedrawer.css';
 import Backdrop from '../../UI/Backdrop/Backdrop';
 import Auxiliary from '../../../hoc/Auxiliary'
 
 const Sidedrawer = (props) => {
-    let attachedClassed = ["SideDrawer", "Closed"];
+    let attachedClassed = ["Sidedrawer", "Closed"];
 
     if (props.open){
-        attachedClassed = ["SideDrawer", "Open"];
+        attachedClassed = ["Sidedrawer", "Open"];
     }
 
     return (
