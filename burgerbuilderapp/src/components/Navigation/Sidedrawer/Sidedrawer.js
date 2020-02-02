@@ -3,7 +3,7 @@ import Logo from '../../Logo/Logo';
 import NavigationItems from '../NavigationItems/NavigationItems';
 import './Sidedrawer.css';
 import Backdrop from '../../UI/Backdrop/Backdrop';
-import Auxiliary from '../../../hoc/Auxiliary';
+import Auxiliary from '../../../hoc/Auxilary/Auxiliary';
 
 const Sidedrawer = props => {
   let attachedClassed = ['Sidedrawer', ' Close'];
