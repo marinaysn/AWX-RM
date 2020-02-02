@@ -1,37 +1,32 @@
-
 import React from 'react';
 import Logo from '../../Logo/Logo';
-import Navigation from '../NavigationItems/NavigationItems';
+import NavigationItems from '../NavigationItems/NavigationItems';
 import './Sidedrawer.css';
 import Backdrop from '../../UI/Backdrop/Backdrop';
-import Auxiliary from '../../../hoc/Auxiliary'
+import Auxiliary from '../../../hoc/Auxilary/Auxiliary';
 
-const Sidedrawer = (props) => {
-    let attachedClassed = ["Sidedrawer", "Closed"];
+const Sidedrawer = props => {
+  let attachedClassed = ['Sidedrawer', ' Close'];
 
-    if (props.open){
-        attachedClassed = ["Sidedrawer", "Open"];
-    }
+  if (props.open) {
+    attachedClassed = ['Sidedrawer', ' Open'];
+  }
 
-    return (
-        <Auxiliary>
+  return (
+    <Auxiliary>
+      <Backdrop show={props.open} clicked={props.closed} />
 
-             <Backdrop show ={props.open}
-                clicked={props.closed}
-             />
-
-            <div className={attachedClassed.join(' ')}>
-                {/* <div className="Logo">
+      <div className={attachedClassed.join(' ')}>
+        {/* <div className="Logo">
                 <Logo height="48px" marginBottom="32px" />
             </div> */}
 
-                <nav>
-                    <Navigation />
-                </nav>
+        <nav>
+          <NavigationItems />
+        </nav>
+      </div>
+    </Auxiliary>
+  );
+};
 
-            </div>
-        </Auxiliary>
-    )
-}
-
-export default Sidedrawer
+export default Sidedrawer;
