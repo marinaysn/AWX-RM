@@ -11,7 +11,6 @@ export class Modal extends Component {
   }
 
   componentDidUpdate() {
-
     console.log('00. Modal - should update');
   }
 
