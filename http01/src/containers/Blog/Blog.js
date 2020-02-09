@@ -9,11 +9,13 @@ import './Blog.css';
 class Blog extends Component {
   state = {
     posts: [],
-    selectedPostId: null
+    selectedPostId: null,
+    error: false
   };
 
   componentDidMount() {
-    axios.get('https://jsonplaceholder.typicode.com/postsss').then(responce => {
+    axios.get('https://jsonplaceholder.typicode.com/posts')
+    .then(responce => {
       const allPosts = responce.data.slice(0, 7);
       const updatedPost = allPosts.map(p => {
         return {
@@ -23,7 +25,12 @@ class Blog extends Component {
       });
       this.setState({ posts: updatedPost });
      // console.log(responce);
-    });
+    })
+    .catch( err =>{
+      console.log(err);
+      this.setState({error: true})
+    })
+    ;
   }
 
   displaySinglePostHandler = id => {
@@ -32,8 +39,10 @@ class Blog extends Component {
   };
 
   render() {
-
-    const posts = this.state.posts.map(post => {
+    let posts = <p style={{textAlign: 'center', color: 'red', fontWeight: 'bold', backgroundColor: 'rgb(248, 241, 226)'}}> Something is wrong. Please check your input data</p>
+    
+    if (!this.state.error){
+      posts = this.state.posts.map(post => {
       return (
         <Post
           key={post.id}
@@ -46,6 +55,9 @@ class Blog extends Component {
         />
       );
     });
+    }
+    
+    
     return (
        
       <div>
