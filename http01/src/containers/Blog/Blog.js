@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
+import axios from '../../axios';
 
 import Post from '../../components/Post/Post';
 import FullPost from '../../components/FullPost/FullPost';
@@ -14,7 +15,7 @@ class Blog extends Component {
   };
 
   componentDidMount() {
-    axios.get('https://jsonplaceholder.typicode.com/posts')
+    axios.get('/posts')
     .then(responce => {
       const allPosts = responce.data.slice(0, 7);
       const updatedPost = allPosts.map(p => {
@@ -27,7 +28,7 @@ class Blog extends Component {
      // console.log(responce);
     })
     .catch( err =>{
-      console.log(err);
+      console.log('333333333333333');
       this.setState({error: true})
     })
     ;
