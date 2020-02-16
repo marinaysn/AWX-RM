@@ -6,17 +6,17 @@ import Button from '../../UI/Button/Button';
 export class OrderSummary extends Component {
 
     shouldComponentUpdate(nextProps, nextState){
-        console.log('0. OrderSummary - will update');
+      //  console.log('0. OrderSummary - will update');
         return true;
     }
     componentDidUpdate(){
-        console.log('1. OrderSummary - will update');
+       // console.log('1. OrderSummary - will update');
     }
 
 
   render() {
 
-    console.log('3. OrderSummary - Updated');
+   // console.log('3. OrderSummary - Updated');
     const redDiv = (
       <div className='redText'>
         <strong>Total: ${this.props.price.toFixed(2)}</strong>

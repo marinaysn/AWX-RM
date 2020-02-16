@@ -4,6 +4,7 @@ import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 import Modal from '../../components/UI/Modal/Modal';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
+import axios from '../../axios-orders';
 
 const INGREDIENTPRICES = {
   salad: 0.5,
@@ -59,7 +60,7 @@ export class BurgerBuilder extends Component {
 
   removeIngredientHandler = type => {
     const oldCount = this.state.ingredients[type];
-    console.log(oldCount);
+    // console.log(oldCount);
     if (oldCount > 0) {
       const updatedCount = oldCount - 1;
       const updatedIngredients = {
@@ -94,7 +95,31 @@ export class BurgerBuilder extends Component {
   };
 
   orderContinuedHandler = () => {
-    alert('you clicked Continue');
+    // alert('you clicked Continue');
+
+    const order = {
+      ingredients: this.state.ingredients,
+      price: this.state.totalPrice,
+      customer: {
+        name: 'Marina Ysn',
+        address: {
+          street: '123 Test St',
+          zipCode: '12345',
+          country: 'Canada'
+        },
+        email: 'marina@test.ca'
+      },
+      deliveryMethod: 'UPS Standard'
+    };
+
+    axios
+      .post('/orders.json', order)
+      .then(responce => {
+        console.log(responce);
+      })
+      .catch(error => {
+        console.log(error);
+      });
 
     this.setState({
       orderIsClicked: false
