@@ -4,9 +4,10 @@ import Backdrop from '../Backdrop/Backdrop';
 import Auxiliary from '../../../hoc/Auxilary/Auxiliary';
 
 export class Modal extends Component {
+
   shouldComponentUpdate(nextProps, nextState) {
-    // console.log('0. Modal - should update');
-    return nextProps.show !== this.props.show;
+
+    return nextProps.show !== this.props.show || nextProps.children !== this.props.children;
   }
 
   componentDidUpdate() {
