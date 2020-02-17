@@ -7,7 +7,7 @@ const Burger = props => {
   const ingredientsObj = props.ingBurger;
   let ingredientsArray = [];
   Object.keys(ingredientsObj).forEach(ingKey => {
-    // console.log(ingKey)
+
     for (let i = 0; i < ingredientsObj[ingKey]; i++) {
       ingredientsArray.push(
         <BurgerIngredient key={ingKey + i} type={ingKey} />

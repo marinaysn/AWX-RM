@@ -33,7 +33,7 @@ class Layout extends Component {
         />
         <main className='mainContent'>{this.props.children}</main>
       </Auxiliary>
-    );
+    )
   }
 }
 

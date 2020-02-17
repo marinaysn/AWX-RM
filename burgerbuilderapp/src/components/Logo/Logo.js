@@ -3,8 +3,7 @@ import imgLogo from '../../assets/images/logo.png'
 import './Logo.css'
 
 const Logo =(props) => {
-    console.log('=================');
-    console.log(props.height)
+    
 
     let styleClasses = {
         'height': props.height,
