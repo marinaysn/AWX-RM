@@ -16,7 +16,6 @@ export class OrderSummary extends Component {
 
   render() {
 
-   // console.log('3. OrderSummary - Updated');
     const redDiv = (
       <div className='redText'>
         <strong>Total: ${this.props.price.toFixed(2)}</strong>
