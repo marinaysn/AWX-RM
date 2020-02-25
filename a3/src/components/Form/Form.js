@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 
 export class Form extends Component {
-  userNameInput = React.createRef();
+
+  state = {
+    userName: ''
+  };
+
 
   SubmitHandler = event => {
     event.preventDefault();
-
+    console.log(this.state.userName);
 
   };
 
@@ -21,7 +25,8 @@ export class Form extends Component {
             type='text'
             placeholder='GitHub Username'
             required
-            ref={this.userNameInput}
+            value={this.state.userName}
+            onChange= {(event) => this.setState({ userName: event.target.value })}
           />
           <button>Add Card</button>
         </form>
