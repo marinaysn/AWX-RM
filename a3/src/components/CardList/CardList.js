@@ -4,14 +4,8 @@ import Card from './Card/Card';
 const CardList = props => {
   return (
     <div>
-      {/* <Card name={testData[0].name} avatar_url ={testData[0].avatar_url} company={testData[0].company } />
-
-      <Card {...testData[1] } />
-      <Card {...testData[2] } />
-      <Card {...testData[3] } /> */}
-
       {props.profiles.map(p => (
-        <Card {...p} key={p.name} />
+        <Card {...p} key={p.id} />
       ))}
     </div>
   );
