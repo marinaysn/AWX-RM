@@ -6,24 +6,30 @@ import Form from './components/Form/Form';
 
 export class App extends Component {
   state = {
-    profiles: '' 
+    profiles: ''
   };
 
   addNewCard = profileData => {
-
     console.log('App', profileData);
-    const tempProfiles = [...this.state.profiles];
-    tempProfiles.push(profileData )
-    this.setState({
-      profiles: tempProfiles
-    });
+
+    // const tempProfiles = [...this.state.profiles];
+    // tempProfiles.push(profileData )
+    // this.setState({
+    //   profiles: tempProfiles
+    // });
+
+    this.setState(prevState => ({
+      profiles: [...prevState.profiles, profileData]
+    }));
   };
 
- 
   render() {
-
-    const cardListArray = this.state.profiles.length > 0 ? <CardList profiles={this.state.profiles} /> : <p>Please Add New Card</p>
-
+    const cardListArray =
+      this.state.profiles.length > 0 ? (
+        <CardList profiles={this.state.profiles} />
+      ) : (
+        <p>Please Add New Card</p>
+      );
 
     return (
       <div className='App'>
