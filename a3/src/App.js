@@ -1,42 +1,48 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import './App.css';
 import Hello from './components/Hello/Hello';
 import CardList from './components/CardList/CardList';
-import Form from './components/Form/Form'
+import Form from './components/Form/Form';
 
 export class App extends Component {
-
-  // constructor(props){
-  //   super(props);
-  //   this.state = {
-  //     profiles: testData
-  //   };
-  // }
-
   state = {
-    profiles: testData
-  }
+    profiles: '' 
+  };
 
+  addNewCard = profileData => {
+
+    console.log('App', profileData);
+    const tempProfiles = [...this.state.profiles];
+    tempProfiles.push(profileData )
+    this.setState({
+      profiles: tempProfiles
+    });
+  };
+
+ 
   render() {
 
+    const cardListArray = this.state.profiles.length > 0 ? <CardList profiles={this.state.profiles} /> : <p>Please Add New Card</p>
+
+
     return (
-      <div className="App">
+      <div className='App'>
         <Hello />
-        <div className="header">{this.props.title}</div>
-        <Form  />
-        <CardList profiles={this.state.profiles} />
+        <div className='header'>{this.props.title}</div>
+        <Form onSubmit={this.addNewCard} profArr={this.state.profiles} />
+        {/* <CardList profiles={this.state.profiles} /> */}
+
+        {cardListArray}
       </div>
-    )
+    );
   }
 }
 
 export default App;
 
-
 // import React from 'react';
 // import './App.css';
 // import Hello from './components/Hello/Hello';
-
 
 // function App() {
 //   return (
@@ -47,7 +53,6 @@ export default App;
 // }
 
 // export default App;
-
 
 const testData = [
   {
