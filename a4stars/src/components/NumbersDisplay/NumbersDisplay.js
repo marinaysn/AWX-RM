@@ -1,6 +1,6 @@
 import React from 'react';
-import './PlayNumbers.css';
-const PlayNumbers = props => {
+import './NumbersDisplay.css';
+const NumbersDisplay = props => {
   return (
     <div>
       <button className='number' onClick={() =>(
@@ -10,4 +10,4 @@ const PlayNumbers = props => {
   );
 };
 
-export default PlayNumbers;
+export default NumbersDisplay;
