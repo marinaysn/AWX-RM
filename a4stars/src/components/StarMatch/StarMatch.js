@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './StarMatch.css';
 import NumbersDisplay from '../NumbersDisplay/NumbersDisplay';
 import StarsDisplay from '../StarsDisplay/StarsDisplay';
@@ -13,8 +13,19 @@ const StarMatch = props => {
   const [secondsLeft, setSecondsLeft] = useState(10);
 
   //computations
-  const gameOver = avaialbleNumbers.length === 0;
+  const gameWon = avaialbleNumbers.length === 0;
   const candidateWrong = utils.sum(candidateNumbers) > stars;
+  const gameLost = secondsLeft === 0;
+
+  //setTimmer
+  useEffect(() => {
+    if (secondsLeft > 0) {
+    const timerId = setTimeout(() => {
+        setSecondsLeft(secondsLeft - 1);
+      }, 1000);
+      return () => clearTimeout(timerId)
+    }
+  });
 
   const numberStatusHandler = num => {
     if (!avaialbleNumbers.includes(num)) {
@@ -56,11 +67,15 @@ const StarMatch = props => {
     console.log(stars);
   };
 
-  const starsShow = gameOver ? (
+  const starsShow = gameWon ? (
     <PlayAgain onClick={startNewGameHandler} />
   ) : (
     <StarsDisplay count={stars} />
   );
+
+  const gameComment = gameLost ? (
+    <p>You lost!</p> 
+  ) : null
 
   return (
     <div className='game'>
@@ -86,6 +101,7 @@ const StarMatch = props => {
         </div>
       </div>
       <div className='timer'>Time Remaining: {secondsLeft} </div>
+      {gameComment}
     </div>
   );
 };
