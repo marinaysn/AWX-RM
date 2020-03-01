@@ -2,29 +2,65 @@ import React, { useState } from 'react';
 import './StarMatch.css';
 import NumbersDisplay from '../NumbersDisplay/NumbersDisplay';
 import StarsDisplay from '../StarsDisplay/StarsDisplay';
+import PlayAgain from '../PlayAgain/PlayAgain';
 import utils from '../../util/util';
-import colors from '../../util/colors';
 
 const StarMatch = props => {
-
-  //const numRandom = utils.random(3, 12);
   //state
-  const [stars, setStars] = useState(utils.random(3, 12));
-  const [avaialbleNumbers, setAvaialbleNumbers] = useState(utils.range(1, stars));
+  const [stars, setStars] = useState(utils.random(1, 9));
+  const [avaialbleNumbers, setAvaialbleNumbers] = useState(utils.range(1, 9));
   const [candidateNumbers, setCandidateNumbers] = useState([]);
+  const [secondsLeft, setSecondsLeft] = useState(10);
 
+  //computations
+  const gameOver = avaialbleNumbers.length === 0;
   const candidateWrong = utils.sum(candidateNumbers) > stars;
 
-  const numberStatusHandler = (num) => {
-    if(!avaialbleNumbers.includes(num)){
+  const numberStatusHandler = num => {
+    if (!avaialbleNumbers.includes(num)) {
       return 'used';
     }
-    if(candidateNumbers.includes(num)){
-      return candidateWrong ? 'wrong': 'candidate';
+    if (candidateNumbers.includes(num)) {
+      return candidateWrong ? 'wrong' : 'candidate';
     }
     return 'available';
-  }
+  };
 
+  const onNumberClickHandler = (numberClicked, currentNumberStatus) => {
+    if (currentNumberStatus == 'used') {
+      return;
+    }
+
+    const newCandidateNumber =
+      currentNumberStatus === 'available'
+        ? candidateNumbers.concat(numberClicked)
+        : candidateNumbers.filter(cn => cn !== numberClicked);
+
+    if (utils.sum(newCandidateNumber) !== stars) {
+      setCandidateNumbers(newCandidateNumber);
+    } else {
+      const tempAvailNum = avaialbleNumbers.filter(
+        n => !newCandidateNumber.includes(n)
+      );
+      setStars(utils.randomSumIn(tempAvailNum, 9));
+      setAvaialbleNumbers(tempAvailNum);
+      setCandidateNumbers([]);
+    }
+  };
+
+  const startNewGameHandler = () => {
+    setStars(utils.random(1, 9));
+    setAvaialbleNumbers(utils.range(1, 9));
+    setCandidateNumbers([]);
+
+    console.log(stars);
+  };
+
+  const starsShow = gameOver ? (
+    <PlayAgain onClick={startNewGameHandler} />
+  ) : (
+    <StarsDisplay count={stars} />
+  );
 
   return (
     <div className='game'>
@@ -34,22 +70,22 @@ const StarMatch = props => {
       <div className='body'>
         <div className='left'>
           {/* add stars */}
-          {utils.range(1, stars).map(starId => (
-            <StarsDisplay key={starId} />
-          ))}
+
+          {starsShow}
         </div>
         <div className='right'>
           {/* add numbers */}
-          {utils.range(1, stars).map(num => (
-            <NumbersDisplay 
-              num={num} 
-              key={num} 
+          {utils.range(1, 9).map(num => (
+            <NumbersDisplay
+              num={num}
+              key={num}
               status={numberStatusHandler(num)}
+              onClick={onNumberClickHandler}
             />
           ))}
         </div>
       </div>
-      <div className='timer'>Time Remaining: 10</div>
+      <div className='timer'>Time Remaining: {secondsLeft} </div>
     </div>
   );
 };

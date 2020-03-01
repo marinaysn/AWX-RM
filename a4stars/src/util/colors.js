@@ -1,4 +1,4 @@
-  // Color Theme
+// Color Theme
 const colors = {
   available: 'lightgray',
   used: 'lightgreen',

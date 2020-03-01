@@ -1,11 +1,10 @@
-
 .star {
-	display: inline-block;
+  display: inline-block;
   margin: 0 15px;
   float: left;
 }
 
 .star:after {
-  content: "\2605";
+  content: '\2605';
   font-size: 45px;
 }
