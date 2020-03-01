@@ -13,9 +13,9 @@ const StarMatch = props => {
   const [secondsLeft, setSecondsLeft] = useState(10);
 
   //computations
-  const gameWon = avaialbleNumbers.length === 0;
+  //const gameWon = avaialbleNumbers.length === 0;
   const candidateWrong = utils.sum(candidateNumbers) > stars;
-  const gameLost = secondsLeft === 0;
+  //const gameLost = secondsLeft === 0;
   const gameStatus = avaialbleNumbers.length === 0 
     ? 'won' 
     : secondsLeft === 0 ? 'lost' : 'active';
@@ -42,7 +42,7 @@ const StarMatch = props => {
   };
 
   const onNumberClickHandler = (numberClicked, currentNumberStatus) => {
-    if (gameStatus !== 'active' || currentNumberStatus == 'used') {
+    if (gameStatus !== 'active' || currentNumberStatus === 'used') {
       return;
     }
 
@@ -70,12 +70,22 @@ const StarMatch = props => {
     setSecondsLeft(10);
   };
 
+
   const starsShow = gameStatus !== 'active' ? (
-    <PlayAgain onClick={startNewGameHandler}
+    <PlayAgain onClick={props.startNewGame}
     gameStatus ={gameStatus} />
   ) : (
     <StarsDisplay count={stars} />
   );
+
+  //another aproach
+  // const starsShow = gameStatus !== 'active' ? (
+  //   <PlayAgain onClick={startNewGameHandler}
+  //   gameStatus ={gameStatus} />
+  // ) : (
+  //   <StarsDisplay count={stars} />
+  // );
+
 
   const gameComment = gameStatus === 'lost' ? (
     <p>You lost!</p> 
