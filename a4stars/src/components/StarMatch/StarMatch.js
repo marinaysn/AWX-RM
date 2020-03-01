@@ -7,10 +7,9 @@ import colors from '../../util/colors';
 
 const StarMatch = props => {
   //state
-  const [stars, setStars] = useState(utils.random(3, 12));
+  const [stars, setStars] = useState(utils.random(1, 9));
   const [avaialbleNumbers, setAvaialbleNumbers] = useState(
-    utils.range(1, stars)
-  );
+    utils.range(1, 9));
   const [candidateNumbers, setCandidateNumbers] = useState([]);
 
   const candidateWrong = utils.sum(candidateNumbers) > stars;
@@ -25,7 +24,29 @@ const StarMatch = props => {
     return 'available';
   };
 
-  const onNumberClickHandler = () => {};
+  const onNumberClickHandler = (numberClicked, currentNumberStatus) => {
+    if(currentNumberStatus == 'used'){
+      return;
+    }
+
+    const newCandidateNumber = 
+      currentNumberStatus === 'available' ?
+    candidateNumbers.concat(numberClicked) : candidateNumbers.filter(cn => cn !== numberClicked)
+    
+    if (utils.sum(newCandidateNumber) !== stars ){
+      setCandidateNumbers(newCandidateNumber)
+    }
+    else{
+      const tempAvailNum = avaialbleNumbers.filter(
+        n => !newCandidateNumber.includes(n)
+      )
+      setStars(utils.randomSumIn(tempAvailNum, 9))
+      setAvaialbleNumbers(tempAvailNum);
+      setCandidateNumbers([])
+    }
+      
+  
+  };
 
   return (
     <div className='game'>
@@ -41,11 +62,12 @@ const StarMatch = props => {
         </div>
         <div className='right'>
           {/* add numbers */}
-          {utils.range(1, stars).map(num => (
+          {utils.range(1, 9).map(num => (
             <NumbersDisplay
               num={num}
               key={num}
               status={numberStatusHandler(num)}
+              onClick={onNumberClickHandler}
             />
           ))}
         </div>

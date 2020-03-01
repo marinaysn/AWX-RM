@@ -8,9 +8,10 @@ const NumbersDisplay = props => {
       <button
         className='number'
         style={{ background: colors[props.status] }}
-        onClick={() => console.log('Num: ', props.num)}
+        onClick={() => (
+          props.onClick(props.num, props.status)
+        ) }
       >
-        {' '}
         {props.num}
       </button>
     </div>
