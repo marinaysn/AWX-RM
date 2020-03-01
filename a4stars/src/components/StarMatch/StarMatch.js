@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './StarMatch.css';
 import NumbersDisplay from '../NumbersDisplay/NumbersDisplay';
 import StarsDisplay from '../StarsDisplay/StarsDisplay';
-import PlayAgain from '../PlayAgain/PlayAgain'
+import PlayAgain from '../PlayAgain/PlayAgain';
 import utils from '../../util/util';
 
 const StarMatch = props => {
@@ -10,6 +10,7 @@ const StarMatch = props => {
   const [stars, setStars] = useState(utils.random(1, 9));
   const [avaialbleNumbers, setAvaialbleNumbers] = useState(utils.range(1, 9));
   const [candidateNumbers, setCandidateNumbers] = useState([]);
+  const [secondsLeft, setSecondsLeft] = useState(10);
 
   //computations
   const gameOver = avaialbleNumbers.length === 0;
@@ -47,13 +48,12 @@ const StarMatch = props => {
     }
   };
 
-  const startNewGameHandler = () =>{
-  
+  const startNewGameHandler = () => {
     setStars(utils.random(1, 9));
     setAvaialbleNumbers(utils.range(1, 9));
-    setCandidateNumbers([])
+    setCandidateNumbers([]);
 
-  console.log(stars);
+    console.log(stars);
   };
 
   const starsShow = gameOver ? (
@@ -85,7 +85,7 @@ const StarMatch = props => {
           ))}
         </div>
       </div>
-      <div className='timer'>Time Remaining: 10</div>
+      <div className='timer'>Time Remaining: {secondsLeft} </div>
     </div>
   );
 };
