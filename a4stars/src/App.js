@@ -1,14 +1,11 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import StarMatch from './components/StarMatch/StarMatch'
+import StarMatch from './components/StarMatch/StarMatch';
 
 function App() {
-
-
   return (
-    <div className="App">
-      
+    <div className='App'>
       <StarMatch />
     </div>
   );

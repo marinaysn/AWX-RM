@@ -6,7 +6,7 @@ const StarsDisplay = () => {
     <div>
       <div className='star' />
     </div>
-  )
-}
+  );
+};
 
-export default StarsDisplay
+export default StarsDisplay;
