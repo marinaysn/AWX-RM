@@ -17,6 +17,7 @@
   text-align: center;
   width: 50%;
   border: thin solid #ddd;
+  padding-left: 20px;
 }
 
 .right {
@@ -24,9 +25,10 @@
   padding: 10px;
   width: 50%;
   border: thin solid #ddd;
+  padding-left: 30px;
 }
 
-.star {
+/* .star {
 	display: inline-block;
   margin: 0 15px;
 }
@@ -34,8 +36,9 @@
 .star:after {
   content: "\2605";
   font-size: 45px;
-}
+} */
 
+/* 
 .number {
   background-color: #eee;
   border: thin solid #ddd;
@@ -48,7 +51,7 @@
 .number:focus, .number:active {
   outline: none;
   border: thin solid #ddd;
-}
+} */
 
 .timer {
 	color: #666;
