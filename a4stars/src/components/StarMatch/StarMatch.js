@@ -3,15 +3,15 @@ import './StarMatch.css';
 import NumbersDisplay from '../NumbersDisplay/NumbersDisplay';
 import StarsDisplay from '../StarsDisplay/StarsDisplay';
 import utils from '../../util/util';
-import colors from '../../util/colors';
 
 const StarMatch = props => {
   //state
   const [stars, setStars] = useState(utils.random(1, 9));
-  const [avaialbleNumbers, setAvaialbleNumbers] = useState(
-    utils.range(1, 9));
+  const [avaialbleNumbers, setAvaialbleNumbers] = useState(utils.range(1, 9));
   const [candidateNumbers, setCandidateNumbers] = useState([]);
 
+  //computations
+  const gameOver = avaialbleNumbers.length === 0;
   const candidateWrong = utils.sum(candidateNumbers) > stars;
 
   const numberStatusHandler = num => {
@@ -25,28 +25,32 @@ const StarMatch = props => {
   };
 
   const onNumberClickHandler = (numberClicked, currentNumberStatus) => {
-    if(currentNumberStatus == 'used'){
+    if (currentNumberStatus == 'used') {
       return;
     }
 
-    const newCandidateNumber = 
-      currentNumberStatus === 'available' ?
-    candidateNumbers.concat(numberClicked) : candidateNumbers.filter(cn => cn !== numberClicked)
-    
-    if (utils.sum(newCandidateNumber) !== stars ){
-      setCandidateNumbers(newCandidateNumber)
-    }
-    else{
+    const newCandidateNumber =
+      currentNumberStatus === 'available'
+        ? candidateNumbers.concat(numberClicked)
+        : candidateNumbers.filter(cn => cn !== numberClicked);
+
+    if (utils.sum(newCandidateNumber) !== stars) {
+      setCandidateNumbers(newCandidateNumber);
+    } else {
       const tempAvailNum = avaialbleNumbers.filter(
         n => !newCandidateNumber.includes(n)
-      )
-      setStars(utils.randomSumIn(tempAvailNum, 9))
+      );
+      setStars(utils.randomSumIn(tempAvailNum, 9));
       setAvaialbleNumbers(tempAvailNum);
-      setCandidateNumbers([])
+      setCandidateNumbers([]);
     }
-      
-  
   };
+
+  const starsShow = gameOver ? (
+    <button>Start New Game</button>
+  ) : (
+    <StarsDisplay count={stars} />
+  );
 
   return (
     <div className='game'>
@@ -56,9 +60,8 @@ const StarMatch = props => {
       <div className='body'>
         <div className='left'>
           {/* add stars */}
-          {utils.range(1, stars).map(starId => (
-            <StarsDisplay key={starId} />
-          ))}
+
+          {starsShow}
         </div>
         <div className='right'>
           {/* add numbers */}

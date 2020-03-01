@@ -1,10 +1,15 @@
 import React from 'react';
 import './StarsDisplay.css';
+import utils from '../../util/util';
 
-const StarsDisplay = () => {
+const StarsDisplay = (props) => {
   return (
     <div>
-      <div className='star' />
+      {utils.range(1, props.count).map(starId => (           
+            <div key={starId} className='star' />
+          ))}
+
+      
     </div>
   );
 };
