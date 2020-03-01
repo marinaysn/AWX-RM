@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './StarMatch.css';
 import NumbersDisplay from '../NumbersDisplay/NumbersDisplay';
 import StarsDisplay from '../StarsDisplay/StarsDisplay';
+import PlayAgain from '../PlayAgain/PlayAgain'
 import utils from '../../util/util';
 
 const StarMatch = props => {
@@ -46,8 +47,17 @@ const StarMatch = props => {
     }
   };
 
+  const startNewGameHandler = () =>{
+  
+    setStars(utils.random(1, 9));
+    setAvaialbleNumbers(utils.range(1, 9));
+    setCandidateNumbers([])
+
+  console.log(stars);
+  };
+
   const starsShow = gameOver ? (
-    <button>Start New Game</button>
+    <PlayAgain onClick={startNewGameHandler} />
   ) : (
     <StarsDisplay count={stars} />
   );
