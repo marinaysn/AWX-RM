@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import axios from '../../axios';
 
 import Post from '../../components/Post/Post';
-import FullPost from '../../components/FullPost/FullPost';
-import NewPost from '../../components/NewPost/NewPost';
+// import FullPost from './FullPost/FullPost';
+// import NewPost from './NewPost/NewPost';
 import './Blog.css';
 
 class Blog extends Component {
@@ -83,15 +83,13 @@ class Blog extends Component {
             </ul>
           </nav>
         </header>
-        <section className='Posts'>
-          {posts}
-          </section>
-        <section>
+        <section className='Posts'>{posts}</section>
+        {/* <section>
           <FullPost id={this.state.selectedPostId} />
         </section>
         <section>
           <NewPost />
-        </section>
+        </section> */}
       </div>
     );
   }
