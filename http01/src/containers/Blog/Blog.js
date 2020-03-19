@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Route} from 'react-router-dom'
+import {Route, Switch, Link} from 'react-router-dom'
 
 import Posts from '../Posts/Posts';
 // import FullPost from './FullPost/FullPost';
@@ -24,10 +24,10 @@ class Blog extends Component {
           <nav>
             <ul>
               <li>
-                <a href='/'>Home</a>
+                <Link to='/'>Home</Link>
               </li>
               <li>
-                <a href='/newpost'>New Post</a>
+                <Link to='/newpost'>New Post</Link>
               </li>
             </ul>
           </nav>
@@ -36,8 +36,13 @@ class Blog extends Component {
         {/* <Route path="/" render={() => <h1>Home Page</h1> } />
         <Route path="/" exact render={() => < Posts /> } /> */}
 
-        <Route path="/" exact component={Posts} />
-        <Route path="/newpost" component={NewPost} />
+        {/* <Route path="/" exact component={Posts} />
+        <Route path="/newpost" component={NewPost} /> */}
+
+        <Switch>
+          <Route path="/newpost" component={NewPost} />
+          <Route path="/" component={Posts} />
+        </Switch>
 
         {/* <Posts /> */}
         {/* <section className='Posts'>{posts}</section> */}
