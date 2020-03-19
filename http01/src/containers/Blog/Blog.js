@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-// import axios from 'axios';
-import axios from '../../axios';
+import {Route} from 'react-router-dom'
 
-import Post from '../../components/Post/Post';
+import Posts from '../Posts/Posts';
 // import FullPost from './FullPost/FullPost';
-// import NewPost from './NewPost/NewPost';
+ import NewPost from './NewPost/NewPost';
+
 import './Blog.css';
 
 class Blog extends Component {
@@ -14,60 +14,9 @@ class Blog extends Component {
     error: false
   };
 
-  componentDidMount() {
-    axios
-      .get('/posts')
-      .then(responce => {
-        const allPosts = responce.data.slice(0, 7);
-        const updatedPost = allPosts.map(p => {
-          return {
-            ...p,
-            author: 'Marina'
-          };
-        });
-        this.setState({ posts: updatedPost });
-        // console.log(responce);
-      })
-      .catch(err => {
-        console.log('333333333333333');
-        this.setState({ error: true });
-      });
-  }
-
-  displaySinglePostHandler = id => {
-    this.setState({ selectedPostId: id });
-  };
 
   render() {
-    let posts = (
-      <p
-        style={{
-          textAlign: 'center',
-          color: 'red',
-          fontWeight: 'bold',
-          backgroundColor: 'rgb(248, 241, 226)'
-        }}
-      >
-        {' '}
-        Something is wrong. Please check your input data
-      </p>
-    );
-
-    if (!this.state.error) {
-      posts = this.state.posts.map(post => {
-        return (
-          <Post
-            key={post.id}
-            userId={post.userId}
-            id={post.id}
-            title={post.title}
-            body={post.body}
-            author={post.author}
-            clicked={() => this.displaySinglePostHandler(post.id)}
-          />
-        );
-      });
-    }
+    
 
     return (
       <div className='Blog'>
@@ -83,7 +32,15 @@ class Blog extends Component {
             </ul>
           </nav>
         </header>
-        <section className='Posts'>{posts}</section>
+
+        {/* <Route path="/" render={() => <h1>Home Page</h1> } />
+        <Route path="/" exact render={() => < Posts /> } /> */}
+
+        <Route path="/" exact component={Posts} />
+        <Route path="/newpost" component={NewPost} />
+
+        {/* <Posts /> */}
+        {/* <section className='Posts'>{posts}</section> */}
         {/* <section>
           <FullPost id={this.state.selectedPostId} />
         </section>
