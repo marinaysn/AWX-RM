@@ -26,6 +26,12 @@
 }
 
 .Blog a:hover,
-.Blog a:active {
-  color: rgb(245, 164, 13);
+.Blog a:active,
+.Blog a.active {
+  color: blue;
+  font-weight: bold;
+}
+a.myactive{
+  color: orange;
+  font-weight: bold;
 }

@@ -5,17 +5,25 @@ import './FullPost.css';
 
 class FullPost extends Component {
   state = {
-    loadedPost: null
+    loadedPost: null,
+    id: null
   };
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    if (this.props.id) {
+  componentDidMount(prevProps, prevState, snapshot) {
+    console.log('1111111111111');
+   console.log(this.props.match.params.postid);
+    console.log(this.props);
+
+    this.setState({id: this.props.match.params.postid})
+    
+    const postId = this.props.match.params.postid;
+
+    if (postId) {
       if (
         !this.state.loadedPost ||
-        (this.state.loadedPost && this.props.id !== this.state.loadedPost.id)
+        (this.state.loadedPost && postId !== this.state.loadedPost.id)
       ) {
-        axios.get('/posts/' + this.props.id).then(responce => {
-          console.log(responce);
+        axios.get('/posts/' + postId ).then(responce => {
           this.setState({ loadedPost: responce.data });
         });
       }
@@ -23,15 +31,18 @@ class FullPost extends Component {
   }
 
   deletePostHandler = () => {
-    axios.delete('/posts/' + this.props.id).then(responce => {
+    
+    axios.delete('/posts/' + this.id).then(responce => {
       // console.log(responce);
     });
   };
 
   render() {
+    console.log('22222222222222222');
+    console.log(this.id);
     let post = <p style={{ textAlign: 'center' }}>Please select a Post!</p>;
 
-    if (this.props.id) {
+    if (this.id) {
       post = <p style={{ textAlign: 'center' }}>Loading...</p>;
     }
     if (this.state.loadedPost) {
