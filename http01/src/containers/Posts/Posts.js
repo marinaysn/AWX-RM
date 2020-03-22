@@ -33,7 +33,10 @@ export class Posts extends Component {
   }
 
   displaySinglePostHandler = id => {
-    this.setState({ selectedPostId: id });
+   // this.setState({ selectedPostId: id });
+
+   this.props.history.push({pathname: '/' + id})
+   //this.props.history.push('/' + id)
   };
 
   render() {
@@ -54,8 +57,9 @@ export class Posts extends Component {
     // if (!this.state.error) {
     posts = this.state.posts.map(post => {
       return (
-        <Link to={'/' + post.id} key={post.id}>
+       // <Link to={'/' + post.id} key={post.id}>
           <Post
+            key={post.id}
             userId={post.userId}
             id={post.id}
             title={post.title}
@@ -64,7 +68,7 @@ export class Posts extends Component {
             {...this.props}
             clicked={() => this.displaySinglePostHandler(post.id)}
           />
-        </Link>
+      //  </Link>
       );
     });
     // }
