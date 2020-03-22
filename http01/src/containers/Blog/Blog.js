@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Route, Switch, NavLink} from 'react-router-dom'
+import { Route, Switch, NavLink } from 'react-router-dom';
 
 import Posts from '../Posts/Posts';
 import FullPost from './FullPost/FullPost';
@@ -14,48 +14,44 @@ class Blog extends Component {
     error: false
   };
 
-
   render() {
-    
-
     return (
       <div className='Blog'>
         <header>
           <nav>
             <ul>
               <li>
-                <NavLink 
-                  to='/' 
+                <NavLink
+                  to='/'
                   exact
                   activeClassName='myactive'
                   activeStyle={{
                     color: 'green'
-                  }}>Home</NavLink>
+                  }}
+                >
+                  Home
+                </NavLink>
               </li>
               <li>
-                <NavLink to={{
-                  pathname: '/newpost',
-                  hash: '#submit',
-                  search:'?quicksubmit=true'}}>New Post</NavLink>
+                <NavLink
+                  to={{
+                    pathname: '/newpost',
+                    hash: '#submit',
+                    search: '?quicksubmit=true'
+                  }}
+                >
+                  New Post
+                </NavLink>
               </li>
             </ul>
           </nav>
         </header>
 
         <Switch>
-          <Route path="/newpost" exact component={NewPost} />
-          <Route path="/:postid" exact component={FullPost} />
-          <Route path="/" exact component={Posts} />
+          <Route path='/newpost' exact component={NewPost} />
+          <Route path='/:postid' exact component={FullPost} />
+          <Route path='/' exact component={Posts} />
         </Switch>
-
-        {/* <Posts /> */}
-        {/* <section className='Posts'>{posts}</section> */}
-        {/* <section>
-          <FullPost id={this.state.selectedPostId} />
-        </section>
-        <section>
-          <NewPost />
-        </section> */}
       </div>
     );
   }

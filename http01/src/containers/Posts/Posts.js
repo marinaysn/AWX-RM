@@ -25,7 +25,6 @@ export class Posts extends Component {
           };
         });
         this.setState({ posts: updatedPost });
-        // console.log(responce);
       })
       .catch(err => {
         console.log(err);
