@@ -11,6 +11,8 @@ export class Posts extends Component {
   };
 
   componentDidMount() {
+    console.log('***************');
+    console.log(this.props);
     axios
       .get('/posts')
       .then(responce => {
@@ -61,6 +63,7 @@ export class Posts extends Component {
             title={post.title}
             body={post.body}
             author={post.author}
+            {...this.props}
             clicked={() => this.displaySinglePostHandler(post.id)}
           />
         );

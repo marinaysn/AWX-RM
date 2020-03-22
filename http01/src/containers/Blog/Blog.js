@@ -27,19 +27,17 @@ class Blog extends Component {
                 <Link to='/'>Home</Link>
               </li>
               <li>
-                <Link to='/newpost'>New Post</Link>
+                <Link to={{
+                  pathname: '/newpost',
+                  hash: '#submit',
+                  search:'?quicksubmit=true'}}>New Post</Link>
               </li>
             </ul>
           </nav>
         </header>
 
-        {/* <Route path="/" render={() => <h1>Home Page</h1> } />
-        <Route path="/" exact render={() => < Posts /> } /> */}
-
-        {/* <Route path="/" exact component={Posts} />
-        <Route path="/newpost" component={NewPost} /> */}
-
         <Switch>
+          
           <Route path="/newpost" component={NewPost} />
           <Route path="/" component={Posts} />
         </Switch>
