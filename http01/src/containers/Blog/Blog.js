@@ -9,9 +9,7 @@ import './Blog.css';
 
 class Blog extends Component {
   state = {
-    posts: [],
-    selectedPostId: null,
-    error: false
+    auth: true
   };
 
   render() {
@@ -48,10 +46,8 @@ class Blog extends Component {
         </header>
 
         <Switch>
-          <Route path='/newpost' exact component={NewPost} />
-          {/* <Route path='/:postid' exact component={FullPost} /> */}
-          <Route path='/posts/' component={Posts} />
-         
+          {this.state.auth ? <Route path='/newpost' exact component={NewPost} /> : null }
+          <Route path='/posts/' component={Posts} />      
           <Redirect from='/' to='/posts' />
 
          
