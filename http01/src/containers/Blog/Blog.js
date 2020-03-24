@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch, NavLink } from 'react-router-dom';
+import { Route, Switch, NavLink, Redirect } from 'react-router-dom';
 
 import Posts from '../Posts/Posts';
 import FullPost from './FullPost/FullPost';
@@ -51,6 +51,10 @@ class Blog extends Component {
           <Route path='/newpost' exact component={NewPost} />
           {/* <Route path='/:postid' exact component={FullPost} /> */}
           <Route path='/posts/' component={Posts} />
+         
+          <Redirect from='/' to='/posts' />
+
+         
         </Switch>
       </div>
     );
