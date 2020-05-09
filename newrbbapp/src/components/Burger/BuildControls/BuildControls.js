@@ -12,7 +12,7 @@ const controls = [
 const BuildControls =(props) =>{
     return (
         <div className="BuildControls">
-            {/* {
+            {
                 controls.map ( i =>(
                     <BuildControl 
                     key={i.label} 
@@ -28,7 +28,7 @@ const BuildControls =(props) =>{
                 className="OrderButton" 
                 disabled={!props.disabledOrderBtn}
                 onClick={props.orderBtnClicked}
-                >ORDER NOW</button> */}
+                >ORDER NOW</button>
         </div>
     )
 }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Auxiliary from '../../hoc/Auxilary/Auxiliary';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
+
 // import Modal from '../../components/UI/Modal/Modal';
 // import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 // import axios from 'axios-orders';
@@ -31,7 +32,92 @@ export class BurgerBuilder extends Component {
     error: false
   };
 
+  addIngredientHandler = type => {
+    const oldCount = this.state.ingredients[type];
+    const updatedCount = oldCount + 1;
+    const updatedIngredients = {
+      ...this.state.ingredients
+    };
+    updatedIngredients[type] = updatedCount;
+
+    const originalPrice = this.state.totalPrice;
+    const updatedPrice = originalPrice + INGREDIENTPRICES[type];
+
+    this.setState({
+      totalPrice: updatedPrice,
+      ingredients: updatedIngredients
+    });
+    this.updateTotalItemsState(updatedIngredients);
+  };
+
+  updateTotalItemsState(tempIngArr) {
+    const sum = Object.keys(tempIngArr)
+      .map(i => {
+        return tempIngArr[i];
+      })
+      .reduce((sum, el) => {
+        return sum + el;
+      }, 0);
+
+    this.setState({
+      isAnyitemsSelected: sum > 0
+    });
+  }
+
+  removeIngredientHandler = type => {
+    const oldCount = this.state.ingredients[type];
+
+    if (oldCount > 0) {
+      const updatedCount = oldCount - 1;
+      const updatedIngredients = {
+        ...this.state.ingredients
+      };
+      let updatedPrice = 0;
+
+      updatedIngredients[type] = updatedCount;
+
+      const originalPrice = this.state.totalPrice;
+      updatedPrice = originalPrice - INGREDIENTPRICES[type];
+
+      this.setState({
+        totalPrice: updatedPrice,
+        ingredients: updatedIngredients
+      });
+
+      this.updateTotalItemsState(updatedIngredients);
+    }
+  };
+
+  orderButtonClickedHandler = () => {
+    this.setState({
+      orderIsClicked: true
+    });
+  };
+
+  orderCancelledHandler = () => {
+    this.setState({
+      orderIsClicked: false
+    });
+  };
+
+  orderContinuedHandler = () => {
+    // alert('you clicked Continue');
+
+    this.setState({
+      orderIsClicked: false,
+      loading: true
+    });
+  }
+
   render() {
+
+    const disabledInfo = {
+      ...this.state.ingredients
+    };
+    for (let key in disabledInfo) {
+      disabledInfo[key] = disabledInfo[key] <= 0
+    }
+
     return (
       <Auxiliary>
 
@@ -39,9 +125,9 @@ export class BurgerBuilder extends Component {
         <Burger ingBurger={this.state.ingredients} price={this.state.totalPrice} />
 
         <BuildControls
-          // addItem={this.addIngredientHandler}
-          // removeItem={this.removeIngredientHandler}
-          // disabled={disabledInfo}
+          addItem={this.addIngredientHandler}
+          removeItem={this.removeIngredientHandler}
+          disabled={disabledInfo}
           // disabledOrderBtn={this.state.isAnyitemsSelected}
           // orderBtnClicked={this.orderButtonClickedHandler}
         />
