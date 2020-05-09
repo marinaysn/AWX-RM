@@ -3,7 +3,7 @@ import './Burger.css';
 import BurgerIngredient from './BurgerIngredient/BurgerIngredient';
 
 const Burger = props => {
-  //turn Object into array
+ 
 //   const ingredientsArray = Object.keys(props.ingBurger)
 //   .map(igKey =>{
 //       return [...Array(props.ingBurger[igKey])]
@@ -12,8 +12,11 @@ const Burger = props => {
 //       })
 //   })
 
+ //turn Object into array
   const ingredientsObj = props.ingBurger;
+
   let ingredientsArray = [];
+
   Object.keys(ingredientsObj).forEach(ingKey => {
 
     for (let i = 0; i < ingredientsObj[ingKey]; i++) {
