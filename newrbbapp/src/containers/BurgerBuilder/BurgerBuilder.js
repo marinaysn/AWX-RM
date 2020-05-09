@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Auxiliary from '../../hoc/Auxilary/Auxiliary';
+import Burger from '../../components/Burger/Burger';
 
 const INGREDIENTPRICES = {
     salad: 0.5,
@@ -10,7 +11,10 @@ const INGREDIENTPRICES = {
   
   export class BurgerBuilder extends Component {
     state = {
-      ingredients: null,
+      // ingredients: null,
+      ingredients: {
+        salad: 1,
+      cheese: 1},
       totalPrice: 4.0,
       isAnyitemsSelected: false,
       orderIsClicked: false,
@@ -23,7 +27,7 @@ const INGREDIENTPRICES = {
             <Auxiliary>
 
               <div>
-                  Burger
+                <Burger ingBurger={this.state.ingredients}  price={this.state.totalPrice} /> 
               </div>  
               <div>
                   Build Controls
