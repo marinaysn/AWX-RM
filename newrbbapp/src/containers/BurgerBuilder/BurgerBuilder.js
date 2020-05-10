@@ -202,7 +202,7 @@ export class BurgerBuilder extends Component {
           disabled={disabledInfo}
           price={this.state.totalPrice}
           disabledOrderBtn={this.state.isAnyitemsSelected}
-        // orderBtnClicked={this.orderButtonClickedHandler}
+          orderBtnClicked={this.orderButtonClickedHandler}
         />
       </Auxiliary>
     )
