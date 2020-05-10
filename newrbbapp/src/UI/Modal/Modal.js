@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Modal.css';
 import Backdrop from '../Backdrop/Backdrop';
-import Auxiliary from '../../../hoc/Auxilary/Auxiliary';
+import Auxiliary from '../../hoc/Auxilary/Auxiliary';
 
 export class Modal extends Component {
 
@@ -14,7 +14,7 @@ export class Modal extends Component {
   render() {
     return (
       <Auxiliary>
-        <Backdrop show={this.props.show} clicked={this.props.modalClosed} />
+        {/* <Backdrop show={this.props.show} clicked={this.props.modalClosed} /> */}
         <div
           className='Modal'
           style={{

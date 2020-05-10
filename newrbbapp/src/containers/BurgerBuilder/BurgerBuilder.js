@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import Auxiliary from '../../hoc/Auxilary/Auxiliary';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
-
-// import Modal from '../../components/UI/Modal/Modal';
-// import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
+import Modal from '../../UI/Modal/Modal';
+import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 // import axios from 'axios-orders';
-// import Spinner from '../../components/UI/Spinner/Spinner';
+import Spinner from '../../UI/Spinner/Spinner';
 // import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 
 const INGREDIENTPRICES = {
@@ -143,16 +142,56 @@ export class BurgerBuilder extends Component {
 
   render() {
 
-    //disable Less Button if user didn't order this ingredient
-    const disabledInfo = {
-      ...this.state.ingredients
-    };
-    for (let key in disabledInfo) {
-      disabledInfo[key] = disabledInfo[key] <= 0
+        //disable Less Button if user didn't order this ingredient
+        const disabledInfo = {
+          ...this.state.ingredients
+        };
+        for (let key in disabledInfo) {
+          disabledInfo[key] = disabledInfo[key] <= 0
+        }
+
+    let orderSummary = null;
+    let burger = this.state.error ? <p>Error: Ingredients can't be loaded</p> : <Spinner />
+
+    if (this.state.ingredients) {
+      burger = (
+        <Auxiliary>
+          <Burger
+            ingBurger={this.state.ingredients}
+            price={this.state.totalPrice}
+          />
+          <BuildControls
+            addItem={this.addIngredientHandler}
+            removeItem={this.removeIngredientHandler}
+            disabled={disabledInfo}
+            disabledOrderBtn={this.state.isAnyitemsSelected}
+            orderBtnClicked={this.orderButtonClickedHandler}
+          />
+        </Auxiliary>
+      )
+
+      orderSummary = (
+        <OrderSummary
+          ingredients={this.state.ingredients}
+          modalClosed={this.orderCancelledHandler}
+          modalContinue={this.orderContinuedHandler}
+          price={this.state.totalPrice}
+        />
+      )
     }
+
+
 
     return (
       <Auxiliary>
+
+{/* <Modal /> */}
+        <Modal
+          show={this.state.orderIsClicked}
+          modalClosed={this.orderCancelledHandler}
+        >
+          {orderSummary}
+        </Modal>
 
 
         <Burger ingBurger={this.state.ingredients} price={this.state.totalPrice} />
@@ -163,7 +202,7 @@ export class BurgerBuilder extends Component {
           disabled={disabledInfo}
           price={this.state.totalPrice}
           disabledOrderBtn={this.state.isAnyitemsSelected}
-          // orderBtnClicked={this.orderButtonClickedHandler}
+        // orderBtnClicked={this.orderButtonClickedHandler}
         />
       </Auxiliary>
     )
