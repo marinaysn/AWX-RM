@@ -10,10 +10,10 @@ import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 // import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 
 const INGREDIENTPRICES = {
-  salad: 0.5,
-  bacon: 0.9,
+  salad: 0.75,
+  bacon: 1.25,
   cheese: 1,
-  meat: 1.5
+  meat: 2.5
 };
 
 export class BurgerBuilder extends Component {
@@ -111,6 +111,7 @@ export class BurgerBuilder extends Component {
 
   render() {
 
+    //disable Less Button if user didn't order this ingredient
     const disabledInfo = {
       ...this.state.ingredients
     };
