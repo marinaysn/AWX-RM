@@ -1,0 +1,56 @@
+.Button {
+    background-color: rgb(197, 245, 217);
+    outline: none;
+    cursor: pointer;
+    border: 1px solid #052c14;
+    color: #032e0a;
+    font-family: inherit;
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 5px 10px;
+    box-shadow: 2px 2px 2px #324636;
+}
+
+.Button:hover, .Button:active {
+    background-color: rgb(8, 48, 26);
+    border: 1px solid #78a07d;
+    color: #bde6c2;
+}
+
+.Button:disabled {
+    background-color: rgb(198, 199, 198);
+    cursor: not-allowed;
+    border: 1px solid rgb(204, 204, 204);
+    color: #718575;
+}
+
+.Button:not(:disabled) {
+    animation: enable 0.3s linear;
+}
+
+/* =================== */
+
+.ButtonNew {
+    background-color: transparent;
+    border: none;
+    color: white;
+    outline: none;
+    cursor: pointer;
+    font: inherit;
+    padding: 10px;
+    margin: 10px;
+    font-weight: bold;
+}
+
+.ButtonNew:first-of-type {
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.Success {
+    color: #5C9210;
+}
+
+.Danger {
+    color: #944317;
+}
