@@ -1,9 +1,8 @@
 .NavItem {
     margin: 10px 0;
     box-sizing: border-box;
-    display: flex;
-    height: 100%;
-    width: auto;
+    display: block;
+    width: 100%;
     align-items: center;
     
 }
@@ -20,7 +19,7 @@
     /* width: 100%; */
     padding: 16px 10px;
     box-sizing: border-box;
-    border-bottom:  4px solid transparent;
+    border-bottom:  1px solid transparent;
     display: block;
 }
 
