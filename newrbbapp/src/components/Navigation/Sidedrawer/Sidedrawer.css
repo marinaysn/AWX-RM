@@ -6,21 +6,18 @@
     left: 0;
     top: 0;
     z-index: 200;
-    /* background-color: whitesmoke; */
     background-color:rgb(245, 239, 207);
     padding: 32px 16px;
     box-sizing: border-box;
     transition: transform 0.3s ease-out;
     -webkit-transform: transform 0.3s ease-out;
 }
+
 @media(min-width: 500px){
     .Sidedrawer {
         display: none;
     }
 }
-/* .Logo { 
-    height: 48px;
-} */
 
 .Open {
     transform: translateX(0);
