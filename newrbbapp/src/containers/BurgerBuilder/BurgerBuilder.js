@@ -129,6 +129,7 @@ export class BurgerBuilder extends Component {
           addItem={this.addIngredientHandler}
           removeItem={this.removeIngredientHandler}
           disabled={disabledInfo}
+          price={this.state.totalPrice}
           // disabledOrderBtn={this.state.isAnyitemsSelected}
           // orderBtnClicked={this.orderButtonClickedHandler}
         />
