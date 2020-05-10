@@ -10,9 +10,9 @@ const Toolbar = (props) => {
 
       <Menu switchMenu={props.switchMenuItems} />
 
-      {/* <div className="Logo"> */}
+      <div className="Logo">
         <Logo height="90%" />
-      {/* </div> */}
+      </div>
       <nav className='DesktopOnly'>
         <NavigationItems />
       </nav>
