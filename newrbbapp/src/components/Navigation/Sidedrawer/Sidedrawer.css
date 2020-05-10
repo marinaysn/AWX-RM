@@ -17,10 +17,10 @@
         display: none;
     }
 }
-.Logo { 
+/* .Logo { 
     height: 48px;
     margin-bottom: 52px;
-}
+} */
 
 .Open {
     transform: translateX(0);
