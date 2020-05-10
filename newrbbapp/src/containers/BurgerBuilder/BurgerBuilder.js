@@ -107,7 +107,39 @@ export class BurgerBuilder extends Component {
       orderIsClicked: false,
       loading: true
     });
-  }
+
+    const order = {
+      ingredients: this.state.ingredients,
+      price: this.state.totalPrice,
+      customer: {
+        name: 'Marina Ysn',
+        address: {
+          street: '123 Test St',
+          zipCode: '12345',
+          country: 'Canada'
+        },
+        email: 'marina@test.ca'
+      },
+      deliveryMethod: 'UPS Standard'
+    };
+
+    // axios
+    //   .post('/orders.json', order)
+    //   .then(responce => {
+    //     this.setState({
+    //       orderIsClicked: false,
+    //       loading: false
+    //     });
+    //   })
+    //   .catch(error => {
+
+
+    //     this.setState({
+    //       orderIsClicked: false,
+    //       loading: false
+    //     });
+    //   });
+  };
 
   render() {
 
@@ -130,7 +162,7 @@ export class BurgerBuilder extends Component {
           removeItem={this.removeIngredientHandler}
           disabled={disabledInfo}
           price={this.state.totalPrice}
-          // disabledOrderBtn={this.state.isAnyitemsSelected}
+          disabledOrderBtn={this.state.isAnyitemsSelected}
           // orderBtnClicked={this.orderButtonClickedHandler}
         />
       </Auxiliary>
