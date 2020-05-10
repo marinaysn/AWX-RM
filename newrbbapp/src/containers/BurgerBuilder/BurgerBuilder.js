@@ -100,7 +100,7 @@ export class BurgerBuilder extends Component {
   };
 
   orderContinuedHandler = () => {
-    // alert('you clicked Continue');
+    alert('you clicked Continue');
 
     this.setState({
       orderIsClicked: false,
