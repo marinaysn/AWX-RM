@@ -1,27 +1,8 @@
 import React, { Component } from 'react';
 import Auxiliary from '../Auxilary/Auxiliary';
 import './Layout.css';
-// import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
-// import Sidedrawer from '../../components/Navigation/Sidedrawer/Sidedrawer';
-
-
-class Layout extends Component {
-    state = {
-        showSideDrawer: false
-    };
-    render() {
-        return (
-            <Auxiliary>
-                <main className='mainContent'>{this.props.children}</main>
-            </Auxiliary>
-        )
-    }
-}
-export default Layout
-
-
-/*
-
+import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
+import Sidedrawer from '../../components/Navigation/Sidedrawer/Sidedrawer';
 
 class Layout extends Component {
   state = {
@@ -57,5 +38,3 @@ class Layout extends Component {
 }
 
 export default Layout;
-
-*/

@@ -8,16 +8,17 @@ const Toolbar = (props) => {
   return (
     <header className='Toolbar'>
 
-        <Menu switchMenu={props.switchMenuItems} />
+      <Menu switchMenu={props.switchMenuItems} />
 
-      <div className="Logo">
-                <Logo  height="90%" />
-            </div> 
+      {/* <div className="Logo"> */}
+        <Logo height="90%" />
+      {/* </div> */}
       <nav className='DesktopOnly'>
         <NavigationItems />
       </nav>
     </header>
-  );
-};
+  )
+}
 
 export default Toolbar;
+
