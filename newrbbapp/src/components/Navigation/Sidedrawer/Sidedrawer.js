@@ -17,8 +17,9 @@ const Sidedrawer = props => {
       <Backdrop show={props.open} clicked={props.closed} />
 
       <div className={attachedClassed.join(' ')}>
-    
+        <Logo height="11%" />
         <nav>
+        
           <NavigationItems />
         </nav>
       </div>

@@ -8,6 +8,11 @@
     
 }
 
+.NavItem:not(:last-child){
+    border-bottom:  1px solid rgb(95, 56, 6);
+  }
+
+
 .NavItem a {
     color: rgb(46, 31, 4);
     text-decoration: none;
@@ -40,6 +45,7 @@
         height: 100%;
         width: auto;
         align-items: center;
+        
     }
     
     .NavItem a {
