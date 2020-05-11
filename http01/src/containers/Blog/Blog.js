@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Route, Switch, NavLink, Redirect } from 'react-router-dom';
 import './Blog.css';
 import Posts from '../Posts/Posts';
-
 //import NewPost from './NewPost/NewPost';
 import asyncComponent from '../../hoc/asyncComponent';
+
 const AnysncNewPost = asyncComponent(() => {
   return import('./NewPost/NewPost');
 });
