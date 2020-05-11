@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import Auxiliary from '../../../hoc/Auxilary/Auxiliary';
 import './OrderSummary';
-import Button from '../../../UI/Button/Button';
+import Button from '../../UI/Button/Button';
 
 export class OrderSummary extends Component {
 
     shouldComponentUpdate(nextProps, nextState){
-      //  console.log('0. OrderSummary - will update');
+        // console.log('0. OrderSummary - will update');
         return true;
     }
     componentDidUpdate(){
-       // console.log('1. OrderSummary - will update');
+        // console.log('1. OrderSummary - did update');
     }
 
 
