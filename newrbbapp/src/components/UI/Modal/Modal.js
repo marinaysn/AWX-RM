@@ -1,18 +1,27 @@
 import React, { Component } from 'react';
 import './Modal.css';
 import Backdrop from '../Backdrop/Backdrop';
-import Auxiliary from '../../hoc/Auxilary/Auxiliary';
+import Auxiliary from '../../../hoc/Auxilary/Auxiliary';
 
 export class Modal extends Component {
 
   shouldComponentUpdate(nextProps, nextState) {
+    console.log('3 Modal: should component update')
+    return  nextProps.show !== this.props.show || 
+            nextProps.children !== this.props.children;
+  }
 
-    return nextProps.show !== this.props.show || nextProps.children !== this.props.children;
+  //WARNING! To be deprecated in React v17. Use componentDidUpdate instead.
+  componentWillUpdate(nextProps, nextState) {
+    console.log('5 Modal: componentWillUpdate')
   }
 
 
   render() {
+
+    console.log('4 Modal: render')
     return (
+
       <Auxiliary>
         <Backdrop show={this.props.show} clicked={this.props.modalClosed} />
         <div
