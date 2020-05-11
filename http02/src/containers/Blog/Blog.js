@@ -9,7 +9,8 @@ import axios from 'axios';
 class Blog extends Component {
 
     state ={
-        posts : []
+        posts : [],
+        currentPostID: null
     }
 
 componentDidMount() {
@@ -17,19 +18,40 @@ componentDidMount() {
     
     axios.get('https://jsonplaceholder.typicode.com/posts')
     .then(responce =>{
+        const temp = responce.data.splice(0,4);
+        const updatedPosts = temp.map( post =>{
+            return {
+                ...post,
+                authors: "Marina"
+            }
+        })
 
-        this.setState({ posts: responce.data.splice(0,7) });
-
+        this.setState({ posts: updatedPosts });
     })
-
 }
+
+
+FullPostReviewHandler = async id =>{
+    // console.log('=============')
+    // console.log(id)
+    await this.componentDidMount()
+    this.setState({ currentPostID:  id });  
+}
+
+
 
     render () {
 
+        console.log('***************')
         console.log(this.state.posts)
+        console.log(this.state.currentPostID);
 
         const tempPosts = this.state.posts.map( p =>{
-            return <Post key={p.id} title={p.title} />
+            return <Post 
+                        key={p.id} 
+                        title={p.title} 
+                        author={p.authors} 
+                        clicked={() => this.FullPostReviewHandler(p.id)} />
         })
 
         return (
@@ -38,7 +60,7 @@ componentDidMount() {
                     {tempPosts}
                 </section>
                 <section>
-                    <FullPost />
+                    <FullPost id={this.state.currentPostID} />
                 </section>
                 <section>
                     <NewPost />

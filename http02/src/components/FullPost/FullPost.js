@@ -4,7 +4,11 @@ import './FullPost.css';
 
 class FullPost extends Component {
     render () {
-        let post = <p>Please select a Post!</p>;
+        
+        let post = <p style={{ textAlign: 'center' }}>Loading...</p>;
+        if (this.props.id){
+
+        console.log(this.props.id)
         post = (
             <div className="FullPost">
                 <h1>Title</h1>
@@ -15,7 +19,9 @@ class FullPost extends Component {
             </div>
 
         );
+    }
         return post;
+    
     }
 }
 
