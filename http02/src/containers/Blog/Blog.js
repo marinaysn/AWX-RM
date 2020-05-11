@@ -8,33 +8,59 @@ import axios from 'axios';
 
 class Blog extends Component {
 
+    state ={
+        posts : [],
+        currentPostID: null
+    }
+
 componentDidMount() {
-    const posts = [];
+    const postsTemp = [];
     
     axios.get('https://jsonplaceholder.typicode.com/posts')
     .then(responce =>{
-        console.log(responce);
-
-        responce.data.map (p =>{
-            posts.push(p);
+        const temp = responce.data.splice(0,4);
+        const updatedPosts = temp.map( post =>{
+            return {
+                ...post,
+                authors: "Marina"
+            }
         })
-        
+
+        this.setState({ posts: updatedPosts });
     })
-    console.log('==========')
-    // console.log(posts(0).userId);
-    console.log(posts);
 }
 
+
+FullPostReviewHandler = async id =>{
+    // console.log('=============')
+    // console.log(id)
+    await this.componentDidMount()
+    this.setState({ currentPostID:  id });  
+}
+
+
+
     render () {
+
+        console.log('***************')
+        console.log(this.state.posts)
+        console.log(this.state.currentPostID);
+
+        const tempPosts = this.state.posts.map( p =>{
+            return <Post 
+                        key={p.id} 
+                        title={p.title} 
+                        author={p.authors} 
+                        clicked={() => this.FullPostReviewHandler(p.id)} />
+        })
+
         return (
             <div>
                 <section className="Posts">
-                    <Post />
-                    <Post />
-                    <Post />
+                    {tempPosts}
                 </section>
                 <section>
-                    <FullPost />
+                    <FullPost id={this.state.currentPostID} />
                 </section>
                 <section>
                     <NewPost />
