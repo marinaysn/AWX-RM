@@ -6,11 +6,11 @@ const Logo = (props) => {
 
     let styleClasses = {
         'height': props.height,
-       
+        'marginBottom': props.marginBottom
     };
 
     return (
-        <div className="Logo" >
+        <div className="Logo"  style={styleClasses} >
             <img src={imgLogo}  alt="burger Logo" />
         </div>
     )
