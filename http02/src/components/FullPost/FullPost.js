@@ -14,7 +14,7 @@ class FullPost extends Component {
 
             if (!this.state.loadedPost || (this.state.loadedPost && this.state.loadedPost.id !== this.props.id)) {
 
-                axios.get('https://jsonplaceholder.cypress.io/posts/' + this.props.id).then(responce => {
+                axios.get('/posts/' + this.props.id).then(responce => {
                     
 
                     this.setState({ loadedPost: responce.data });
@@ -27,7 +27,7 @@ class FullPost extends Component {
 
         if (this.props.id) {
 
-            axios.delete('https://jsonplaceholder.cypress.io/posts/' + this.props.id).then(responce => {
+            axios.delete('/posts/' + this.props.id).then(responce => {
                     console.log('2+++++++++++++++++++++')
                     console.log(responce)
 

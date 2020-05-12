@@ -4,7 +4,8 @@ import Post from '../../components/Post/Post';
 import FullPost from '../../components/FullPost/FullPost';
 import NewPost from '../../components/NewPost/NewPost';
 import './Blog.css';
-import axios from 'axios';
+// import axios from 'axios';
+import axios from '../../axios';
 
 class Blog extends Component {
 
@@ -18,7 +19,7 @@ class Blog extends Component {
 componentDidMount() {
     const postsTemp = [];
     
-    axios.get('https://jsonplaceholder.cypress.io/posts')
+    axios.get('/posts')
     .then(responce =>{
         const temp = responce.data.splice(0,4);
         const updatedPosts = temp.map( post =>{
@@ -31,8 +32,8 @@ componentDidMount() {
         this.setState({ posts: updatedPosts });
     })
     .catch(err =>{
-        console.log('------------------')
-        console.log(err);
+        // console.log('------------------')
+        // console.log(err);
         this.setState({ error: true, errorMsg: err.toString() });
     })
     
@@ -51,6 +52,7 @@ FullPostReviewHandler = async id =>{
 
        let err = '';
        if (!this.state.error){
+
            tempPosts = this.state.posts.map( p =>{
             return <Post 
                         key={p.id} 
