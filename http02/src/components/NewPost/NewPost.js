@@ -12,7 +12,7 @@ class NewPost extends Component {
 
     postDataHandler = () => {
 
-        console.log('------------------')
+        
         const post = {
             title: this.state.title,
             body: this.state.content,

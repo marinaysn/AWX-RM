@@ -10,13 +10,15 @@ class Blog extends Component {
 
     state ={
         posts : [],
-        currentPostID: null
+        currentPostID: null,
+        error: false,
+        errorMsg: ''
     }
 
 componentDidMount() {
     const postsTemp = [];
     
-    axios.get('https://jsonplaceholder.typicode.com/posts')
+    axios.get('https://jsonplaceholder.cypress.io/posts')
     .then(responce =>{
         const temp = responce.data.splice(0,4);
         const updatedPosts = temp.map( post =>{
@@ -28,6 +30,12 @@ componentDidMount() {
 
         this.setState({ posts: updatedPosts });
     })
+    .catch(err =>{
+        console.log('------------------')
+        console.log(err);
+        this.setState({ error: true, errorMsg: err.toString() });
+    })
+    
 }
 
 
@@ -37,24 +45,32 @@ FullPostReviewHandler = async id =>{
     this.setState({ currentPostID:  id });  
 }
 
-
-
     render () {
 
-       
+       let tempPosts = <p style={{textAlign: 'center'}}>Something is wrong</p>
 
-        const tempPosts = this.state.posts.map( p =>{
+       let err = '';
+       if (!this.state.error){
+           tempPosts = this.state.posts.map( p =>{
             return <Post 
                         key={p.id} 
                         title={p.title} 
                         author={p.authors} 
                         clicked={() => this.FullPostReviewHandler(p.id)} />
         })
+       }
+       else {
+        err = <p style={{textAlign: 'center'}}>{this.state.errorMsg}</p>
+       }
+        
 
         return (
             <div>
                 <section className="Posts">
                     {tempPosts}
+                </section>
+                <section className="Posts">
+                    {err}
                 </section>
                 <section>
                     <FullPost id={this.state.currentPostID} />
