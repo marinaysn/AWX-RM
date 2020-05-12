@@ -14,20 +14,32 @@ class FullPost extends Component {
 
             if (!this.state.loadedPost || (this.state.loadedPost && this.state.loadedPost.id !== this.props.id)) {
 
-                axios.get('https://jsonplaceholder.typicode.com/posts/' + this.props.id).then(responce => {
-                    console.log('2+++++++++++++++++++++')
-                    console.log(responce)
+                axios.get('https://jsonplaceholder.cypress.io/posts/' + this.props.id).then(responce => {
+                    
 
                     this.setState({ loadedPost: responce.data });
                 })
-
             }
-
-
-
         }
-
     }
+
+    deletePostHandler  = () =>{
+
+        if (this.props.id) {
+
+            axios.delete('https://jsonplaceholder.cypress.io/posts/' + this.props.id).then(responce => {
+                    console.log('2+++++++++++++++++++++')
+                    console.log(responce)
+
+                    this.setState({ loadedPost: null });
+
+                    console.log('3+++++++++++++++++++++')
+                    console.log(this.loadedPost)
+                })
+            }
+        }
+    
+
     render() {
 
         let post = <p style={{ textAlign: 'center' }}>Please select Post to see details</p>;
@@ -43,14 +55,13 @@ class FullPost extends Component {
                     <h1>{this.state.loadedPost.title}</h1>
                     <p>{this.state.loadedPost.body}</p>
                     <div className="Edit">
-                        <button className="Delete">Delete</button>
+                        <button className="Delete" onClick={this.deletePostHandler}>Delete</button>
                     </div>
                 </div>
 
             );
         }
         return post;
-
     }
 }
 
