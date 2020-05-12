@@ -31,8 +31,8 @@ componentDidMount() {
         this.setState({ posts: updatedPosts });
     })
     .catch(err =>{
-        console.log('------------------')
-        console.log(err);
+        // console.log('------------------')
+        // console.log(err);
         this.setState({ error: true, errorMsg: err.toString() });
     })
     
@@ -51,6 +51,7 @@ FullPostReviewHandler = async id =>{
 
        let err = '';
        if (!this.state.error){
+
            tempPosts = this.state.posts.map( p =>{
             return <Post 
                         key={p.id} 
