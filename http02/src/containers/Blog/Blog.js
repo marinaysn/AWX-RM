@@ -32,8 +32,7 @@ componentDidMount() {
 
 
 FullPostReviewHandler = async id =>{
-    // console.log('=============')
-    // console.log(id)
+
     await this.componentDidMount()
     this.setState({ currentPostID:  id });  
 }
