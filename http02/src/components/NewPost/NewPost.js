@@ -20,7 +20,7 @@ class NewPost extends Component {
 
         }
 
-        axios.post('https://jsonplaceholder.cypress.io/posts', post).then(response => {
+        axios.post('/posts', post).then(response => {
                 console.log(response)
             })
     }

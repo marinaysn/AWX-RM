@@ -18,7 +18,7 @@ class Blog extends Component {
 componentDidMount() {
     const postsTemp = [];
     
-    axios.get('https://jsonplaceholder.cypress.io/posts')
+    axios.get('/posts')
     .then(responce =>{
         const temp = responce.data.splice(0,4);
         const updatedPosts = temp.map( post =>{
