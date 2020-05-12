@@ -42,9 +42,7 @@ FullPostReviewHandler = async id =>{
 
     render () {
 
-        console.log('***************')
-        console.log(this.state.posts)
-        console.log(this.state.currentPostID);
+       
 
         const tempPosts = this.state.posts.map( p =>{
             return <Post 
