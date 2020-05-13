@@ -9,27 +9,33 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 
 const INGREDIENTPRICES = {
-  salad: 0.75,
-  bacon: 1.25,
+  salad: 0.5,
+  bacon: 0.9,
   cheese: 1,
-  meat: 2.5
+  meat: 1.5
 };
 
 export class BurgerBuilder extends Component {
   state = {
-    // ingredients: null,
-    ingredients: {
-      salad: 0,
-      bacon: 0,
-      cheese: 0,
-      meat: 0
-    },
+    ingredients: null,
     totalPrice: 4.0,
     isAnyitemsSelected: false,
     orderIsClicked: false,
     loading: false,
     error: false
   };
+
+  componentDidMount() {
+    axios
+      .get('https://marb2-af6dd.firebaseio.com/ingredients.json')
+      .then(res => {
+        this.setState({ ingredients: res.data });
+      })
+      .catch( err =>{
+        this.setState({error: true})
+      })
+      
+  }
 
   addIngredientHandler = type => {
     const oldCount = this.state.ingredients[type];
@@ -125,14 +131,14 @@ export class BurgerBuilder extends Component {
     axios
       .post('/orders.json', order)
       .then(responce => {
-        console.log('==================');
-        console.log(responce);
         this.setState({
           orderIsClicked: false,
           loading: false
         });
       })
       .catch(error => {
+
+
         this.setState({
           orderIsClicked: false,
           loading: false
@@ -141,19 +147,20 @@ export class BurgerBuilder extends Component {
   };
 
   render() {
-
-        //disable Less Button if user didn't order this ingredient
-        const disabledInfo = {
-          ...this.state.ingredients
-        };
-        for (let key in disabledInfo) {
-          disabledInfo[key] = disabledInfo[key] <= 0
-        }
+    const disabledInfo = {
+      ...this.state.ingredients
+    };
+    for (let key in disabledInfo) {
+      disabledInfo[key] = disabledInfo[key] <= 0
+    }
 
     let orderSummary = null;
+
     let burger = this.state.error ? <p>Error: Ingredients can't be loaded</p> : <Spinner />
 
     if (this.state.ingredients) {
+      console.log('**************')
+      console.log(this.state.totalPrice)
       burger = (
         <Auxiliary>
           <Burger
@@ -166,6 +173,7 @@ export class BurgerBuilder extends Component {
             disabled={disabledInfo}
             disabledOrderBtn={this.state.isAnyitemsSelected}
             orderBtnClicked={this.orderButtonClickedHandler}
+            price={this.state.totalPrice}
           />
         </Auxiliary>
       )
@@ -180,14 +188,12 @@ export class BurgerBuilder extends Component {
       )
     }
 
- if (this.state.loading) {
-        orderSummary = <Spinner />
-      }
+    if (this.state.loading) {
+      orderSummary = <Spinner />
+    }
 
     return (
       <Auxiliary>
-
-{/* <Modal /> */}
         <Modal
           show={this.state.orderIsClicked}
           modalClosed={this.orderCancelledHandler}
@@ -195,17 +201,7 @@ export class BurgerBuilder extends Component {
           {orderSummary}
         </Modal>
 
-
-        <Burger ingBurger={this.state.ingredients} price={this.state.totalPrice} />
-
-        <BuildControls
-          addItem={this.addIngredientHandler}
-          removeItem={this.removeIngredientHandler}
-          disabled={disabledInfo}
-          price={this.state.totalPrice}
-          disabledOrderBtn={this.state.isAnyitemsSelected}
-          orderBtnClicked={this.orderButtonClickedHandler}
-        />
+        {burger}
       </Auxiliary>
     )
   }
