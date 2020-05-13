@@ -4,7 +4,7 @@ import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 import Modal from '../../components/UI/Modal/Modal';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
-// import axios from 'axios-orders';
+import axios from '../../axios-orders';
 import Spinner from '../../components/UI/Spinner/Spinner';
 // import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 
@@ -100,7 +100,7 @@ export class BurgerBuilder extends Component {
   };
 
   orderContinuedHandler = () => {
-    alert('you clicked Continue');
+    // alert('you clicked Continue');
 
     this.setState({
       orderIsClicked: false,
@@ -122,22 +122,22 @@ export class BurgerBuilder extends Component {
       deliveryMethod: 'UPS Standard'
     };
 
-    // axios
-    //   .post('/orders.json', order)
-    //   .then(responce => {
-    //     this.setState({
-    //       orderIsClicked: false,
-    //       loading: false
-    //     });
-    //   })
-    //   .catch(error => {
-
-
-    //     this.setState({
-    //       orderIsClicked: false,
-    //       loading: false
-    //     });
-    //   });
+    axios
+      .post('/orders.json', order)
+      .then(responce => {
+        console.log('==================');
+        console.log(responce);
+        this.setState({
+          orderIsClicked: false,
+          loading: false
+        });
+      })
+      .catch(error => {
+        this.setState({
+          orderIsClicked: false,
+          loading: false
+        });
+      });
   };
 
   render() {
@@ -180,7 +180,9 @@ export class BurgerBuilder extends Component {
       )
     }
 
-
+ if (this.state.loading) {
+        orderSummary = <Spinner />
+      }
 
     return (
       <Auxiliary>
