@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
 import Post from '../../components/Post/Post';
-import FullPost from '../../components/FullPost/FullPost';
-import NewPost from '../../components/NewPost/NewPost';
+import FullPost from './FullPost/FullPost';
+import NewPost from './NewPost/NewPost';
 import './Blog.css';
 // import axios from 'axios';
 import axios from '../../axios';
@@ -67,19 +67,30 @@ FullPostReviewHandler = async id =>{
         
 
         return (
-            <div>
+            <div className='Blog'>
+    <header>
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a> </li>
+                    <li><a href="/newpost">New Poste</a> </li>
+                </ul>
+            </nav>
+
+    </header>
+
+
                 <section className="Posts">
                     {tempPosts}
                 </section>
                 <section className="Posts">
                     {err}
                 </section>
-                <section>
+                {/* <section>
                     <FullPost id={this.state.currentPostID} />
                 </section>
                 <section>
                     <NewPost />
-                </section>
+                </section> */}
             </div>
         );
     }
