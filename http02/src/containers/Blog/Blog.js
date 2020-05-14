@@ -67,7 +67,18 @@ FullPostReviewHandler = async id =>{
         
 
         return (
-            <div>
+            <div className='Blog'>
+    <header>
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a> </li>
+                    <li><a href="/newpost">New Poste</a> </li>
+                </ul>
+            </nav>
+
+    </header>
+
+
                 <section className="Posts">
                     {tempPosts}
                 </section>
