@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Posts from './Posts/Posts';
-import { Route } from "react-router-dom"
+import { Route, Link } from "react-router-dom"
 import FullPost from './FullPost/FullPost';
 import NewPost from './NewPost/NewPost';
 import './Blog.css';
@@ -16,8 +16,12 @@ class Blog extends Component {
                 <header>
                     <nav>
                         <ul>
-                            <li><a href="/">Home</a> </li>
-                            <li><a href="/newpost">New Posts</a> </li>
+                            <li><Link to="/">Home</Link> </li>
+                            <li><Link to={{
+                                pathname: '/newpost',
+                                hash: '#submit',
+                                search: '?quick-submit=true'
+                            }}>New Posts</Link> </li>
                         </ul>
                     </nav>
 
