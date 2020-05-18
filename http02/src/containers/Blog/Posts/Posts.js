@@ -19,8 +19,8 @@ export class Posts extends Component {
   }
 
   componentDidMount() {
-    console.log('++++++++++++++')
-    console.log(this.props)
+    // console.log('++++++++++++++')
+    // console.log(this.props)
     const postsTemp = [];
 
     axios.get('/posts')
