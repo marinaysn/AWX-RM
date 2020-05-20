@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import Post from '../../../components/Post/Post'
 import axios from '../../../axios';
 import './Posts.css';
-import {Link} from 'react-router-dom'
+import { Route, Link, NavLink, Switch } from "react-router-dom";
+import FullPost from '../FullPost/FullPost';
 import post from '../../../components/Post/Post';
+
 
 export class Posts extends Component {
 
@@ -13,16 +15,22 @@ export class Posts extends Component {
     error: false,
     errorMsg: ''
   }
+  //use with Link
+  // FullPostReviewHandler = async id => {
+
+  //   await this.componentDidMount()
+  //   this.setState({ currentPostID: id });
+  // }
 
   FullPostReviewHandler = async id => {
 
     await this.componentDidMount()
-    this.setState({ currentPostID: id });
+
+    this.props.history.push({ pathname: '/' + id })
   }
 
   componentDidMount() {
-    // console.log('++++++++++++++')
-    // console.log(this.props)
+
     const postsTemp = [];
 
     axios.get('/posts')
@@ -51,13 +59,21 @@ export class Posts extends Component {
     if (!this.state.error) {
 
       tempPosts = this.state.posts.map(p => {
+
+
         return (
-        <Link to={'/' + post.id} key={p.id}>
+          // <Link to={'/' + p.id} >
+
+
           <Post
+            key={p.id}
             title={p.title}
             author={p.authors}
             clicked={() => this.FullPostReviewHandler(p.id)} />
-        </Link>)
+
+
+          // </Link>
+        )
       })
     }
     else {
@@ -66,12 +82,17 @@ export class Posts extends Component {
 
     return (
       <div>
-        <section className="Posts">
+
+       <section className="Posts">
           {tempPosts}
         </section>
         <section className="Posts">
           {err}
         </section>
+      {/* with nested routes use url property for the dynamic path */}
+        <Route path={this.props.match.url + '/:id'} exact component={FullPost} />
+
+       
       </div>
     )
   }
