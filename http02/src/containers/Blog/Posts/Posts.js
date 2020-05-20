@@ -21,8 +21,7 @@ export class Posts extends Component {
   }
 
   componentDidMount() {
-    // console.log('++++++++++++++')
-    // console.log(this.props)
+
     const postsTemp = [];
 
     axios.get('/posts')
@@ -51,8 +50,10 @@ export class Posts extends Component {
     if (!this.state.error) {
 
       tempPosts = this.state.posts.map(p => {
+
+
         return (
-        <Link to={'/' + post.id} key={p.id}>
+        <Link to={'/' + p.id} key={p.id}>
           <Post
             title={p.title}
             author={p.authors}
