@@ -10,10 +10,6 @@ class FullPost extends Component {
 
     componentDidMount(prevProps, prevState) {
 
-            console.log('1===========***')
-            console.log(this.props)
-            console.log('2===========***')
-            console.log(this.props.match.params.id)
         if (this.props.match.params.id) {
 
             if (!this.state.loadedPost || (this.state.loadedPost && this.state.loadedPost.id !== this.props.match.params.id)) {
