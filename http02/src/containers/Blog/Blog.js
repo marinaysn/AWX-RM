@@ -17,7 +17,7 @@ class Blog extends Component {
                 <header>
                     <nav>
                         <ul>
-                            <li><NavLink to="/" 
+                            <li><NavLink to="/postsmar/" 
                             exact
                             activeClassName="myactive"
                             activeStyle={{color:"red"}} >Posts</NavLink> </li>
@@ -35,7 +35,7 @@ class Blog extends Component {
                     
                     <Route path="/newpost" component={NewPost} />
 
-                    <Route path="/" component={Posts} /> 
+                    <Route path="/postsmar/" component={Posts} /> 
                     {/* <Route path="/:id" exact component={FullPost} /> */}
                 </Switch>
             </div>
