@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import Post from '../../../components/Post/Post'
 import axios from '../../../axios';
 import './Posts.css';
-import { Route, Link, NavLink, Switch } from "react-router-dom";
+import { Route, Link } from "react-router-dom";
 import FullPost from '../FullPost/FullPost';
-import post from '../../../components/Post/Post';
 
 
 export class Posts extends Component {
@@ -26,8 +25,9 @@ export class Posts extends Component {
 
     await this.componentDidMount()
 
-    this.props.history.push({ pathname: '/' + id })
+    this.props.history.push({ pathname: '/postsmar/' + id })
   }
+
 
   componentDidMount() {
 
@@ -62,7 +62,7 @@ export class Posts extends Component {
 
 
         return (
-          // <Link to={'/' + p.id} >
+          // <Link to={'/postsmar/' + p.id} >
 
 
           <Post
@@ -79,20 +79,21 @@ export class Posts extends Component {
     else {
       err = <p style={{ textAlign: 'center' }}>{this.state.errorMsg}</p>
     }
+    console.log(this.props)
 
     return (
       <div>
 
-       <section className="Posts">
+        <section className="Posts">
           {tempPosts}
         </section>
         <section className="Posts">
           {err}
         </section>
-      {/* with nested routes use url property for the dynamic path */}
-        <Route path={this.props.match.url + '/:id'} exact component={FullPost} />
+        {/* with nested routes use url property for the dynamic path */}
+        <Route path={this.props.match.url + '/:id'} component={FullPost} />
+        {/* <Route path="/:id" exact component={FullPost} /> */}
 
-       
       </div>
     )
   }
