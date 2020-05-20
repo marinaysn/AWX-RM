@@ -13,11 +13,18 @@ export class Posts extends Component {
     error: false,
     errorMsg: ''
   }
+//use with Link
+  // FullPostReviewHandler = async id => {
+
+  //   await this.componentDidMount()
+  //   this.setState({ currentPostID: id });
+  // }
 
   FullPostReviewHandler = async id => {
 
     await this.componentDidMount()
-    this.setState({ currentPostID: id });
+    
+    this.props.history.push({pathname: '/' + id})
   }
 
   componentDidMount() {
@@ -53,12 +60,14 @@ export class Posts extends Component {
 
 
         return (
-        <Link to={'/' + p.id} key={p.id}>
-          <Post
+        // <Link to={'/' + p.id} >
+          <Post 
+          key={p.id}
             title={p.title}
             author={p.authors}
             clicked={() => this.FullPostReviewHandler(p.id)} />
-        </Link>)
+        // </Link>
+        )
       })
     }
     else {
