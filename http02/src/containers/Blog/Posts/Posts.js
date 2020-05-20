@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Post from '../../../components/Post/Post'
 import axios from '../../../axios';
 import './Posts.css';
+import {Link} from 'react-router-dom'
+import post from '../../../components/Post/Post';
 
 export class Posts extends Component {
 
@@ -49,11 +51,13 @@ export class Posts extends Component {
     if (!this.state.error) {
 
       tempPosts = this.state.posts.map(p => {
-        return <Post
-          key={p.id}
-          title={p.title}
-          author={p.authors}
-          clicked={() => this.FullPostReviewHandler(p.id)} />
+        return (
+        <Link to={'/' + post.id} key={p.id}>
+          <Post
+            title={p.title}
+            author={p.authors}
+            clicked={() => this.FullPostReviewHandler(p.id)} />
+        </Link>)
       })
     }
     else {
