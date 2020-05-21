@@ -9,6 +9,10 @@ import './Blog.css';
 
 class Blog extends Component {
 
+state={
+    auth: true
+}
+
 
     render() {
 
@@ -21,19 +25,21 @@ class Blog extends Component {
                             exact
                             activeClassName="myactive"
                             activeStyle={{color:"red"}} >Posts</NavLink> </li>
-                            <li><NavLink to={{
+
+                            {this.state.auth ?<li><NavLink to={{
                                 pathname: '/newpost',
                                 hash: '#submit',
                                 search: '?quick-submit=true'
-                            }} exact>New Posts</NavLink> </li>
+                            }} exact>New Posts</NavLink> </li> : null}
+                            
                         </ul>
                     </nav>
 
                 </header>
 
                 <Switch>
-                    
-                    <Route path="/newpost" component={NewPost} />
+                    { this.state.auth ? <Route path="/newpost" component={NewPost} /> : null }
+                    {/* <Route path="/newpost" component={NewPost} /> */}
 
                     <Route path="/postsmar/" component={Posts} /> 
 
