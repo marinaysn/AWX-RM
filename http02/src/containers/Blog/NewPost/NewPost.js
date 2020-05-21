@@ -8,7 +8,8 @@ class NewPost extends Component {
         title: '',
         content: '',
         author: 'Max',
-        submitted: false
+        submitted: false,
+        unauth: 0
     }
     componentDidMount() {
         console.log('===============')

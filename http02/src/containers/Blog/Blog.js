@@ -10,7 +10,7 @@ import './Blog.css';
 class Blog extends Component {
 
 state={
-    auth: true
+    auth: false
 }
 
 
@@ -42,9 +42,11 @@ state={
                     {/* <Route path="/newpost" component={NewPost} /> */}
 
                     <Route path="/postsmar/" component={Posts} /> 
+                            <Route render={() => 
+                            <h1> 404 - Page Not Found</h1>
+                            } />
+                    {/* <Redirect from="/" to="/postsmar" /> */}
 
-                    <Redirect from="/" to="/postsmar" />
-                    {/* <Route path="/" component={Posts} />  */}
                 </Switch>
             </div>
         );
