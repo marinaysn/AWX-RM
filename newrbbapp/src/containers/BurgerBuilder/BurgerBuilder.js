@@ -26,6 +26,9 @@ export class BurgerBuilder extends Component {
   };
 
   componentDidMount() {
+    console.log('marinamarinamarinamarina')
+    console.log(this.props);
+
     axios
       .get('https://marb2-af6dd.firebaseio.com/ingredients.json')
       .then(res => {
@@ -106,44 +109,44 @@ export class BurgerBuilder extends Component {
   };
 
   orderContinuedHandler = () => {
-    // alert('you clicked Continue');
+    alert('you clicked Continue');
 
-    this.setState({
-      orderIsClicked: false,
-      loading: true
-    });
+    // with routes we don't need to send data to DB right away, but first to go checkout summary first
 
-    const order = {
-      ingredients: this.state.ingredients,
-      price: this.state.totalPrice,
-      customer: {
-        name: 'Marina Ysn',
-        address: {
-          street: '123 Test St',
-          zipCode: '12345',
-          country: 'Canada'
-        },
-        email: 'marina@test.ca'
-      },
-      deliveryMethod: 'UPS Standard'
-    };
+    // this.setState({
+    //   orderIsClicked: false,
+    //   loading: true
+    // });
 
-    axios
-      .post('/orders.json', order)
-      .then(responce => {
-        this.setState({
-          orderIsClicked: false,
-          loading: false
-        });
-      })
-      .catch(error => {
+    // const order = {
+    //   ingredients: this.state.ingredients,
+    //   price: this.state.totalPrice,
+    //   customer: {
+    //     name: 'Marina Ysn',
+    //     address: {
+    //       street: '123 Test St',
+    //       zipCode: '12345',
+    //       country: 'Canada'
+    //     },
+    //     email: 'marina@test.ca'
+    //   },
+    //   deliveryMethod: 'UPS Standard'
+    // };
 
-
-        this.setState({
-          orderIsClicked: false,
-          loading: false
-        });
-      });
+    // axios
+    //   .post('/orders.json', order)
+    //   .then(responce => {
+    //     this.setState({
+    //       orderIsClicked: false,
+    //       loading: false
+    //     });
+    //   })
+    //   .catch(error => {
+    //       this.setState({
+    //       orderIsClicked: false,
+    //       loading: false
+    //     });
+    //   });
   };
 
   render() {
@@ -159,8 +162,7 @@ export class BurgerBuilder extends Component {
     let burger = this.state.error ? <p>Error: Ingredients can't be loaded</p> : <Spinner />
 
     if (this.state.ingredients) {
-      console.log('**************')
-      console.log(this.state.totalPrice)
+
       burger = (
         <Auxiliary>
           <Burger
