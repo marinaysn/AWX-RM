@@ -1,7 +1,6 @@
 import React from 'react';
 import './Burger.css';
 import BurgerIngredient from './BurgerIngredient/BurgerIngredient';
-import { withRouter } from "react-router-dom";
 
 const Burger = props => {
  
@@ -15,10 +14,6 @@ const Burger = props => {
 
  //turn Object into array
   const ingredientsObj = props.ingBurger;
-
-  console.log('mar mar mar mar')
-console.log(props);
-console.log(props.match.url);
 
   let ingredientsArray = [];
 
@@ -47,4 +42,4 @@ console.log(props.match.url);
   );
 };
 
-export default withRouter(Burger);
+export default Burger;

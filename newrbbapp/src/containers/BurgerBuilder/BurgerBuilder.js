@@ -26,8 +26,6 @@ export class BurgerBuilder extends Component {
   };
 
   componentDidMount() {
-    console.log('marinamarinamarinamarina')
-    console.log(this.props);
 
     axios
       .get('https://marb2-af6dd.firebaseio.com/ingredients.json')
@@ -109,7 +107,9 @@ export class BurgerBuilder extends Component {
   };
 
   orderContinuedHandler = () => {
-    alert('you clicked Continue');
+    // alert('you clicked Continue');
+
+    this.props.history.push('/checkout');
 
     // with routes we don't need to send data to DB right away, but first to go checkout summary first
 
@@ -209,4 +209,5 @@ export class BurgerBuilder extends Component {
   }
 }
 
-export default withErrorHandler(BurgerBuilder, axios);
+// export default withErrorHandler(BurgerBuilder, axios);
+export default BurgerBuilder;
