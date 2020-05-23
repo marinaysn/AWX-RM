@@ -107,9 +107,18 @@ export class BurgerBuilder extends Component {
   };
 
   orderContinuedHandler = () => {
-    // alert('you clicked Continue');
+    
+    const queryParams = [];
 
-    this.props.history.push('/checkout');
+    for(let i in this.state.ingredients) {
+      // queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]));
+      queryParams.push(i + '=' + this.state.ingredients[i]);
+    }
+
+    this.props.history.push({
+      pathname: '/checkout',
+      search: '?' + queryParams.join('&')
+    });
 
     // with routes we don't need to send data to DB right away, but first to go checkout summary first
 
