@@ -117,7 +117,9 @@ export class BurgerBuilder extends Component {
 
     this.props.history.push({
       pathname: '/checkout',
-      search: '?' + queryParams.join('&')
+      search: '?' + queryParams.join('&'),
+      price: this.state.totalPrice,
+      ingredients: this.state.ingredients
     });
 
     // with routes we don't need to send data to DB right away, but first to go checkout summary first
