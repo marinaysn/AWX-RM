@@ -3,6 +3,7 @@ import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSumm
 import ContactData from './ContactData/ContactData';
 import { Route } from "react-router-dom";
 
+
 class Checkout extends Component {
     state ={
         ingredients: [],

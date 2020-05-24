@@ -31,6 +31,13 @@
     color: white;
 }
 
+.activeStyle {
+    background-color: #8F5C2C;
+    border-bottom: #40A4c8;
+    /* color: rgb(7, 49, 88); */
+    color: white;
+}
+
 .NavItem a:hover.active {
     color: rgb(160, 228, 245);
 }

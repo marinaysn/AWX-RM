@@ -6,16 +6,17 @@ const withErrorHandler = (WrappedComponent, axios) => {
   return class extends Component {
 
     state = {
-      error: null
+      error: null,
+       isMounted: false
     }
 
     componentWillMount() {
       this.reqInterceptor = axios.interceptors.request.use(req => {
-        this.setState({ error: null })
+        this.setState({ error: null, isMounted: true})
         return req;
       })
       this.respInterceptor = axios.interceptors.response.use(res => res, error => {
-        this.setState({ error: error });
+        this.setState({ error: error, isMounted: true });
       })
     }
 
@@ -23,8 +24,13 @@ const withErrorHandler = (WrappedComponent, axios) => {
 
       // console.log('Called to remove interceptors', this.reqInterceptor);
       // console.log('Second one', this.respInterceptor);
-      axios.interceptors.request.eject(this.reqInterceptor)
-      axios.interceptors.responce.eject(this.respInterceptor)
+
+      if (this.state.isMounted) {
+        axios.interceptors.request.eject(this.reqInterceptor)
+        axios.interceptors.responce.eject(this.respInterceptor)
+        
+      } 
+        this.setState({ isMounted: false });   
     }
 
     errorConfirmedHandler = () => {
