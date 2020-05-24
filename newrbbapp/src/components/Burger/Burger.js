@@ -3,18 +3,22 @@ import './Burger.css';
 import BurgerIngredient from './BurgerIngredient/BurgerIngredient';
 
 const Burger = props => {
- 
-//   const ingredientsArray = Object.keys(props.ingBurger)
-//   .map(igKey =>{
-//       return [...Array(props.ingBurger[igKey])]
-//       .map((_ , i) =>{
-//          return <BurgerIngredient key={igKey + 1} type={igKey} />;
-//       })
-//   })
 
- //turn Object into array
+  //   const ingredientsArray = Object.keys(props.ingBurger)
+  //   .map(igKey =>{
+  //       return [...Array(props.ingBurger[igKey])]
+  //       .map((_ , i) =>{
+  //          return <BurgerIngredient key={igKey + 1} type={igKey} />;
+  //       })
+  //   })
+
+  //turn Object into array
   const ingredientsObj = props.ingBurger;
+  let priceTemp = props.price;
 
+  if (!priceTemp) {
+    priceTemp = 0
+  }
   let ingredientsArray = [];
 
   Object.keys(ingredientsObj).forEach(ingKey => {
@@ -32,7 +36,7 @@ const Burger = props => {
 
   return (
     <div className='Burger'>
-      <h1>${props.price.toFixed(2)}</h1>
+      <h1>${priceTemp.toFixed(2)}</h1>
       <BurgerIngredient type='bread-top' />
 
       {ingredientsArray}
