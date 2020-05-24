@@ -4,7 +4,6 @@ const Order =(props) =>{
 
     const temp = [];
     for (let i in props.ingredients){
-
         if (props.ingredients[i] > 0){
             temp.push(i.charAt(0).toUpperCase() + i.slice(1) + ' : (' + props.ingredients[i] + ') ')
         }
