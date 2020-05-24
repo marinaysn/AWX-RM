@@ -3,6 +3,7 @@ import Button from '../../../components/UI/Button/Button';
 import './ContactData.css'
 import axios from '../../../axios-orders';
 import Spinner from '../../../components/UI/Spinner/Spinner';
+import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
 
 export class ContactData extends Component {
 
@@ -91,4 +92,4 @@ export class ContactData extends Component {
     }
 }
 
-export default ContactData;
+export default withErrorHandler(ContactData, axios);
