@@ -20,7 +20,7 @@ export class ContactData extends Component {
 
     orderHandler = (event) => {
         event.preventDefault();
-        
+
         // moved here from BurgerBuilder
 
         this.setState({
@@ -59,28 +59,28 @@ export class ContactData extends Component {
 
     }
 
-    handleChange = (e) =>{
+    handleChange = (e) => {
 
-            this.setState({
-                [e.target.name]: e.target.value
-            })
+        this.setState({
+            [e.target.name]: e.target.value
+        })
     }
 
     render() {
 
         let form = (
-                    <form >
-                    <input className='inp' type='text' value={this.state.name} onChange={e => this.handleChange(e)} name='name' placeholder='Your Name: ' />
-                    <input className='inp' type='email' value={this.state.email} onChange={e => this.handleChange(e)} name='email' placeholder='Email: ' />
-                    <input className='inp' type='text' value={this.state.street} onChange={e => this.handleChange(e)} name='street' placeholder='Your Street : ' />
-                    <input className='inp' type='text' value={this.state.zipcode} onChange={e => this.handleChange(e)} name='zipcode' placeholder='Zip Code : ' />
-                    <Button btnType='Success' click={this.orderHandler}>ORDER NOW</Button>
-                </form>
+            <form >
+                <input className='inp' type='text' value={this.state.name} onChange={e => this.handleChange(e)} name='name' placeholder='Your Name: ' />
+                <input className='inp' type='email' value={this.state.email} onChange={e => this.handleChange(e)} name='email' placeholder='Email: ' />
+                <input className='inp' type='text' value={this.state.street} onChange={e => this.handleChange(e)} name='street' placeholder='Your Street : ' />
+                <input className='inp' type='text' value={this.state.zipcode} onChange={e => this.handleChange(e)} name='zipcode' placeholder='Zip Code : ' />
+                <Button btnType='Success' click={this.orderHandler}>ORDER NOW</Button>
+            </form>
 
         );
         if (this.state.loading) {
             form = <Spinner />
-          }
+        }
 
         return (
             <div className='ContactData'>
