@@ -15,7 +15,7 @@ const Order =(props) =>{
         <h3>Order # {props.orderId} </h3>
            <p><u>Ingredients:</u> {temp} </p>
            {/* <p>Ingredients: Salad </p> */}
-           <p><u>Price</u> CAN {props.price}</p>
+           <p><u>Price:</u> CAN {props.price.toFixed(2)}</p>
         </div>
     )
 }
