@@ -122,42 +122,7 @@ export class BurgerBuilder extends Component {
       ingredients: this.state.ingredients
     });
 
-    // with routes we don't need to send data to DB right away, but first to go checkout summary first
-
-    // this.setState({
-    //   orderIsClicked: false,
-    //   loading: true
-    // });
-
-    // const order = {
-    //   ingredients: this.state.ingredients,
-    //   price: this.state.totalPrice,
-    //   customer: {
-    //     name: 'Marina Ysn',
-    //     address: {
-    //       street: '123 Test St',
-    //       zipCode: '12345',
-    //       country: 'Canada'
-    //     },
-    //     email: 'marina@test.ca'
-    //   },
-    //   deliveryMethod: 'UPS Standard'
-    // };
-
-    // axios
-    //   .post('/orders.json', order)
-    //   .then(responce => {
-    //     this.setState({
-    //       orderIsClicked: false,
-    //       loading: false
-    //     });
-    //   })
-    //   .catch(error => {
-    //       this.setState({
-    //       orderIsClicked: false,
-    //       loading: false
-    //     });
-    //   });
+    
   };
 
   render() {
