@@ -43,7 +43,6 @@ export class ContactData extends Component {
                 },
                 value: ''
             },
-            country: 'Canada',
 
             country: {
                 elementType: 'select',
@@ -52,17 +51,17 @@ export class ContactData extends Component {
                     {value: 'USA', displayValue: 'USA'},
                     {value: 'EU', displayValue: 'EU'}]
                 },
-                value: ''
+                value: 'Canada'
             },
 
             deliveryMethod: {
                 elementType: 'select',
                 elementConfig: {
-                    options: [{value: 'uber', displayValue: 'Uber Eats'},
-                    {value: 'skip', displayValue: 'Skip the Dishes'},
-                    {value: 'ups', displayValue: 'UPS Standard'}]
+                    options: [{value: 'Uber Eats', displayValue: 'Uber Eats'},
+                    {value: 'Skip the Dishes', displayValue: 'Skip the Dishes'},
+                    {value: 'UPS Standard', displayValue: 'UPS Standard'}]
                 },
-                value: ''
+                value: 'UPS Standard'
             },
         },
         loading: false
@@ -78,19 +77,16 @@ export class ContactData extends Component {
             loading: true
         });
 
+        const formData ={};
+
+        for (let formIdentifier in this.state.orderForm){
+            formData[formIdentifier] = this.state.orderForm[formIdentifier].value
+        }
+
         const order = {
             ingredients: this.props.ingredients,
             price: this.props.price,
-            customer: {
-                name: this.state.orderForm.name.value,
-                address: {
-                    street: this.state.orderForm.street.value,
-                    zipCode: this.state.orderForm.zipcode.value,
-                    country: this.state.orderForm.country.displayValue
-                },
-                email: this.state.orderForm.email.displayValue
-            },
-            deliveryMethod: this.state.orderForm.deliveryMethod.value
+            orderData: formData
         };
 
         axios
@@ -134,7 +130,7 @@ export class ContactData extends Component {
         }
 
         let form = (
-            <form >
+            <form onSubmit={this.orderHandler}>
                 {formElementsArray.map(i =>(
                     <Input 
                         key={i.id}
@@ -144,7 +140,8 @@ export class ContactData extends Component {
                         onChange={ (e) => this.handleChange(e, i.id)} />
                 ))}
 
-                <Button btnType='Success' click={this.orderHandler}>ORDER NOW</Button>
+                {/* <Button btnType='Success' click={this.orderHandler}>ORDER NOW</Button> */}
+                <Button btnType='Success'>ORDER NOW</Button>
             </form>
 
         );
