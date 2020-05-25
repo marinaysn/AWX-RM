@@ -81,16 +81,16 @@ export class ContactData extends Component {
         const order = {
             ingredients: this.props.ingredients,
             price: this.props.price,
-            // customer: {
-            //     name: this.state.name,
-            //     address: {
-            //         street: this.state.street,
-            //         zipCode: this.state.zipcode,
-            //         country: 'Canada'
-            //     },
-            //     email: this.state.email
-            // },
-            // deliveryMethod: 'UPS Standard'
+            customer: {
+                name: this.state.orderForm.name.value,
+                address: {
+                    street: this.state.orderForm.street.value,
+                    zipCode: this.state.orderForm.zipcode.value,
+                    country: this.state.orderForm.country.displayValue
+                },
+                email: this.state.orderForm.email.displayValue
+            },
+            deliveryMethod: this.state.orderForm.deliveryMethod.value
         };
 
         axios
@@ -108,11 +108,18 @@ export class ContactData extends Component {
             });
     }
 
-    handleChange = (e) => {
+    handleChange = (e, name) => {
 
-        // this.setState({
-        //     [e.target.name]: e.target.value
-        // })
+        const tempOrderFormObject = {...this.state.orderForm };
+
+        //deep clone
+        const updatedOrderFormElement = {...tempOrderFormObject[name]};
+        updatedOrderFormElement.value = e.target.value;
+        tempOrderFormObject[name] = updatedOrderFormElement;
+
+        this.setState({
+            orderForm: tempOrderFormObject
+        })
     }
 
     render() {
@@ -137,7 +144,7 @@ export class ContactData extends Component {
                         elementType={i.config.elementType}
                         elementConfig={i.config.elementConfig}
                         value={i.config.value}
-                        onChange={e => this.handleChange(e)} />
+                        onChange={ (e) => this.handleChange(e, i.id)} />
                 ))}
 
                 {/* <Input inputtype='input' type='email' value={this.state.email} onChange={e => this.handleChange(e)} name='email' placeholder='Email: ' />
