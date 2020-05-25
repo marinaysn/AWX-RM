@@ -55,8 +55,6 @@ export class ContactData extends Component {
                     loading: false
                 });
             });
-
-
     }
 
     handleChange = (e) => {
