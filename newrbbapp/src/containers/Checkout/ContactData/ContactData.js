@@ -43,7 +43,6 @@ export class ContactData extends Component {
                 },
                 value: ''
             },
-            country: 'Canada',
 
             country: {
                 elementType: 'select',
@@ -52,17 +51,17 @@ export class ContactData extends Component {
                     {value: 'USA', displayValue: 'USA'},
                     {value: 'EU', displayValue: 'EU'}]
                 },
-                value: ''
+                value: 'Canada'
             },
 
             deliveryMethod: {
                 elementType: 'select',
                 elementConfig: {
-                    options: [{value: 'uber', displayValue: 'Uber Eats'},
-                    {value: 'skip', displayValue: 'Skip the Dishes'},
-                    {value: 'ups', displayValue: 'UPS Standard'}]
+                    options: [{value: 'Uber Eats', displayValue: 'Uber Eats'},
+                    {value: 'Skip the Dishes', displayValue: 'Skip the Dishes'},
+                    {value: 'UPS Standard', displayValue: 'UPS Standard'}]
                 },
-                value: ''
+                value: 'UPS Standard'
             },
         },
         loading: false
@@ -78,19 +77,16 @@ export class ContactData extends Component {
             loading: true
         });
 
+        const formData ={};
+
+        for (let formIdentifier in this.state.orderForm){
+            formData[formIdentifier] = this.state.orderForm[formIdentifier].value
+        }
+
         const order = {
             ingredients: this.props.ingredients,
             price: this.props.price,
-            // customer: {
-            //     name: this.state.name,
-            //     address: {
-            //         street: this.state.street,
-            //         zipCode: this.state.zipcode,
-            //         country: 'Canada'
-            //     },
-            //     email: this.state.email
-            // },
-            // deliveryMethod: 'UPS Standard'
+            orderData: formData
         };
 
         axios
@@ -108,11 +104,18 @@ export class ContactData extends Component {
             });
     }
 
-    handleChange = (e) => {
+    handleChange = (e, name) => {
 
-        // this.setState({
-        //     [e.target.name]: e.target.value
-        // })
+        const tempOrderFormObject = {...this.state.orderForm };
+
+        //deep clone
+        const updatedOrderFormElement = {...tempOrderFormObject[name]};
+        updatedOrderFormElement.value = e.target.value;
+        tempOrderFormObject[name] = updatedOrderFormElement;
+
+        this.setState({
+            orderForm: tempOrderFormObject
+        })
     }
 
     render() {
@@ -126,26 +129,19 @@ export class ContactData extends Component {
             })
         }
 
-        console.log(formElementsArray)
-
         let form = (
-            <form >
-                {/* <Input elementType='...' elementconfig='...' value='...' onChange={e => this.handleChange(e)} name='name'  /> */}
+            <form onSubmit={this.orderHandler}>
                 {formElementsArray.map(i =>(
                     <Input 
                         key={i.id}
                         elementType={i.config.elementType}
                         elementConfig={i.config.elementConfig}
                         value={i.config.value}
-                        onChange={e => this.handleChange(e)} />
+                        onChange={ (e) => this.handleChange(e, i.id)} />
                 ))}
 
-                {/* <Input inputtype='input' type='email' value={this.state.email} onChange={e => this.handleChange(e)} name='email' placeholder='Email: ' />
-                <Input inputtype='input' type='text' value={this.state.street} onChange={e => this.handleChange(e)} name='street' placeholder='Your Street : ' />
-                <Input inputtype='input' type='text' value={this.state.zipcode} onChange={e => this.handleChange(e)} name='zipcode' placeholder='Zip Code : ' /> */}
-
-
-                <Button btnType='Success' click={this.orderHandler}>ORDER NOW</Button>
+                {/* <Button btnType='Success' click={this.orderHandler}>ORDER NOW</Button> */}
+                <Button btnType='Success'>ORDER NOW</Button>
             </form>
 
         );
