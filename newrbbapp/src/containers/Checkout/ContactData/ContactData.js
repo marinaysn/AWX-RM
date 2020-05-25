@@ -133,11 +133,8 @@ export class ContactData extends Component {
             })
         }
 
-        console.log(formElementsArray)
-
         let form = (
             <form >
-                {/* <Input elementType='...' elementconfig='...' value='...' onChange={e => this.handleChange(e)} name='name'  /> */}
                 {formElementsArray.map(i =>(
                     <Input 
                         key={i.id}
@@ -146,11 +143,6 @@ export class ContactData extends Component {
                         value={i.config.value}
                         onChange={ (e) => this.handleChange(e, i.id)} />
                 ))}
-
-                {/* <Input inputtype='input' type='email' value={this.state.email} onChange={e => this.handleChange(e)} name='email' placeholder='Email: ' />
-                <Input inputtype='input' type='text' value={this.state.street} onChange={e => this.handleChange(e)} name='street' placeholder='Your Street : ' />
-                <Input inputtype='input' type='text' value={this.state.zipcode} onChange={e => this.handleChange(e)} name='zipcode' placeholder='Zip Code : ' /> */}
-
 
                 <Button btnType='Success' click={this.orderHandler}>ORDER NOW</Button>
             </form>
