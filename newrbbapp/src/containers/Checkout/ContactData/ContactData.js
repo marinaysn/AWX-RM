@@ -16,7 +16,12 @@ export class ContactData extends Component {
                     type: 'text',
                     placeholder: 'Your Name'
                 },
-                value: ''
+                value: '',
+                validation: {
+                    required: true
+                },
+                valid: false,
+                valueWasEntered: false
             },
             email: {
                 elementType: 'input',
@@ -24,7 +29,12 @@ export class ContactData extends Component {
                     type: 'email',
                     placeholder: 'Email'
                 },
-                value: ''
+                value: '',
+                validation: {
+                    required: true
+                },
+                valid: false,
+                valueWasEntered: false
             },
 
             street: {
@@ -33,7 +43,12 @@ export class ContactData extends Component {
                     type: 'text',
                     placeholder: 'Street'
                 },
-                value: ''
+                value: '',
+                validation: {
+                    required: true
+                },
+                valid: false,
+                valueWasEntered: false
             },
             zipcode: {
                 elementType: 'input',
@@ -41,30 +56,82 @@ export class ContactData extends Component {
                     type: 'text',
                     placeholder: 'Zip Code'
                 },
-                value: ''
+                value: '',
+                validation: {
+                    required: true,
+                    minLength: 5,
+                    maxLength: 7
+                },
+                valid: false,
+                valueWasEntered: false
             },
 
             country: {
                 elementType: 'select',
                 elementConfig: {
-                    options: [{value: 'Canada', displayValue: 'Canada'},
-                    {value: 'USA', displayValue: 'USA'},
-                    {value: 'EU', displayValue: 'EU'}]
+                    options: [{ value: 'Canada', displayValue: 'Canada' },
+                    { value: 'USA', displayValue: 'USA' },
+                    { value: 'EU', displayValue: 'EU' }]
                 },
-                value: 'Canada'
+                valid: true,
+                value: 'Canada',
+                valueWasEntered: false
             },
 
             deliveryMethod: {
                 elementType: 'select',
                 elementConfig: {
-                    options: [{value: 'Uber Eats', displayValue: 'Uber Eats'},
-                    {value: 'Skip the Dishes', displayValue: 'Skip the Dishes'},
-                    {value: 'UPS Standard', displayValue: 'UPS Standard'}]
+                    options: [{ value: 'Uber Eats', displayValue: 'Uber Eats' },
+                    { value: 'Skip the Dishes', displayValue: 'Skip the Dishes' },
+                    { value: 'UPS Standard', displayValue: 'UPS Standard' }]
                 },
-                value: 'UPS Standard'
+
+                value: 'UPS Standard',
+                valueWasEntered: false
             },
         },
         loading: false
+    }
+
+    checkValidation(value, rules) {
+        let isValid = true;
+        if (rules.required) {
+            isValid = value.trim() !== '' && isValid;
+        }
+
+        if (rules.minLength) {
+            isValid = value.length >= rules.minLength && isValid
+        }
+
+        if (rules.maxLength) {
+            isValid = value.length <= rules.maxLength && isValid
+        }
+
+        return isValid;
+    }
+
+    handleChange = (e, name) => {
+
+
+
+        const tempOrderFormObject = { ...this.state.orderForm };
+
+        //deep clone
+        const updatedOrderFormElement = { ...tempOrderFormObject[name] };
+        updatedOrderFormElement.value = e.target.value;
+
+        updatedOrderFormElement.valid = this.checkValidation(updatedOrderFormElement.value, updatedOrderFormElement.validation)
+
+        updatedOrderFormElement.valueWasEntered = true
+        tempOrderFormObject[name] = updatedOrderFormElement;
+
+
+        this.setState({
+            orderForm: tempOrderFormObject
+        })
+
+
+
     }
 
 
@@ -77,9 +144,9 @@ export class ContactData extends Component {
             loading: true
         });
 
-        const formData ={};
+        const formData = {};
 
-        for (let formIdentifier in this.state.orderForm){
+        for (let formIdentifier in this.state.orderForm) {
             formData[formIdentifier] = this.state.orderForm[formIdentifier].value
         }
 
@@ -104,19 +171,7 @@ export class ContactData extends Component {
             });
     }
 
-    handleChange = (e, name) => {
 
-        const tempOrderFormObject = {...this.state.orderForm };
-
-        //deep clone
-        const updatedOrderFormElement = {...tempOrderFormObject[name]};
-        updatedOrderFormElement.value = e.target.value;
-        tempOrderFormObject[name] = updatedOrderFormElement;
-
-        this.setState({
-            orderForm: tempOrderFormObject
-        })
-    }
 
     render() {
 
@@ -131,13 +186,16 @@ export class ContactData extends Component {
 
         let form = (
             <form onSubmit={this.orderHandler}>
-                {formElementsArray.map(i =>(
-                    <Input 
+                {formElementsArray.map(i => (
+                    <Input
                         key={i.id}
                         elementType={i.config.elementType}
                         elementConfig={i.config.elementConfig}
                         value={i.config.value}
-                        onChange={ (e) => this.handleChange(e, i.id)} />
+                        invalid={!i.config.valid}
+                        valueWasEntered={i.config.valueWasEntered}
+                        shouldValidate={i.config.validation ? true : false}
+                        onChange={(e) => this.handleChange(e, i.id)} />
                 ))}
 
                 {/* <Button btnType='Success' click={this.orderHandler}>ORDER NOW</Button> */}

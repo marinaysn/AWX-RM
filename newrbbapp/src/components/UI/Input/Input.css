@@ -26,3 +26,8 @@
     border: 1px solid rgb(9, 73, 88);
     background-color: rgb(244, 245, 247);
 }
+
+.Invalid {
+  border: 1px solid red;
+  background-color: rgb(247, 239, 238);
+}
