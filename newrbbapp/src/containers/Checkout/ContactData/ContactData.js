@@ -73,6 +73,7 @@ export class ContactData extends Component {
                     { value: 'USA', displayValue: 'USA' },
                     { value: 'EU', displayValue: 'EU' }]
                 },
+                validation: {},
                 valid: true,
                 value: 'Canada',
                 valueWasEntered: false
@@ -85,16 +86,23 @@ export class ContactData extends Component {
                     { value: 'Skip the Dishes', displayValue: 'Skip the Dishes' },
                     { value: 'UPS Standard', displayValue: 'UPS Standard' }]
                 },
-
-                value: 'UPS Standard',
+                validation: {},
+                valid: true,
+                value: 'Uber Eats',
                 valueWasEntered: false
             },
         },
-        loading: false
+        loading: false,
+        formIsValid: false
     }
 
     checkValidation(value, rules) {
         let isValid = true;
+
+        if (!rules) {
+            return true;
+
+        }
         if (rules.required) {
             isValid = value.trim() !== '' && isValid;
         }
@@ -112,8 +120,6 @@ export class ContactData extends Component {
 
     handleChange = (e, name) => {
 
-
-
         const tempOrderFormObject = { ...this.state.orderForm };
 
         //deep clone
@@ -125,9 +131,14 @@ export class ContactData extends Component {
         updatedOrderFormElement.valueWasEntered = true
         tempOrderFormObject[name] = updatedOrderFormElement;
 
+        let formValid = true;
+        for (let i in tempOrderFormObject) {
+
+            formValid = tempOrderFormObject[i].valid && formValid
+        }
 
         this.setState({
-            orderForm: tempOrderFormObject
+            orderForm: tempOrderFormObject, formIsValid: formValid
         })
 
 
@@ -200,7 +211,7 @@ export class ContactData extends Component {
                 ))}
 
                 {/* <Button btnType='Success' click={this.orderHandler}>ORDER NOW</Button> */}
-                <Button btnType='Success'>ORDER NOW</Button>
+                <Button disabled={!this.state.formIsValid} btnType='Success'>ORDER NOW</Button>
             </form>
 
         );

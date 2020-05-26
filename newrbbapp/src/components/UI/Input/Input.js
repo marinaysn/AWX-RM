@@ -10,9 +10,9 @@ const Input = (props) => {
     let LabelMsg = props.name.charAt(0).toUpperCase() + props.name.slice(1);
     let labelCSS = 'Label'
 
-    if(props.invalid && props.shouldValidate && props.valueWasEntered) {
+    if (props.invalid && props.shouldValidate && props.valueWasEntered) {
         inputClassesTemp.push('Invalid');
-        LabelMsg = LabelMsg+ ': Please enter valid ' + LabelMsg;
+        LabelMsg = LabelMsg + ': Please enter valid ' + LabelMsg;
         labelCSS = labelCSS + ' InvalidLabel'
     }
 
@@ -22,15 +22,15 @@ const Input = (props) => {
     switch (props.elementType) {
         case ('input'):
             inputElement = <input
-                className= {inputClasses}
+                className={inputClasses}
                 {...props.elementConfig}
                 value={props.value}
                 onChange={props.onChange}
             />
             break;
         case ('textarea'):
-            inputElement = <textarea 
-                className= {inputClasses}
+            inputElement = <textarea
+                className={inputClasses}
                 {...props.elementConfig}
                 value={props.value}
                 onChange={props.onChange} />
@@ -39,7 +39,7 @@ const Input = (props) => {
             inputElement = (
                 <select
                     onChange={props.onChange}
-                    className= {inputClasses}
+                    className={inputClasses}
                     value={props.value}>
                     {props.elementConfig.options.map(o => (
                         <option key={o.value} value={o.value}>{o.displayValue}</option>
@@ -48,7 +48,7 @@ const Input = (props) => {
             break;
         default:
             inputElement = <input
-                className= {inputClasses}
+                className={inputClasses}
                 onChange={props.onChange}
                 {...props.elementConfig}
                 value={props.value} />

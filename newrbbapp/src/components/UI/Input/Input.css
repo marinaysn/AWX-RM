@@ -9,23 +9,23 @@
   /* margin: 5px; */
   width: 100%;
   text-align: left;
-  color: rgb(116, 87, 7)
+  color: rgb(116, 87, 7);
 }
 
 .InputElement {
-    outline: none;
-    border: 1px solid #ccc;
-    background-color: white;
-    font: inherit;
-    padding: 6px 10px;
-    display: block;
-    width: 100%;
-    box-sizing: border-box;
+  outline: none;
+  border: 1px solid #ccc;
+  background-color: white;
+  font: inherit;
+  padding: 6px 10px;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
 }
 .InputElement:focus {
-    outline: none;
-    border: 1px solid rgb(9, 73, 88);
-    background-color: rgb(244, 245, 247);
+  outline: none;
+  border: 1px solid rgb(9, 73, 88);
+  background-color: rgb(244, 245, 247);
 }
 
 .Invalid {
