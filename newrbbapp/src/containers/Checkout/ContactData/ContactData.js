@@ -88,7 +88,7 @@ export class ContactData extends Component {
                 },
                 validation: {},
                 valid: true,
-                value: 'UPS Standard',
+                value: 'Uber Eats',
                 valueWasEntered: false
             },
         },
@@ -99,11 +99,11 @@ export class ContactData extends Component {
     checkValidation(value, rules) {
         let isValid = true;
 
-        if (!rules ) {
+        if (!rules) {
             return true;
-           
+
         }
-        if (rules.required  ) {
+        if (rules.required) {
             isValid = value.trim() !== '' && isValid;
         }
 
@@ -132,7 +132,7 @@ export class ContactData extends Component {
         tempOrderFormObject[name] = updatedOrderFormElement;
 
         let formValid = true;
-        for ( let i in tempOrderFormObject){
+        for (let i in tempOrderFormObject) {
 
             formValid = tempOrderFormObject[i].valid && formValid
         }
