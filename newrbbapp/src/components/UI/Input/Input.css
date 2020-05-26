@@ -9,6 +9,7 @@
   /* margin: 5px; */
   width: 100%;
   text-align: left;
+  color: rgb(116, 87, 7)
 }
 
 .InputElement {
@@ -30,4 +31,9 @@
 .Invalid {
   border: 1px solid red;
   background-color: rgb(247, 239, 238);
+}
+
+.InvalidLabel {
+  color: red;
+  font-weight: bold;
 }

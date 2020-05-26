@@ -7,9 +7,13 @@ const Input = (props) => {
     let inputElement = null;
     let inputClassesTemp = ['InputElement'];
     let inputClasses = '';
+    let LabelMsg = props.name.charAt(0).toUpperCase() + props.name.slice(1);
+    let labelCSS = 'Label'
 
     if(props.invalid && props.shouldValidate && props.valueWasEntered) {
         inputClassesTemp.push('Invalid');
+        LabelMsg = LabelMsg+ ': Please enter valid ' + LabelMsg;
+        labelCSS = labelCSS + ' InvalidLabel'
     }
 
     inputClasses = inputClassesTemp.join(' ')
@@ -53,7 +57,7 @@ const Input = (props) => {
 
     return (
         <div className='Input'>
-            <label className='Label'>{props.placeholder}</label>
+            <label className={labelCSS}>{LabelMsg}</label>
             {inputElement}
         </div>
     )

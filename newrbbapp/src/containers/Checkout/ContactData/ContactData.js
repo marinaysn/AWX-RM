@@ -193,6 +193,7 @@ export class ContactData extends Component {
                         elementConfig={i.config.elementConfig}
                         value={i.config.value}
                         invalid={!i.config.valid}
+                        name={i.id}
                         valueWasEntered={i.config.valueWasEntered}
                         shouldValidate={i.config.validation ? true : false}
                         onChange={(e) => this.handleChange(e, i.id)} />
