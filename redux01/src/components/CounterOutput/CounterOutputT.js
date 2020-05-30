@@ -4,7 +4,7 @@ import './CounterOutput.css';
 
 const counterOutputT = (props) => (
     <div className="CounterOutput">
-        Current Totals: {props.value}
+        Total in the List: {props.value}
     </div>
 );
 

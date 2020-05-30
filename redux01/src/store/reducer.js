@@ -1,67 +1,66 @@
+import * as actionTypes from '../store/actions';
+
 const initialState = {
     counter: 0,
     total: 0,
     result: []
 }
 
-const countTotals = () => {
+const countTotals = (tempArr) => {
 
-    const tempArr = [...this.state]
+    let cnt = 0
 
-    for (let i = 0; i < tempArr.result.lenght; i++) {
-        console.log(tempArr.result[i])
+    for (let i in tempArr) {
+        cnt = cnt + tempArr[i].value
     }
+    return cnt;
 }
 
 
 const reducer = (state = initialState, action) => {
 
-
     switch (action.type) {
-        case 'INCREMENT':
+        case actionTypes.INCREMENT:
             const newState = Object.assign({}, state);
             newState.counter = state.counter + 1;
             return newState;
 
-        case 'DECREMENT':
+        case actionTypes.DECREMENT:
             return {
                 ...state,
                 counter: state.counter - 1
             }
-        case 'ADD_COUNTER':
+        case actionTypes.ADD_COUNTER:
             return {
                 ...state,
                 counter: state.counter + action.value
             }
-        case 'SUB_COUNTER':
+        case actionTypes.SUB_COUNTER:
             return {
                 ...state,
                 counter: state.counter - action.value
             }
-        case 'STORE_RESULT':
+        case actionTypes.STORE_RESULT:
             return {
                 ...state,
-                result: state.result.concat({ id: new Date(), value: state.counter }), total: state.total + state.counter
+                result: state.result.concat({ id: state.counter + +new Date(), value: state.counter }), total: state.total + state.counter
             }
-        case 'DELETE_RESULT':
+        case actionTypes.DELETE_RESULT:
             // const id=2;
             // const tempArr = [...state.result];
             // tempArr.result.splice(id, 1);
 
             const tempArr = state.result.filter(result => result.id !== action.resultElementID);
-
-            let tempTotal = 0
-            tempArr.map(c => {
-                tempTotal = tempTotal + c.value
-            }
-            )
+  
             return {
                 ...state,
                 result: tempArr,
-                total: tempTotal
+                total: countTotals(tempArr)
             }
 
     }
+    console.log('state')
+    console.log(state)
 
     return state
 }
