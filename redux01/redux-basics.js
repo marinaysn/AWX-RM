@@ -2,8 +2,7 @@ const redux = require('redux');
 const createStore = redux.createStore;
 
 const initialState = {
-    counter: 0,
-    result: []
+    counter: 0
 }
 //Reducer
 
