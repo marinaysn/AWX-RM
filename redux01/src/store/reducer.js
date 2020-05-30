@@ -1,32 +1,31 @@
-const initialState ={
+const initialState = {
     counter: 0
 }
 
 
-const reducer =(state = initialState, action) =>{
+const reducer = (state = initialState, action) => {
 
     switch (action.type) {
         case 'INCREMENT':
             return {
-                counter:  state.counter + 1
+                counter: state.counter + 1
             }
 
-            case 'DECREMENT': 
+        case 'DECREMENT':
             return {
-                        counter:  state.counter - 1
+                counter: state.counter - 1
             }
-            case 'ADD_COUNTER': 
+        case 'ADD_COUNTER':
             return {
-                counter:  state.counter + action.value
+                counter: state.counter + action.value
             }
-            case 'SUB_COUNTER': 
+        case 'SUB_COUNTER':
             return {
-                counter:  state.counter - action.value
+                counter: state.counter - action.value
             }
-
     }
 
     return state
 }
 
-export default reducer ;
+export default reducer;
