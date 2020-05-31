@@ -1,4 +1,20 @@
 .AddPerson {
     text-align: center;
     margin: 30px;
+    
+
+}
+
+.inputElementsDiv {
+    margin-bottom: 20px;
+    align-items: center;
+    display: inline-block;
+
+}
+
+.el{
+    display: block;
+    padding: 5px;
+    margin: 10px;
+
 }
