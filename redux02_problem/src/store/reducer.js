@@ -1,7 +1,6 @@
 import * as actionType from './actions'
 
 const InitialState = {
-
     persons: []
 }
 const reducer = (state = InitialState, action) => {
@@ -10,8 +9,8 @@ const reducer = (state = InitialState, action) => {
         case actionType.ADD_PERSON:
             const newPerson = {
                 id: Math.random(),
-                name: 'Marina',
-                age: Math.floor(Math.random() * 40)
+                name: action.personData.name,
+                age: action.personData.age
             }
 
             return {
