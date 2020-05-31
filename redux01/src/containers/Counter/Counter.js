@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import CounterControl from '../../components/CounterControl/CounterControl';
 import CounterOutput from '../../components/CounterOutput/CounterOutput';
 import CounterOutputT from '../../components/CounterOutput/CounterOutputT';
+
 import { connect } from 'react-redux';
 import './Counter.css'
 import * as actionTypes from '../../store/actions';
