@@ -9,7 +9,7 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 
 // REDUX
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import * as actionTypes from '../../store/actions';
 
 export class BurgerBuilder extends Component {
@@ -29,7 +29,7 @@ export class BurgerBuilder extends Component {
     //   .catch( err =>{
     //     this.setState({error: true})
     //   })
-      
+
   }
 
   updateTotalItemsState(tempIngArr) {
@@ -57,20 +57,10 @@ export class BurgerBuilder extends Component {
     });
   };
 
-  orderContinuedHandler = () => { 
-    const queryParams = [];
-
-    for(let i in this.props.ingredientsArray) {
-      queryParams.push(i + '=' + this.props.ingredientsArray[i]);
-    }
-
-    this.props.history.push({
-      pathname: '/checkout',
-      search: '?' + queryParams.join('&'),
-      price: this.props.totalPrice,
-      ingredients: this.props.ingredientsArray
-    });
+  orderContinuedHandler = () => {
+    this.props.history.push('/checkout');
   };
+
 
   render() {
     const disabledInfo = {
@@ -93,7 +83,7 @@ export class BurgerBuilder extends Component {
             price={this.props.totalPrice}
           />
           <BuildControls
-            addItem={ this.props.onProductAdded}
+            addItem={this.props.onProductAdded}
             removeItem={this.props.onProductRemoved}
             disabled={disabledInfo}
             disabledOrderBtn={this.updateTotalItemsState(this.props.ingredientsArray)}
@@ -132,14 +122,14 @@ export class BurgerBuilder extends Component {
   }
 }
 
- const mapStateToProps = (state) =>{
-   return {
-     ingredientsArray: state.ingredients,
-     totalPrice: state.totalPrice
-   }
+const mapStateToProps = (state) => {
+  return {
+    ingredientsArray: state.ingredients,
+    totalPrice: state.totalPrice
+  }
 }
 
-const mapDispatchtoProps = (dispatch) =>{
+const mapDispatchToProps = (dispatch) => {
 
   return {
     onProductAdded: (ingredientName) => dispatch({
@@ -152,4 +142,4 @@ const mapDispatchtoProps = (dispatch) =>{
 }
 
 // export default withErrorHandler(BurgerBuilder, axios);
-export default connect(mapStateToProps, mapDispatchtoProps)(withErrorHandler(BurgerBuilder, axios));
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(BurgerBuilder, axios));
