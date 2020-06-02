@@ -14,8 +14,6 @@ import * as actionTypes from '../../store/actions';
 
 export class BurgerBuilder extends Component {
   state = {
-
-    // isAnyitemsSelected: false,
     orderIsClicked: false,
     loading: false,
     error: false
@@ -34,24 +32,6 @@ export class BurgerBuilder extends Component {
       
   }
 
-  // addIngredientHandler = type => {
-  //   const oldCount = this.state.ingredients[type];
-  //   const updatedCount = oldCount + 1;
-  //   const updatedIngredients = {
-  //     ...this.state.ingredients
-  //   };
-  //   updatedIngredients[type] = updatedCount;
-
-  //   const originalPrice = this.state.totalPrice;
-  //   const updatedPrice = originalPrice + INGREDIENTPRICES[type];
-
-  //   this.setState({
-  //     totalPrice: updatedPrice,
-  //     ingredients: updatedIngredients
-  //   });
-  //   this.updateTotalItemsState(updatedIngredients);
-  // };
-
   updateTotalItemsState(tempIngArr) {
     const sum = Object.keys(tempIngArr)
       .map(i => {
@@ -65,30 +45,6 @@ export class BurgerBuilder extends Component {
 
   }
 
-  // removeIngredientHandler = type => {
-  //   const oldCount = this.state.ingredients[type];
-
-  //   if (oldCount > 0) {
-  //     const updatedCount = oldCount - 1;
-  //     const updatedIngredients = {
-  //       ...this.state.ingredients
-  //     };
-  //     let updatedPrice = 0;
-
-  //     updatedIngredients[type] = updatedCount;
-
-  //     const originalPrice = this.state.totalPrice;
-  //     updatedPrice = originalPrice - INGREDIENTPRICES[type];
-
-  //     this.setState({
-  //       totalPrice: updatedPrice,
-  //       ingredients: updatedIngredients
-  //     });
-
-  //     this.updateTotalItemsState(updatedIngredients);
-  //   }
-  // };
-
   orderButtonClickedHandler = () => {
     this.setState({
       orderIsClicked: true
@@ -101,12 +57,10 @@ export class BurgerBuilder extends Component {
     });
   };
 
-  orderContinuedHandler = () => {
-    
+  orderContinuedHandler = () => { 
     const queryParams = [];
 
     for(let i in this.props.ingredientsArray) {
-      // queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]));
       queryParams.push(i + '=' + this.props.ingredientsArray[i]);
     }
 
@@ -116,8 +70,6 @@ export class BurgerBuilder extends Component {
       price: this.props.totalPrice,
       ingredients: this.props.ingredientsArray
     });
-
-    
   };
 
   render() {
@@ -197,9 +149,7 @@ const mapDispatchtoProps = (dispatch) =>{
       type: actionTypes.REMOVE_INGREDIENT, ingredientName: ingredientName
     })
   }
-
 }
 
-
 // export default withErrorHandler(BurgerBuilder, axios);
-export default connect(mapStateToProps, mapDispatchtoProps)(BurgerBuilder);
+export default connect(mapStateToProps, mapDispatchtoProps)(withErrorHandler(BurgerBuilder, axios));
