@@ -14,9 +14,8 @@ import * as actionTypes from '../../store/actions';
 
 export class BurgerBuilder extends Component {
   state = {
-    // ingredients: null,
-    // totalPrice: 4.0,
-    isAnyitemsSelected: false,
+
+    // isAnyitemsSelected: false,
     orderIsClicked: false,
     loading: false,
     error: false
@@ -62,9 +61,8 @@ export class BurgerBuilder extends Component {
         return sum + el;
       }, 0);
 
-    this.setState({
-      isAnyitemsSelected: sum > 0
-    });
+    return sum > 0
+
   }
 
   // removeIngredientHandler = type => {
@@ -146,7 +144,7 @@ export class BurgerBuilder extends Component {
             addItem={ this.props.onProductAdded}
             removeItem={this.props.onProductRemoved}
             disabled={disabledInfo}
-            disabledOrderBtn={this.state.isAnyitemsSelected}
+            disabledOrderBtn={this.updateTotalItemsState(this.props.ingredientsArray)}
             orderBtnClicked={this.orderButtonClickedHandler}
             price={this.props.totalPrice}
           />
