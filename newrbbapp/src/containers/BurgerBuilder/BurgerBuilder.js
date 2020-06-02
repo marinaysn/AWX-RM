@@ -10,19 +10,12 @@ import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 
 // REDUX
 import {connect} from 'react-redux';
-import * as actionTypes from '../../store/actions'
-
-const INGREDIENTPRICES = {
-  salad: 0.5,
-  bacon: 0.9,
-  cheese: 1,
-  meat: 1.5
-};
+import * as actionTypes from '../../store/actions';
 
 export class BurgerBuilder extends Component {
   state = {
     // ingredients: null,
-    totalPrice: 4.0,
+    // totalPrice: 4.0,
     isAnyitemsSelected: false,
     orderIsClicked: false,
     loading: false,
@@ -122,7 +115,7 @@ export class BurgerBuilder extends Component {
     this.props.history.push({
       pathname: '/checkout',
       search: '?' + queryParams.join('&'),
-      price: this.state.totalPrice,
+      price: this.props.totalPrice,
       ingredients: this.props.ingredientsArray
     });
 
@@ -147,7 +140,7 @@ export class BurgerBuilder extends Component {
         <Auxiliary>
           <Burger
             ingBurger={this.props.ingredientsArray}
-            price={this.state.totalPrice}
+            price={this.props.totalPrice}
           />
           <BuildControls
             addItem={ this.props.onProductAdded}
@@ -155,7 +148,7 @@ export class BurgerBuilder extends Component {
             disabled={disabledInfo}
             disabledOrderBtn={this.state.isAnyitemsSelected}
             orderBtnClicked={this.orderButtonClickedHandler}
-            price={this.state.totalPrice}
+            price={this.props.totalPrice}
           />
         </Auxiliary>
       )
@@ -165,7 +158,7 @@ export class BurgerBuilder extends Component {
           ingredients={this.props.ingredientsArray}
           modalClosed={this.orderCancelledHandler}
           modalContinue={this.orderContinuedHandler}
-          price={this.state.totalPrice}
+          price={this.props.totalPrice}
         />
       )
     }
@@ -192,7 +185,7 @@ export class BurgerBuilder extends Component {
  const mapStateToProps = (state) =>{
    return {
      ingredientsArray: state.ingredients,
-     totPrice: state.totalPrice
+     totalPrice: state.totalPrice
    }
 }
 
