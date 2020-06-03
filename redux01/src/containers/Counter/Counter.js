@@ -3,9 +3,11 @@ import CounterControl from '../../components/CounterControl/CounterControl';
 import CounterOutput from '../../components/CounterOutput/CounterOutput';
 import CounterOutputT from '../../components/CounterOutput/CounterOutputT';
 
+// import { increment, decrement, addCounter, subCounter, storeResult, deleteResult } from '../../store/actions/actions';
+
 import { connect } from 'react-redux';
 import './Counter.css'
-import * as actionTypes from '../../store/actions';
+import * as actionCreators from '../../store/actions/actions';
 
 class Counter extends Component {
 
@@ -43,26 +45,19 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onIncrementCounter: () => dispatch({
-            type: actionTypes.INCREMENT
-        }),
-        onDecrementCounter: () => dispatch({
-            type: actionTypes.DECREMENT
-        }),
-        onAddCounter: () => dispatch({
-            type: actionTypes.ADD_COUNTER, value: 5
-        }),
-        onSubCounter: () => dispatch({
-            type: actionTypes.SUB_COUNTER, value: 5
-        }),
+        onIncrementCounter: () => dispatch(actionCreators.increment()),
+        onDecrementCounter: () => dispatch(actionCreators.decrement()),
+        onAddCounter: () => dispatch(actionCreators.addCounter(5)),
+        onSubCounter: () => dispatch(actionCreators.subCounter(5)),
 
-        onStoreResult: (resultParam, totParam) => dispatch({ type: actionTypes.STORE_RESULT, result: resultParam, total: totParam }),
+        // onStoreResult: (resultParam, totParam) => dispatch({ type: actionTypes.STORE_RESULT, result: resultParam, total: totParam }),
 
-        onDeleteResult: (id, resultParam, storedParamArray,totParam) => dispatch({ type: actionTypes.DELETE_RESULT, resultElementID: id, result: resultParam, storedResult: storedParamArray, total: totParam })
+        onStoreResult: (resultParam, totParam) => dispatch(actionCreators.storeResult(resultParam, totParam)),
 
+        // onDeleteResult: (id, resultParam, storedParamArray,totParam) => dispatch({ type: actionTypes.DELETE_RESULT, resultElementID: id, result: resultParam, storedResult: storedParamArray, total: totParam })
 
+        onDeleteResult: (id, resultParam, storedParamArray,totParam) => dispatch(actionCreators.deleteResult(id, resultParam, storedParamArray,totParam))
     }
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Counter);
