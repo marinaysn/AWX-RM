@@ -141,8 +141,6 @@ export class ContactData extends Component {
             orderForm: tempOrderFormObject, formIsValid: formValid
         })
 
-
-
     }
 
 
