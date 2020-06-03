@@ -23,26 +23,36 @@ export const addCounter = (num) => {
     }
 }
 
-export const subCounter = (num) => {
+export const saveResult = (num) => {
     return {
         type: SUB_COUNTER, value: num
     }
 }
 
+export const subCounter = (num) => {
+    return dispatch => {
+        setTimeout(() => {
+            dispatch(saveResult(num))
+        }, 2000)
+    }
+
+
+}
+
 export const storeResult = (resultParam, totParam) => {
     return {
-        type: STORE_RESULT, 
-        result: resultParam, 
-        total: totParam 
+        type: STORE_RESULT,
+        result: resultParam,
+        total: totParam
     }
 }
 
 export const deleteResult = (id, resultParam, storedParamArray, totParam) => {
     return {
-        type: DELETE_RESULT, 
-        resultElementID: id, 
-        result: resultParam, 
-        storedResult: storedParamArray, 
+        type: DELETE_RESULT,
+        resultElementID: id,
+        result: resultParam,
+        storedResult: storedParamArray,
         total: totParam
     }
 }
