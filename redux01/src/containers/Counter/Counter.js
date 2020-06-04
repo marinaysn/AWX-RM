@@ -7,7 +7,9 @@ import CounterOutputT from '../../components/CounterOutput/CounterOutputT';
 
 import { connect } from 'react-redux';
 import './Counter.css'
-import * as actionCreators from '../../store/actions/actions';
+import * as actionCreators from '../../store/actions/index';
+
+
 
 class Counter extends Component {
 
