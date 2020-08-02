@@ -31,6 +31,8 @@ const logger = (store) =>{
     }
   }
 
+  // adding code to use Redux Dev Tools
+  //   https://github.com/zalmoxisus/redux-devtools-extension
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const storeR = createStore(RootReducer, composeEnhancers(applyMiddleware(logger, thunk)));
