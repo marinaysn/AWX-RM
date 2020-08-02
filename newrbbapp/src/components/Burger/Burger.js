@@ -39,7 +39,7 @@ const Burger = props => {
       <h1>${priceTemp.toFixed(2)}</h1>
       <BurgerIngredient type='bread-top' />
 
-      {ingredientsArray}
+          {ingredientsArray}
 
       <BurgerIngredient type='bread-bottom' />
     </div>
