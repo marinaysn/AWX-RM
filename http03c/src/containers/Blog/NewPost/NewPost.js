@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from '../../axios';
+import axios from 'axios';
 
 import './NewPost.css';
 
@@ -10,19 +10,20 @@ class NewPost extends Component {
         author: 'Max'
     }
 
-    postDataHandler = () =>{
+    componentDidMount () {
+        console.log(this.props);
+    }
 
-        const post = {
+    postDataHandler = () => {
+        const data = {
             title: this.state.title,
             body: this.state.content,
-            author: this.state.author,
-        }
-        axios.post('posts', post )
-        .then( response =>{
-            console.log(response)
-        }
-
-        )
+            author: this.state.author
+        };
+        axios.post('/posts', data)
+            .then(response => {
+                console.log(response);
+            });
     }
 
     render () {
