@@ -7,7 +7,6 @@ const post = (props) => (
         <h1>{props.title}</h1>
         <div className="Info">
             <div className="Author">{props.author}</div>
-            <div>{props.date}</div>
         </div>
     </article>
 );
