@@ -12,32 +12,14 @@ const onSubmit = (value) => {
   console.log(value);
 };
 
-const validate = (value) => {
-  const error = {};
-
-  if (!value.name) {
-    error.name = 'Requred';
-  }
-
-  if (!value.email) {
-    error.email = 'Requred';
-  } else if (!/^[A-Z0-9._%+_]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value.email)) {
-    error.email = 'Invalid email format';
-  }
-
-  if (!value.channel) {
-    error.channel = 'Requred';
-  }
-
-  return error;
-};
+const min = 5;
 
 const validationSchema = Yup.object({
   name: Yup.string().required('Name is Required'),
   email: Yup.string()
     .email('Invalid Email Format')
     .required('Email is required'),
-  channel: Yup.string().required('Channel is Required'),
+  channel: Yup.string().required('Channel is Required').min(5, `Channel field must be ${min} characters long`).max(5, `Channel field must be ${min} characters long`),
 });
 
 const YoutubeForm = (props) => {
@@ -56,9 +38,7 @@ const YoutubeForm = (props) => {
         type='text'
         id='name'
         name='name'
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
-        value={formik.values.name}
+        {...formik.getFieldProps('name')}
       />
       {formik.touched.name && formik.errors.name ? (
         <div style={{ color: 'red', textTransform: 'capitalize' }}>
@@ -71,9 +51,7 @@ const YoutubeForm = (props) => {
         type='email'
         id='email'
         name='email'
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
-        value={formik.values.email}
+        {...formik.getFieldProps('email')}
       />
 
       {formik.touched.email && formik.errors.email ? (
@@ -88,9 +66,7 @@ const YoutubeForm = (props) => {
         type='text'
         id='channel'
         name='channel'
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
-        value={formik.values.channel}
+        {...formik.getFieldProps('channel')}
       />
       {formik.touched.channel && formik.errors.channel ? (
         <div style={{ color: 'red', textTransform: 'capitalize' }}>
