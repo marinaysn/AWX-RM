@@ -1,6 +1,7 @@
 import React from 'react';
-import { useFormik } from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import './YoutubeForm.css'
 
 const initialValues = {
   name: 'Marina',
@@ -19,63 +20,51 @@ const validationSchema = Yup.object({
   email: Yup.string()
     .email('Invalid Email Format')
     .required('Email is required'),
-  channel: Yup.string().required('Channel is Required').min(5, `Channel field must be ${min} characters long`).max(5, `Channel field must be ${min} characters long`),
+  channel: Yup.string()
+    .required('Channel is Required')
+    .min(5, `Channel field must be ${min} characters long`)
+    .max(5, `Channel field must be ${min} characters long`),
 });
 
 const YoutubeForm = (props) => {
-  const formik = useFormik({
-    initialValues,
-    onSubmit,
-    validationSchema
-  });
-
-  console.log('Visited:', formik.touched);
+//   console.log('Visited:', formik.touched);
 
   return (
-    <form onSubmit={formik.handleSubmit}>
-      <label htmlFor='name'>Name</label>
-      <input
-        type='text'
-        id='name'
-        name='name'
-        {...formik.getFieldProps('name')}
-      />
-      {formik.touched.name && formik.errors.name ? (
-        <div style={{ color: 'red', textTransform: 'capitalize' }}>
-          {formik.errors.name}
-        </div>
-      ) : null}
+    <Formik
+    initialValues={initialValues}
+    validationSchema={validationSchema}
+    onSubmit={onSubmit}
+    >
+      <Form >
+        <label htmlFor='name'>Name</label>
+        <Field
+          type='text'
+          id='name'
+          name='name'
+        />
+        <ErrorMessage className=
+        "errorsMsg" name='name' />
 
-      <label htmlFor='email'>Email</label>
-      <input
-        type='email'
-        id='email'
-        name='email'
-        {...formik.getFieldProps('email')}
-      />
+        <label htmlFor='email'>Email</label>
+        <Field
+          type='email'
+          id='email'
+          name='email'
+        />
 
-      {formik.touched.email && formik.errors.email ? (
-        <div style={{ color: 'red', textTransform: 'capitalize' }}>
-          {' '}
-          {formik.errors.email}
-        </div>
-      ) : null}
+<ErrorMessage name='email' />
 
-      <label htmlFor='channel'>Channel</label>
-      <input
-        type='text'
-        id='channel'
-        name='channel'
-        {...formik.getFieldProps('channel')}
-      />
-      {formik.touched.channel && formik.errors.channel ? (
-        <div style={{ color: 'red', textTransform: 'capitalize' }}>
-          {formik.errors.channel}
-        </div>
-      ) : null}
+        <label htmlFor='channel'>Channel</label>
+        <Field
+          type='text'
+          id='channel'
+          name='channel'
+        />
+        <ErrorMessage name='channel' />
 
-      <button type='submit'>Submit</button>
-    </form>
+        <button type='submit'>Submit</button>
+      </Form>
+    </Formik>
   );
 };
 
