@@ -1,5 +1,6 @@
 import React from 'react';
 import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 const initialValues = {
   name: 'Marina',
@@ -31,15 +32,22 @@ const validate = (value) => {
   return error;
 };
 
+const validationSchema = Yup.object({
+  name: Yup.string().required('Name is Required'),
+  email: Yup.string()
+    .email('Invalid Email Format')
+    .required('Email is required'),
+  channel: Yup.string().required('Channel is Required'),
+});
+
 const YoutubeForm = (props) => {
   const formik = useFormik({
     initialValues,
     onSubmit,
-    validate,
+    validationSchema
   });
 
   console.log('Visited:', formik.touched);
-
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -50,10 +58,13 @@ const YoutubeForm = (props) => {
         name='name'
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
-        value={formik.values.name
-         }
+        value={formik.values.name}
       />
-      {formik.touched.name && formik.errors.name ?<div style={{'color': 'red', 'textTransform': 'capitalize'}}>{Object.keys(formik.initialValues)[0]} is {formik.errors.name}</div>: null}
+      {formik.touched.name && formik.errors.name ? (
+        <div style={{ color: 'red', textTransform: 'capitalize' }}>
+          {formik.errors.name}
+        </div>
+      ) : null}
 
       <label htmlFor='email'>Email</label>
       <input
@@ -65,8 +76,12 @@ const YoutubeForm = (props) => {
         value={formik.values.email}
       />
 
-{formik.touched.email && formik.errors.email ? <div style={{'color': 'red', 'textTransform': 'capitalize'}}> {formik.errors.email}</div>: null}
-
+      {formik.touched.email && formik.errors.email ? (
+        <div style={{ color: 'red', textTransform: 'capitalize' }}>
+          {' '}
+          {formik.errors.email}
+        </div>
+      ) : null}
 
       <label htmlFor='channel'>Channel</label>
       <input
@@ -77,7 +92,11 @@ const YoutubeForm = (props) => {
         onBlur={formik.handleBlur}
         value={formik.values.channel}
       />
-      {formik.touched.channel && formik.errors.channel ?<div style={{'color': 'red', 'textTransform': 'capitalize'}}>{Object.keys(formik.initialValues)[2]} is {formik.errors.channel}</div>: null}
+      {formik.touched.channel && formik.errors.channel ? (
+        <div style={{ color: 'red', textTransform: 'capitalize' }}>
+          {formik.errors.channel}
+        </div>
+      ) : null}
 
       <button type='submit'>Submit</button>
     </form>
