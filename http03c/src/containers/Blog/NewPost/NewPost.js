@@ -11,6 +11,7 @@ class NewPost extends Component {
     }
 
     componentDidMount () {
+        console.log(232323232);
         console.log(this.props);
     }
 
