@@ -49,6 +49,23 @@ const validateComments = (value) => {
   return error;
 }
 
+const validateCommentsHandle = (formikProps, fieldToValidate) => {
+
+  if (fieldToValidate) {
+    formikProps.validateField(fieldToValidate)
+    formikProps.setFieldTouched(fieldToValidate)
+  }
+  else {
+    formikProps.validateForm();
+    formikProps.setTouched({
+      name: true,
+      channel: true,
+      email: true,
+      comments: true
+    })
+  }
+
+}
 
 const YoutubeForm = (props) => {
   //   console.log('Visited:', formik.touched);
@@ -170,21 +187,9 @@ const YoutubeForm = (props) => {
 
               {/* button Validation */}
               <div className='divValidation'>
-                <button type='button' className='buttonValidation' onClick={ () =>formikProps.validateField('comments')} >Validate Comments</button>
-                <button type='button' className='buttonValidation' onClick={() => formikProps.validateForm()}>Validate All</button>
+                <button type='button' className='buttonValidation' onClick={() => validateCommentsHandle(formikProps, 'comments')} >Validate Comments</button>
+                <button type='button' className='buttonValidation' onClick={() => validateCommentsHandle(formikProps) }>Validate All</button>
               </div>
-
-               {/* button Validation with Trigger */}
-               <div className='divValidation'>
-                <button type='button' className='buttonValidation' onClick={ () =>formikProps.setFieldTouched('comments')}>Show Comments Error</button>
-                <button type='button' className='buttonValidation' onClick={() => formikProps.setTouched({
-                  name: true,
-                  email: true,
-                  channel: true,
-                  comments: true
-                })}>Show Validation Error</button>
-              </div>
-
 
               <button type='submit'>Submit</button>
             </Form>
