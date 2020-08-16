@@ -1,10 +1,13 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage, FieldArray, FastField } from 'formik';
 import * as Yup from 'yup';
 import './YoutubeForm.css';
 import TextError from '../TextError';
 
 const YoutubeForm = (props) => {
+
+  const [formValues, setFormValues] = useState(null)
+
 
   const initialValues = useMemo(() => {
     return {
@@ -22,25 +25,13 @@ const YoutubeForm = (props) => {
     }
   }, []);
 
-  const savedValues = {
-    name: '',
-    email: '',
-    channel: '',
-    comments: '',
-    address: '',
-    social: {
-      facebook: '',
-      twitter: ''
-    },
-    phoneNumbers: ['', ''],
-    phNumbers: ['']
-  };
+
 
   const onSubmit = (value, onSubmitProps) => {
     console.log('+++++++++++')
     console.log(onSubmitProps);
     onSubmitProps.setSubmitting(false)
-    // onSubmitProps.resetForm()
+    onSubmitProps.resetForm()
   };
 
   const min = 5;
@@ -91,15 +82,47 @@ const YoutubeForm = (props) => {
 
   }
 
+  const saveValuesHandler = (formikProps) => {
+
+    console.log("**********")
+    console.log(formikProps)
+
+
+    const savedValues = {
+      name: formikProps.values.name,
+      email: formikProps.values.email,
+      channel: formikProps.values.channel,
+      comments: 'abc',
+      address: ' 221B Baker Street',
+      social: {
+        facebook: formikProps.values.social.facebook,
+        twitter: formikProps.values.social.twitter
+      },
+      phoneNumbers: [formikProps.values.phoneNumbers[0], formikProps.values.phoneNumbers[1]],
+      phNumbers: ['123']
+    };
+    setFormValues(savedValues)
+
+  }
+
+  const clearValuesHandler = () => {
+
+    setFormValues(initialValues)
+    
+  }
+
+
   return (
     <Formik
-      initialValues={initialValues}
+      initialValues={formValues || initialValues}
       validationSchema={validationSchema}
       onSubmit={onSubmit}
+
+
       validateOnChange={true}
       validateOnBlur={true}
       validateOnMount={true}
-
+      enableReinitialize
     >
       {
         formikProps => {
@@ -213,8 +236,20 @@ const YoutubeForm = (props) => {
                 <button type='button' className='buttonValidation' onClick={() => validateCommentsHandle(formikProps)}>Validate All</button>
               </div>
 
-              {/* button submit */}
-              <button type='submit' disabled={!(formikProps.isValid && formikProps.dirty) || formikProps.isSubmitting}>Submit</button>
+              <div className='divValidation'>
+                {/* button Save Data */}
+                <button type='button' className='buttonValidation'
+                  onClick={() => saveValuesHandler(formikProps)}>Save Data</button>
+
+                {/* button reset */}
+                <button type='reset' className='buttonValidation' onClick={clearValuesHandler}
+                >Reset All</button>
+
+
+                {/* button submit */}
+                <button type='submit' className='buttonValidation' disabled={!(formikProps.isValid) || formikProps.isSubmitting}>Submit</button>
+              </div>
+
             </Form>
           )
         }
