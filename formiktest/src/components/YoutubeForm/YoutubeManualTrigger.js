@@ -1,65 +1,104 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Formik, Form, Field, ErrorMessage, FieldArray, FastField } from 'formik';
 import * as Yup from 'yup';
 import './YoutubeForm.css';
 import TextError from '../TextError';
 
-const initialValues = {
-  name: 'Marina',
-  email: '',
-  channel: '',
-  comments: '',
-  address: '',
-  social: {
-    facebook: '',
-    twitter: ''
-  },
-  phoneNumbers: ['', ''],
-  phNumbers: ['']
-};
+const YoutubeForm = (props) => {
 
-const onSubmit = (value) => {
-  console.log(value);
-};
+  const initialValues = useMemo(() => {
+    return {
+      name: '',
+      email: '',
+      channel: '',
+      comments: '',
+      address: '',
+      social: {
+        facebook: '',
+        twitter: ''
+      },
+      phoneNumbers: ['', ''],
+      phNumbers: ['']
+    }
+  }, []);
 
-const min = 5;
+  const savedValues = {
+    name: '',
+    email: '',
+    channel: '',
+    comments: '',
+    address: '',
+    social: {
+      facebook: '',
+      twitter: ''
+    },
+    phoneNumbers: ['', ''],
+    phNumbers: ['']
+  };
 
-const validationSchema = Yup.object({
-  name: Yup.string().required('Name is Required'),
-  email: Yup.string()
-    .email('Invalid Email Format')
-    .required('Email is required'),
-  channel: Yup.string()
-    .required('Channel is Required')
-    .min(5, `Channel field must be ${min} characters long`)
-    .max(5, `Channel field must be ${min} characters long`),
-  comments: Yup.string().max(
-    500,
-    `Comments field is maximum 500 characters long`
-  ),
-});
+  const onSubmit = (value, onSubmitProps) => {
+    console.log('+++++++++++')
+    console.log(onSubmitProps);
+    onSubmitProps.setSubmitting(false)
+    // onSubmitProps.resetForm()
+  };
 
-const validateComments = (value) => {
-  let error = '';
+  const min = 5;
 
-  if (!value) {
-    error = 'Required!'
+  const validationSchema = Yup.object({
+    name: Yup.string().required('Name is Required'),
+    email: Yup.string()
+      .email('Invalid Email Format')
+      .required('Email is required'),
+    channel: Yup.string()
+      .required('Channel is Required')
+      .min(5, `Channel field must be ${min} characters long`)
+      .max(5, `Channel field must be ${min} characters long`),
+    comments: Yup.string().max(
+      500,
+      `Comments field is maximum 500 characters long`
+    ),
+  });
+
+  const validateComments = (value) => {
+    let error;
+
+    if (!value) {
+      error = 'Required!'
+    }
+
+    return error;
   }
 
-  return error;
-}
+  const validateCommentsHandle = (formikProps, fieldToValidate) => {
 
+    console.log('**********')
+    console.log(formikProps);
 
-const YoutubeForm = (props) => {
-  //   console.log('Visited:', formik.touched);
+    if (fieldToValidate) {
+      formikProps.validateField('comments')
+      formikProps.setFieldTouched('comments')
+    }
+    else {
+      formikProps.validateForm();
+      formikProps.setTouched({
+        name: true,
+        channel: true,
+        email: true,
+        comments: true
+      })
+    }
+
+  }
 
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={onSubmit}
-      validateOnChange={false}
-      validateOnBlur={false}
+      validateOnChange={true}
+      validateOnBlur={true}
+      validateOnMount={true}
 
     >
       {
@@ -170,23 +209,12 @@ const YoutubeForm = (props) => {
 
               {/* button Validation */}
               <div className='divValidation'>
-                <button type='button' className='buttonValidation' onClick={ () =>formikProps.validateField('comments')} >Validate Comments</button>
-                <button type='button' className='buttonValidation' onClick={() => formikProps.validateForm()}>Validate All</button>
+                <button type='button' className='buttonValidation' onClick={() => validateCommentsHandle(formikProps, 'comments')} >Validate Comments</button>
+                <button type='button' className='buttonValidation' onClick={() => validateCommentsHandle(formikProps)}>Validate All</button>
               </div>
 
-               {/* button Validation with Trigger */}
-               <div className='divValidation'>
-                <button type='button' className='buttonValidation' onClick={ () =>formikProps.setFieldTouched('comments')}>Show Comments Error</button>
-                <button type='button' className='buttonValidation' onClick={() => formikProps.setTouched({
-                  name: true,
-                  email: true,
-                  channel: true,
-                  comments: true
-                })}>Show Validation Error</button>
-              </div>
-
-
-              <button type='submit'>Submit</button>
+              {/* button submit */}
+              <button type='submit' disabled={!(formikProps.isValid && formikProps.dirty) || formikProps.isSubmitting}>Submit</button>
             </Form>
           )
         }
