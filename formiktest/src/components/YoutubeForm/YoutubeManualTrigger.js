@@ -40,7 +40,7 @@ const validationSchema = Yup.object({
 });
 
 const validateComments = (value) => {
-  let error = '';
+  let error;
 
   if (!value) {
     error = 'Required!'
@@ -51,9 +51,12 @@ const validateComments = (value) => {
 
 const validateCommentsHandle = (formikProps, fieldToValidate) => {
 
+  console.log('**********')
+          console.log(formikProps);
+
   if (fieldToValidate) {
-    formikProps.validateField(fieldToValidate)
-    formikProps.setFieldTouched(fieldToValidate)
+    formikProps.validateField('comments')
+    formikProps.setFieldTouched('comments')
   }
   else {
     formikProps.validateForm();
@@ -77,7 +80,8 @@ const YoutubeForm = (props) => {
       onSubmit={onSubmit}
       validateOnChange={false}
       validateOnBlur={false}
-
+      validateOnMount
+      validateOnChange
     >
       {
         formikProps => {
@@ -187,11 +191,11 @@ const YoutubeForm = (props) => {
 
               {/* button Validation */}
               <div className='divValidation'>
-                <button type='button' className='buttonValidation' onClick={() => validateCommentsHandle(formikProps, 'comments')} >Validate Comments</button>
+                <button type='button' className='buttonValidation' onClick={() => validateCommentsHandle(formikProps,  'comments')} >Validate Comments</button>
                 <button type='button' className='buttonValidation' onClick={() => validateCommentsHandle(formikProps) }>Validate All</button>
               </div>
 
-              <button type='submit'>Submit</button>
+              <button type='submit' disabled={!formikProps.isValid && !formikProps.dirty}>Submit</button>
             </Form>
           )
         }
