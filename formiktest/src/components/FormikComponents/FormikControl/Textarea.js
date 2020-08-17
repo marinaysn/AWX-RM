@@ -2,16 +2,17 @@ import React from 'react';
 import { Field, ErrorMessage } from 'formik';
 import TextError from '../../TextError';
 
-const Input = (props) => {
-
+const Textarea = (props) => {
     const { label, name, type, ...rest } = props
+    console.log('object')
+    console.log(props)
     return (
         <div className='form-control'>
             <label htmlFor={name}>{label}</label>
-            <Field id={name} name={name} type={type} />
+            <Field as='textarea' type={type} id={name} name={name} />
             <ErrorMessage name={name} component={TextError} />
         </div>
     )
 }
 
-export default Input;
+export default Textarea;

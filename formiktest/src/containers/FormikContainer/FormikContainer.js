@@ -7,13 +7,17 @@ import FormikControl from '../../components/FormikComponents/FormikControl/Formi
 const FormikContainer = (props) => {
 
     const initialValues = {
-        email: ''
+        email: '',
+        description: ''
     };
 
     const validationSchema = Yup.object({
         email: Yup.string()
             .email('Invalid Email Format')
-            .required('Email is required')
+            .required('Email is required'),
+        description: Yup.string()
+            .max(500, `Comments field is maximum 500 characters long`)
+            .required('Description is required')
     });
 
     const onSubmit = (values) => {
@@ -35,10 +39,12 @@ const FormikContainer = (props) => {
                 formik => <Form >
                     <FormikControl control='input' type='email' label='Email' name='email' />
 
+                    <FormikControl control='textarea' type='text' label='Description' name='description' />
+
                     <div className='divValidation'>
                         <button type='submit' className='buttonValidation'>Submit</button>
                     </div>
-                    
+
                 </Form>
             }
 
