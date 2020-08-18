@@ -16,10 +16,17 @@ const FormikContainer = (props) => {
         { key: 'Saab', value: '06' }
     ]
 
+    const radioOptions = [
+        { key: 'mail', value: '01' },
+        { key: 'phone', value: '02' },
+        { key: 'email', value: '03' }
+    ]
+
     const initialValues = {
         email: '',
         description: '',
-        selectOption: ''
+        selectOption: '',
+        radioOption: ''
     };
 
     const validationSchema = Yup.object({
@@ -31,9 +38,12 @@ const FormikContainer = (props) => {
             .required('Description is required'),
         selectOption: Yup.string()
             .required('Select an option'),
+        radioOption: Yup.string()
+            .required('Select an option'),
     });
 
     const onSubmit = (values) => {
+        console.log('marina')
         console.log(values)
     }
 
@@ -55,7 +65,14 @@ const FormikContainer = (props) => {
                     <FormikControl control='textarea' type='text' label='Description' name='description' />
 
                     <FormikControl control='select' type='text' label='Select an Option' name='selectOption'
-                    options={dropdownOptions} />
+                        options={dropdownOptions} />
+
+                    <FormikControl
+                        control='radio'
+                        label='Select a Contact Option'
+                        name='radioOption'
+                        options={radioOptions}
+                         />
 
                     <div className='divValidation'>
                         <button type='submit' className='buttonValidation'>Submit</button>
