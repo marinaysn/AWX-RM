@@ -22,11 +22,18 @@ const FormikContainer = (props) => {
         { key: 'email', value: '03' }
     ]
 
+    const checkBoxOptions = [
+        { key: 'mail report', value: '011' },
+        { key: 'fax report', value: '021' },
+        { key: 'email report', value: '031' }
+    ]
+
     const initialValues = {
         email: '',
         description: '',
         selectOption: '',
-        radioOption: ''
+        radioOption: '',
+        checkBoxOption: []
     };
 
     const validationSchema = Yup.object({
@@ -40,6 +47,8 @@ const FormikContainer = (props) => {
             .required('Select an option'),
         radioOption: Yup.string()
             .required('Select an option'),
+        checkBoxOption: Yup.array()
+            .required('Select a method to receive the report'),
     });
 
     const onSubmit = (values) => {
@@ -72,7 +81,14 @@ const FormikContainer = (props) => {
                         label='Select a Contact Option'
                         name='radioOption'
                         options={radioOptions}
-                         />
+                    />
+
+                    <FormikControl
+                        control='checkbox'
+                        label='Select a Report Option'
+                        name='checkBoxOption'
+                        options={checkBoxOptions}
+                    />
 
                     <div className='divValidation'>
                         <button type='submit' className='buttonValidation'>Submit</button>

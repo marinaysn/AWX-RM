@@ -2,28 +2,28 @@ import React from 'react';
 import { Field, ErrorMessage } from 'formik';
 import TextError from '../../TextError';
 
-const RadioButton = (props) => {
+const CheckBox = (props) => {
 
     const { label, name, options, ...rest } = props  
 
     return (
         <div className='form-control controlInline'>
             <label htmlFor={name} className="labelCheck">{label}</label>
-            <Field as="radio" name={name} {...rest} >
+            <Field as="checkbox" name={name} {...rest} >
                 {
                     ({ field }) => {
 
-                        {/* console.log(field) */}
+                        console.log(field)
 
                         return options.map(o => {
 
                             return (
                                 <React.Fragment key={o.key}>
-                                    <input type="radio"
+                                    <input type="checkbox"
                                         id={o.value}
                                         {...field}
                                         value={o.value}
-                                        checked={field.value === o.value} />
+                                        checked={field.value.includes(o.value)} />
 
                                     <label htmlFor={o.value}>{o.key}</label>
                                 </React.Fragment>
@@ -38,4 +38,4 @@ const RadioButton = (props) => {
     )
 }
 
-export default RadioButton;
+export default CheckBox;
