@@ -11,6 +11,7 @@ label {
 
 input[type='text'],
 input[type='email'],
+input[type='password'],  
 textarea,
 select {
   display: block;
@@ -29,7 +30,7 @@ select {
 
 
 input[type='radio'] ,
-input[type='checkbox'] {
+input[type='checkbox']{
   opacity: 0;
   position: fixed;
   width: 5px;
