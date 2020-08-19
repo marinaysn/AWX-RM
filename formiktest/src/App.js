@@ -8,14 +8,15 @@ import YoutubeManualTrigger from './components/YoutubeForm/YoutubeManualTrigger'
 //Formik Component Tests
 import FormikContainer from './containers/FormikContainer/FormikContainer'
 
-
+//testing Forms with controls
+import LoginForm from './components/TestForms/LoginForm'
 
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <FormikContainer />
+      <LoginForm />
     </div>
   );
 }
