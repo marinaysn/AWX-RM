@@ -10,13 +10,18 @@ import FormikContainer from './containers/FormikContainer/FormikContainer'
 
 //testing Forms with controls
 import LoginForm from './components/TestForms/LoginForm'
+import RegistryForm from './components/TestForms/RegistryForm';
+import EnrolmentForm from './components/TestForms/EnrolmentForm'
+
 
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <LoginForm />
+      {/* <LoginForm />
+      <RegistryForm /> */}
+      <EnrolmentForm />
     </div>
   );
 }

@@ -13,7 +13,7 @@ const CheckBox = (props) => {
                 {
                     ({ field }) => {
 
-                        console.log(field)
+                        {/* console.log(field) */}
 
                         return options.map(o => {
 
