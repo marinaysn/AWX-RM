@@ -10,14 +10,24 @@ import FormikContainer from './containers/FormikContainer/FormikContainer'
 
 //testing Forms with controls
 import LoginForm from './components/TestForms/LoginForm'
+import RegistryForm from './components/TestForms/RegistryForm';
+import EnrolmentForm from './components/TestForms/EnrolmentForm';
+import { theme, ThemeProvider, CSSReset } from '@chakra-ui/core';
+import ChakraContainer from './containers/ChakraContainer/ChakraContainer'
 
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <LoginForm />
-    </div>
+    <ThemeProvider theme={theme}>
+      <div className="App">
+        {/* <LoginForm /> */}
+        {/* <RegistryForm /> */}
+        {/* <EnrolmentForm /> */}
+
+        <CSSReset />
+        <ChakraContainer />
+      </div></ThemeProvider>
   );
 }
 
