@@ -12,8 +12,8 @@ const EnrolmentForm = (props) => {
         password: '',
         bio: '',
         course: '',
-        skillset: '',
-        coursedate: ''
+        skillset: [],
+        coursedate: null
     }
 
     const checkBoxOptions = [

@@ -35,11 +35,11 @@ const LoginForm = (props) => {
 
                     return (
                         <Form>
-                            <FormikControl control='input' type='email'
+                            <FormikControl control='chakrainput' type='email'
                                 label='Email'
                                 name='email' />
 
-                            <FormikControl control='input' type='password' label='Password' name='password' />
+                            <FormikControl control='chakrainput' type='password' label='Password' name='password' />
 
                             <div className='divValidation'>
                                 <button type='submit' className='buttonValidation'
