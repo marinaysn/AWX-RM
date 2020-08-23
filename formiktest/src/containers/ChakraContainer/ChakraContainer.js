@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Image, Link, Text } from "@chakra-ui/core";
 import LoginForm from '../../components/TestForms/LoginForm'
+import EnrolmentForm from '../../components/TestForms/EnrolmentForm';
 
 const ChakraContainer = (props) => {
     return (
@@ -15,11 +16,12 @@ const ChakraContainer = (props) => {
             fontSize={["sm", "md", "lg", "xl"]}
 
             borderWidth="1px" rounded="lg" >
-            <Box p="6" bg="gray.200" rounded='md'>
+            <Box p="6" bg="gray.200" >
 
-                <Box d="flex" alignItems="baseline">
-                    <LoginForm />
-                </Box>
+              
+                    {/* <LoginForm /> */}
+                    <EnrolmentForm />
+               
 
                 {/* <Box as="button" rounded="md" bg="tomato" color="white" px={10} h={10}>
                     Button

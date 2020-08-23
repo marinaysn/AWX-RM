@@ -7,6 +7,7 @@ import RadioButton from './RadioButton';
 import CheckBox from './CheckBox';
 import DatePicker from './DatePicker';
 import ChakraInput from '../ChakraComponents/ChakraInput';
+import ChakraTextArea from '../ChakraComponents/ChakraTextArea';
 
 const FormikControl = (props) =>{
     const { control, ...rest} = props
@@ -32,6 +33,9 @@ const FormikControl = (props) =>{
         }
         case 'chakrainput': {
             return <ChakraInput {...rest} />
+        }
+        case 'chakratextarea': {
+            return <ChakraTextArea {...rest} />
         }
         default: return null   
     }

@@ -25,7 +25,7 @@ function App() {
         {/* <RegistryForm /> */}
         {/* <EnrolmentForm /> */}
 
-        <CSSReset />
+        {/* <CSSReset /> */}
         <ChakraContainer />
       </div></ThemeProvider>
   );
