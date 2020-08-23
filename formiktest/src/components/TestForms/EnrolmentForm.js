@@ -63,10 +63,10 @@ const EnrolmentForm = (props) => {
 
             {
                 formik => <Form>
-                    <FormikControl control='input' type='email' label='Email' name='email' />
+                    <FormikControl control='chakrainput' type='email' label='Email' name='email' />
 
 
-                    <FormikControl control='textarea' type='text' label='Biography' name='bio' />
+                    <FormikControl control='chakratextarea' type='text' label='Biography' name='bio' />
 
 
                     <FormikControl control='select' type='text' label='Select an Option' name='course'
