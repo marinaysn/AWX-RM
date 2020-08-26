@@ -1,4 +1,4 @@
-.App {
+/* .App {
   display: flex;
   justify-content: center;
 }
@@ -65,6 +65,8 @@ input[type='checkbox']{
   border-color: #4c4;
   border-radius: 5px;
   padding: 5px;
+
+ 
 }
 
 .controlInline input[type="checkbox"]:focus + label {
@@ -89,4 +91,4 @@ option {
 
 .error {
   color: red;
-}
+} */
