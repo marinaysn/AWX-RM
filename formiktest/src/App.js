@@ -13,7 +13,8 @@ import LoginForm from './components/TestForms/LoginForm'
 import RegistryForm from './components/TestForms/RegistryForm';
 import EnrolmentForm from './components/TestForms/EnrolmentForm';
 import { theme, ThemeProvider, CSSReset } from '@chakra-ui/core';
-import ChakraContainer from './containers/ChakraContainer/ChakraContainer'
+import ChakraContainer from './containers/ChakraContainer/ChakraContainer';
+import SimpleForm from './components/TestForms/SimpleForm'
 
 import './App.css';
 
@@ -25,8 +26,12 @@ function App() {
         {/* <RegistryForm /> */}
         {/* <EnrolmentForm /> */}
 
-        {/* <CSSReset /> */}
-        <ChakraContainer />
+        <CSSReset />
+
+        <SimpleForm />
+          <ChakraContainer />
+        
+        
       </div></ThemeProvider>
   );
 }

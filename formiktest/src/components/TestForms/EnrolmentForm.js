@@ -68,9 +68,10 @@ const EnrolmentForm = (props) => {
 
                     <FormikControl control='chakratextarea' type='text' label='Biography' name='bio' />
 
-
+                    <br />
                     <FormikControl control='select' type='text' label='Select an Option' name='course'
                         options={dropdownOptions} />
+                        <br />
 
                     <FormikControl
                         control='checkbox'
@@ -78,14 +79,14 @@ const EnrolmentForm = (props) => {
                         name='skillset'
                         options={checkBoxOptions}
                     />
-
+<br />
                     <FormikControl
                         control='date'
                         label='Course Date'
                         name='coursedate'
                     />
 
-
+<br />
                     <div className='divValidation'>
                         <button type='submit' className='buttonValidation'
                             disabled={!(formik.isValid && formik.dirty)}>Submit</button>
